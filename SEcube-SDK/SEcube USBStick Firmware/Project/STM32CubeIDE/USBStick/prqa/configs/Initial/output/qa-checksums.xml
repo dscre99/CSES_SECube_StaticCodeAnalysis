@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This file is API generated -->
+<dependencies version="1">
+ <toolchain_history>
+  <component whole_project="no" version="2.1.0" language="C" name="namecheck"/>
+  <component whole_project="no" version="9.8.0" language="C" name="qac"/>
+  <component whole_project="no" version="4.6.0" language="C++" name="qacpp"/>
+  <component whole_project="yes" version="2.2.0" language="C_CPP" name="rcma"/>
+ </toolchain_history>
+ <baseline_history baseline="OFF"/>
+ <checksums>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_uart.c.qac.via" hash="3a76a7871bd399ae58619e9d39ee67e3"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_tim_ex.c.qac.via" hash="ddf46b44ace014bf32301c464d2141e9"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_i2c_ex.c.qac.via" hash="ad14c29a9b302188203e6cd285a89159"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal.c.qac.via" hash="71d8ba220ed2861b75ca49ac5a05f77c"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_cryp_ex.c.qac.via" hash="e14274fc6091e86cc0d65a64ab9e28bf"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_i2c.c.qac.via" hash="268d159b83c9dfff97eced6aa17595bb"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_cec.c.qac.via" hash="4ed447d0584b0d0ba7dc633cb9532d00"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_adc.c.qac.via" hash="74ebcc2d9b7bbaca75bb32a5eea0adcd"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_adc_ex.c.qac.via" hash="228bcca604ef4aefb92295341db4ae09"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_sai_ex.c.qac.via" hash="df76c7b8c706755809546e626c5a6754"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_can.c.qac.via" hash="fea4bb1988cb884685e2acb6bd1f4555"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dma_ex.c.qac.via" hash="79d58d12c92769a58f37b138590080f6"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_lptim.c.qac.via" hash="c979b44291d9ef313aa144532e2e52ac"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dsi.c.qac.via" hash="8b90515b793cc039e8c4aedcbb4be36a"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_cortex.c.qac.via" hash="bf92e6bb14db7dac7bead98337c87081"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_sai.c.qac.via" hash="dd157f75c59dad040dbb196f008d2d0d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_ll_fmc.c.qac.via" hash="523d3c3336b07fc600758b58eeff967b"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_crc.c.qac.via" hash="a42b61fa1c41935d5958fec2adeda602"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_pwr.c.qac.via" hash="ae4c2f7649d007039f7d607de546b9cc"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_flash.c.qac.via" hash="64cb560d93dae6c4aa909a09dcfe1d99"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_cryp.c.qac.via" hash="64567d4d919c199e9f592e0ba1640621"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_flash_ramfunc.c.qac.via" hash="bd8183ec191b757f5f3563bd7c654a13"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dac.c.qac.via" hash="5e9ab824974bcbf85cfb59968226ea09"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_sd.c.qac.via" hash="65969e81b677d3980c6e1cb45be5e3f0"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dac_ex.c.qac.via" hash="e6122d66ecbc0b63ba131cd16f2f2574"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-15972c75a2a6b9f302b8\usbd_msc_data.c.qac.via" hash="318982c8a7bb9b94f5dacf67d8b4809e"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_nand.c.qac.via" hash="4c2078581df3ea0183d9977bc4cf04fb"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dma.c.qac.via" hash="6ed350cbf4a8b13e18c3bc8c670e4166"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dcmi.c.qac.via" hash="9c7af93825265b903ef8278211567b5d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dcmi_ex.c.qac.via" hash="fb5c3fa03631a9f031b8916f5ed6f8af"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_dma2d.c.qac.via" hash="0bf416521847e3e61f518090d9aca99b"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_rtc.c.qac.via" hash="1c72a9f61779668cc427ad5d78ea4620"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_eth.c.qac.via" hash="907fb0b3405d6dffb2d5295ce2dfa9fa"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\usbd_storage_if.c.qac.via" hash="b65ed295ad390b336723905c6a10a9e2"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_flash_ex.c.qac.via" hash="72bbc07a48e0d6030fd5b767d7aa43f7"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_fmpi2c.c.qac.via" hash="6c12ef2e32409f58e83e1a6d4874893c"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_sekey.c.qac.via" hash="34872d1f56e261e854c6c240322573e2"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_security_core.c.qac.via" hash="84db328b49f0000c9510028fdbd92c21"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_fmpi2c_ex.c.qac.via" hash="a4ac1ae9e2e3c4ed062e7fee60a0f989"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_spdifrx.c.qac.via" hash="197f478cc73a6f345bd9b12f9dc1f2a3"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_gpio.c.qac.via" hash="29a22a014c491e2caceb15a5fef4da34"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_hash.c.qac.via" hash="ffebc6ab745ba907ed80b3d01974736b"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_hash_ex.c.qac.via" hash="30e34f775cd1c1b836b65e2f55fc302c"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_hcd.c.qac.via" hash="3f1bbc386c23250925099aabbc47bd71"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_i2s.c.qac.via" hash="acd3e595c10b46c8a17a5292b716bad2"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_ltdc_ex.c.qac.via" hash="e9fead59081c52907289f9d361eb7d15"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_i2s_ex.c.qac.via" hash="d33c2a59e7b2da72b16e38f81f982877"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_irda.c.qac.via" hash="8b5d994afbca4cf9a2f82350a8c2acc8"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_iwdg.c.qac.via" hash="85fe9148f7511cd1bfc5385d0a147ae6"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-78b9699cdde6fab3e97f\usbd_ctlreq.c.qac.via" hash="cb53d53ba236cf0fab9ebf85a7713b37"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_ltdc.c.qac.via" hash="4021451deccb9f75c16287e726e91711"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_rcc_ex.c.qac.via" hash="853915b3426064c323a8845ec7265e2a"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_nor.c.qac.via" hash="0b9eb9e819a427344e34a5539cf0430b"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_wwdg.c.qac.via" hash="4aef75b6c3d80ab3622ef31a02417bd9"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_pccard.c.qac.via" hash="ce34356cccc5a15eb25e13e819613cf8"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_pcd.c.qac.via" hash="1c849cd888bfa4fabe6ff8d7fe518382"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_sdio.c.qac.via" hash="deb7054048ccc53884daa9127cae34a0"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_pcd_ex.c.qac.via" hash="e744f1899f63614bd1fad82a77a2f9a4"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_pwr_ex.c.qac.via" hash="0ffc5d54db8c995d9a60e9727a063c96"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_rcc.c.qac.via" hash="2b48b87aad267719f8bf6b0ce335a96d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_qspi.c.qac.via" hash="e11c2708f5049d8f63cf0039c6c71b2f"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_rng.c.qac.via" hash="81622009db28af33191421fa4a849493"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_rtc_ex.c.qac.via" hash="c18e4f4b4af163ed893b69e2cd818f46"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_sdram.c.qac.via" hash="72ab97eb7b6f1239f4b17837171a941d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_smartcard.c.qac.via" hash="6cbb090201073f468934fa7ed5a5acef"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_spi.c.qac.via" hash="ff2cf005e8ad000787b7066362a47874"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_sram.c.qac.via" hash="c898f3f62d7ded46d0c3327f3ecd3239"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_tim.c.qac.via" hash="a83b150f5caa29f5389502aff9d1fee2"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_ll_fsmc.c.qac.via" hash="88590c933d152ec90234995345bcbd46"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_dispatcher_core.c.qac.via" hash="96c4645880a49734e1e982c266cecbdf"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_hal_usart.c.qac.via" hash="4ea01ed8c41d398de27fef266c03f5db"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_ll_sdmmc.c.qac.via" hash="5b3c2e71c65482a8233648124a84d9e7"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-7620d50973e91db01599\stm32f4xx_ll_usb.c.qac.via" hash="c0e8843e7e5207196720bd7f9a830f09"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-15972c75a2a6b9f302b8\usbd_msc.c.qac.via" hash="6cac5beeaeeef09661ffc540d6510a90"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-15972c75a2a6b9f302b8\usbd_msc_bot.c.qac.via" hash="56977ecf3577be40acbfc4d814c84613"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-15972c75a2a6b9f302b8\usbd_msc_scsi.c.qac.via" hash="19d11601e4cba5a0df7c243b1938d1ae"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-78b9699cdde6fab3e97f\usbd_core.c.qac.via" hash="f6f6f86fcd9fb46eca335ebc6a249aae"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-78b9699cdde6fab3e97f\usbd_ioreq.c.qac.via" hash="9dcaaca80e47300e8c94558ccc71f4e1"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Common-885b3331e2114ba6edd2\aes256.c.qac.via" hash="a8f6b7f2f3e331bb5250d370097d2337"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Common-885b3331e2114ba6edd2\crc16.c.qac.via" hash="afe177496a6db6b755666a95126e9e89"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Common-885b3331e2114ba6edd2\pbkdf2.c.qac.via" hash="ad0903383b5e1b2d7d9d01f576e17019"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Common-885b3331e2114ba6edd2\se3_common.c.qac.via" hash="ae5013290054d2a3b4ad6c2f0d8b9866"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Common-885b3331e2114ba6edd2\sha256.c.qac.via" hash="056bd7f7b37e52b36178fc24e3c05fa5"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_algo_Aes.c.qac.via" hash="b2c6ec4826d8a0c1ac09e25aaf14c715"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_algo_AesHmacSha256s.c.qac.via" hash="1c09ec215aa765ada1f2d08149ac43c0"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_algo_HmacSha256.c.qac.via" hash="b5f7a00783cac497bb7c526d9691703e"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_algo_sha256.c.qac.via" hash="7794235cd9e0dec3c54281d101116ec1"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_communication_core.c.qac.via" hash="d844c1e8b421050be32065980f790d7b"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_core.c.qac.via" hash="ed50dcbac50f5529ca5a1a59d3e51e3d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_core_time.c.qac.via" hash="effe8837d16236cb246574fa91656ba6"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_flash.c.qac.via" hash="431b84e8de8ed8ac83182d7e92b67207"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_fpga.c.qac.via" hash="32cd2b3eb3dae7845d8a2f4e6fd3bfcb"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_keys.c.qac.via" hash="dd1846885b2517868f3e917d9b0fd2e8"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_memory.c.qac.via" hash="d26f7e191eadc11828f772de7962ccbf"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Device-26a606dd6a5e1e888868\se3_rand.c.qac.via" hash="2099dd43a86f01a688cfc09af56fb059"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\tim.c.qac.via" hash="1fb5b67da0395e8354d82b8361d36e98"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\adc.c.qac.via" hash="0cfa856d406c49a9cc0aa026255961cd"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\crc.c.qac.via" hash="16e8cc5266293896d20085b294fce7c2"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\dma.c.qac.via" hash="a029b9894fdb56eb44468bf8a1534e8f"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\fmc.c.qac.via" hash="d4ec8a9639bc8e882bbbfd0cf7ea2f06"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\gpio.c.qac.via" hash="dcd8566e92b91e08c03b7c63d39645a6"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\i2c.c.qac.via" hash="c975070fdec8368d96f67e305e6edbe3"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\main.c.qac.via" hash="a2bd0a6e2487195508f8f4d21becb041"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\misc.c.qac.via" hash="06c61d3ebb60fed3340722e908d5ff2d"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\rng.c.qac.via" hash="04491af923d48e9a10856eaab11e1f64"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\spi.c.qac.via" hash="bfcf9fc204edd2914e0504d25d7a11f5"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\sdio.c.qac.via" hash="77b675f177ff01459b41067005a1a88f"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\stm32f4xx_exti.c.qac.via" hash="ca875ceded4bcef48fda1be85b7bc70a"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\stm32f4xx_hal_msp.c.qac.via" hash="5f8ce216349eac7ad008e660410bbf20"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\stm32f4xx_it.c.qac.via" hash="a28f63ed0bbdbe13fd6eafb8033b11c0"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\stm32f4xx_syscfg.c.qac.via" hash="dd9ebaa5089c39e1ff7c8e45d565adf5"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\system_stm32f4xx.c.qac.via" hash="ea05edd284b05140bc32d056bf2912c3"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\usart.c.qac.via" hash="338c881cc16b4844feb6cfe6b2114fee"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\usb_device.c.qac.via" hash="f196acdf53f999406b07ec5d7c9f5df6"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\usbd_conf.c.qac.via" hash="e5ffc001003867bf92650671653b86e5"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\Src-d156d2207fc53b0ff791\usbd_desc.c.qac.via" hash="168cbbf6a8747399671831a570e3bbda"/>
+  <file name="${SOURCE_ROOT}\prqa\configs\Initial\output\_SOURCE_ROOT\cma.rcma.via" hash="7090ce1a81c1399f6f851631fff30133"/>
+ </checksums>
+</dependencies>

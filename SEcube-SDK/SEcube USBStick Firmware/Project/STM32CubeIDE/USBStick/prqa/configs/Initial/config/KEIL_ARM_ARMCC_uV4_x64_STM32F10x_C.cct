@@ -1,0 +1,114 @@
+*{
+* "PLATFORM" : "PLATFORM_WIN64",
+* "COMPILER_HIERARCHY" : "Keil_ARM_uVision4",
+* "COMPILER_NAME": "ARM",
+* "COMPILER_VERSION": "5020078",
+* "HOST": "x64",
+* "TARGET": "STM32F10x",
+* "SOURCE_LANGUAGE": "C",
+* "COMPILER_CMD": "armcc",
+* "ADDITIONAL_INCLUDES":"DATA/KEIL_ARM_ARMCC_uV4_x64_STM32F10x_C/Stub",
+* "INCLUDE_LIST": [
+*   {"INCLUDE_STRUCTURE": {
+*       "INCLUDE_TYPE": "MasterScript",
+*       "INCLUDE_VALUE": "DATA/KEIL_ARM_ARMCC_uV4_x64_STM32F10x_C/Script/KEIL_ARM_ARMCC_uV4_x64_STM32F10x_C.py"
+*       }
+*   },
+*   {"INCLUDE_STRUCTURE": {
+*       "INCLUDE_TYPE": "HelperScript",
+*           "INCLUDE_VALUE": ""
+*       }
+*   }
+* ],
+* "SYNCHRONISATION" : {
+*   "INCLUDE_FLAGS":"",
+*   "DEFINE_FLAGS":"",
+*   "SETTINGS_FILE_OPTIONS":{
+*       "FLAG":"",
+*       "EXTENSION":"",
+*       "LITERAL_QUOTES":""
+*       }
+*   }
+*}
+
+-d _PRL_STRINGIFY(x)=#x
+-d __ARMCC_VERSION=5030076
+-d __CC_ARM=1
+-d __EDG_VERSION__=401
+-d __EDG__=1
+-d __MODULE__=_PRL_STRINGIFY(deftest.c)
+-d __OPT_SMALL_ASSERT=1
+-d __SOFTFP__=1
+-d __STDC_VERSION__=199409L
+-d __STDC__=1
+-d __TARGET_ARCH_ARM=4
+-d __TARGET_ARCH_THUMB=1
+-d __TARGET_FPU_SOFTVFP=1
+
+-s int=32
+-a int=4
+-s char=8
+-a char=1
+-u+
+-s short=16
+-a short=2
+-s long=32
+-a long=4
+-s longlong=64
+-a longlong=8
+-s float=32
+-a float=4
+-s double=64
+-a double=8
+-s ldouble=64
+-a ldouble=8
+-s dataptr=32
+-a dataptr=4
+-s codeptr=32
+-a codeptr=4
+
+-it "size_t=unsigned int"
+-it "ptrdiff_t=signed int"
+-it "wchar_t=unsigned short"
+
+-xn 31
+-na 31
+-ar+
+-ex ansipc
+-ex asm
+-ex c++
+-ex dollar 
+-ex longlong
+-fpc+
+-sl-
+-xc-
+
+-d "__ESCAPE__=1 prl_ignore_paren"
+-d "__INTADDR__=1 prl_ignore_paren"
+-d "__align=_ignore_paren"
+-d "__asm=asm"
+-d "__asm__=asm"
+-d "__attribute__=_ignore_paren"
+-d "__declspec=_ignore_paren"
+-d "__forceinline="
+-d "__inline=inline"
+-d "__irq="
+-d "__packed="
+-d "__pure="
+-d "__softfp="
+-d "__svc_indirect=_ignore_paren"
+-d "__swi=_ignore_paren"
+-d "__value_in_regs="
+-d "__weak="
+-d "_prl_null_expression=0 prl_ignore_paren"
+-d __INFINITY__=
+-d __PRETTY_FUNCTION__=_PRL_STRINGIFY(__PRETTY_FUNCTION__)
+-d __va_arg=
+-d __va_end=
+-d __va_start=
+-d prl_ignore_paren=_ignore_paren
+-d "__int64=long long"
+-d _inline=inline
+-d __svc(a)=
+-d "far="
+-d "near="

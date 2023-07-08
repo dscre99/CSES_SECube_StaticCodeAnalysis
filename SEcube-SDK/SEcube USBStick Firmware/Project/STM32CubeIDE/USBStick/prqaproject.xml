@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<prqaproject xmlversion="3.0.0" qafversion="2.7.0">
+ <!-- Config file information... -->
+ <configurations>
+  <cosmetic_name name="USBStick"/>
+  <languageFamily name="C/C++"/>
+  <processMonitor>
+   <includeOptionSyntax>
+    <option string="-I"/>
+    <option string="/I"/>
+   </includeOptionSyntax>
+   <defineOptionSyntax>
+    <option string="-D"/>
+    <option string="/D"/>
+   </defineOptionSyntax>
+   <flagScript string=""/>
+   <settingsOptionSyntax>
+    <option compiler="Visual Studio" string="@" extension=".rsp" literal_quotes="no"/>
+    <option compiler="Windriver" string="-@" extension="" literal_quotes="no"/>
+    <option compiler="Greenhills" string="--Via" extension="__i" literal_quotes="no"/>
+   </settingsOptionSyntax>
+   <excludeStrings/>
+   <fileFilterStrings/>
+  </processMonitor>
+  <suppressIncludes active="no"/>
+  <exclusionPattern method="CSV"/>
+  <root_paths>
+   <root_path path="${PROJECT_ROOT}" name="SOURCE_ROOT"/>
+  </root_paths>
+  <default_config name="Initial"/>
+  <!-- Individual Configs... -->
+  <config name="Initial">
+   <baselinedSourceRoot baseline="OFF"/>
+   <baselineSnapshot id="" name="" date=""/>
+   <acf name="default.acf"/>
+   <rcf name="m3cm-2.5.0-en_US.rcf"/>
+   <ccts>
+    <cct target="C" active="yes" name="KEIL_ARM_ARMCC_uV4_x64_STM32F10x_C.cct"/>
+   </ccts>
+  </config>
+ </configurations>
+ <!-- Mapping of extension to target_language... -->
+ <file_extensions>
+  <language target="C">
+   <extension ext=".c"/>
+  </language>
+  <language target="C">
+   <extension ext=".C"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cpp"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cxx"/>
+  </language>
+  <language target="C++">
+   <extension ext=".cc"/>
+  </language>
+  <language target="C++">
+   <extension ext=".CPP"/>
+  </language>
+  <language target="C++">
+   <extension ext=".CXX"/>
+  </language>
+  <language target="C++">
+   <extension ext=".CC"/>
+  </language>
+ </file_extensions>
+ <!-- Files in project... -->
+ <folders>
+  <folder id="C:/">
+   <defines>
+    <define name="STM32F429xx="/>
+    <define name="__packed=&quot;&quot;__attribute__((__packed__))&quot;&quot;"/>
+    <define name="__weak=&quot;&quot;__attribute__((weak))&quot;&quot;"/>
+    <define name="USE_HAL_DRIVER="/>
+    <define name="DEBUG="/>
+   </defines>
+   <includes>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/CMSIS/Include"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Inc"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Core/Inc"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Inc"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Inc/Common"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Inc/Device"/>
+    <include path="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
+   </includes>
+  </folder>
+ </folders>
+ <files>
+  <!-- Explicit files... -->
+  <file target="C" name="se3_algo_Aes.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_algo_AesHmacSha256s.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_algo_HmacSha256.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_algo_sha256.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_communication_core.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_core.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_core_time.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_dispatcher_core.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_flash.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_fpga.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_keys.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_memory.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_rand.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_sdio.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_security_core.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="se3_sekey.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Device"/>
+  <file target="C" name="aes256.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Common"/>
+  <file target="C" name="crc16.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Common"/>
+  <file target="C" name="pbkdf2.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Common"/>
+  <file target="C" name="se3_common.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Common"/>
+  <file target="C" name="sha256.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src/Common"/>
+  <file target="C" name="adc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="crc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="dma.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="fmc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="gpio.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="i2c.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="main.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="misc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="rng.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="sdio.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="spi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="stm32f4xx_exti.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="stm32f4xx_hal_msp.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="stm32f4xx_it.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="stm32f4xx_syscfg.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="system_stm32f4xx.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="tim.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usart.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usb_device.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usbd_conf.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usbd_desc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usbd_storage_if.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Project/Src"/>
+  <file target="C" name="usbd_core.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Core/Src"/>
+  <file target="C" name="usbd_ctlreq.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Core/Src"/>
+  <file target="C" name="usbd_ioreq.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Core/Src"/>
+  <file target="C" name="usbd_msc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src"/>
+  <file target="C" name="usbd_msc_bot.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src"/>
+  <file target="C" name="usbd_msc_data.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src"/>
+  <file target="C" name="usbd_msc_scsi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src"/>
+  <file target="C" name="stm32f4xx_hal.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_adc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_adc_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_can.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_cec.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_cortex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_crc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_cryp.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_cryp_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dac.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dac_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dcmi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dcmi_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dma.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dma2d.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dma_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_dsi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_eth.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_flash.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_flash_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_flash_ramfunc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_fmpi2c.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_fmpi2c_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_gpio.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_hash.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_hash_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_hcd.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_i2c.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_i2c_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_i2s.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_i2s_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_irda.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_iwdg.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_lptim.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_ltdc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_ltdc_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_nand.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_nor.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_pccard.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_pcd.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_pcd_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_pwr.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_pwr_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_qspi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_rcc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_rcc_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_rng.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_rtc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_rtc_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_sai.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_sai_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_sd.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_sdram.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_smartcard.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_spdifrx.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_spi.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_sram.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_tim.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_tim_ex.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_uart.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_usart.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_hal_wwdg.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_ll_fmc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_ll_fsmc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_ll_sdmmc.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+  <file target="C" name="stm32f4xx_ll_usb.c" folder="C:/Users/dscre/git/CSES_SECube_StaticCodeAnalysis/SEcube-SDK/SEcube USBStick Firmware/Drivers/STM32F4xx_HAL_Driver/Src"/>
+ </files>
+</prqaproject>

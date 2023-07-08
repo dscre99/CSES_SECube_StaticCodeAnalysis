@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<acf xmlversion="2.0.0">
+  <components>
+    <component version="4.6.0" target="C++" name="qacpp"/>
+    <component version="9.8.0" target="C" name="qac"/>
+    <component version="2.2.0" target="C_CPP" name="rcma"/>
+    <component version="2.1.0" target="C" name="namecheck"/>
+  </components>
+  <component_settings/>
+</acf>
