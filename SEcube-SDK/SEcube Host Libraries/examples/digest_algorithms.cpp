@@ -44,7 +44,7 @@ int digest_example() {
 	char digest_input[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat ornare nunc vitae placerat. "
 			"Phasellus tincidunt dictum dui at tristique. Fusce at neque ac nisl hendrerit porta in quis ipsum. In at sollicitudin "
 			"nunc, et feugiat augue placerat.";
-	int testsize = strlen(digest_input);
+	//int testsize = strlen(digest_input);
 
 	/* we recommend using smart pointers to manage L0 and L1 objects in order
 	   to ensure proper memory management by their constructors and destructors. */
@@ -95,6 +95,7 @@ int digest_example() {
 	int cnt = 0, ch = 0;
 
 	if((sel >= 0) && (sel < numdevices)){
+        int testsize = strlen(digest_input);
 		array<uint8_t, L0Communication::Size::SERIAL> sn = {0};
 		if(devices.at(sel).second.length() > L0Communication::Size::SERIAL){
 			cout << "Unexpected error...quit." << endl;
