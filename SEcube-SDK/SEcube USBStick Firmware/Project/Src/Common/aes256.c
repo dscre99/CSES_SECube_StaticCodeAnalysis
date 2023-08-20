@@ -693,7 +693,7 @@ const uint32_t B5Td4_S[256] = {
     0xbabababaU, 0x77777777U, 0xd6d6d6d6U, 0x26262626U,
     0xe1e1e1e1U, 0x69696969U, 0x14141414U, 0x63636363U,
     0x55555555U, 0x21212121U, 0x0c0c0c0cU, 0x7d7d7d7dU,
-}; 
+};
 
 const uint32_t B5_rcon[] = {
     0x01000000, 0x02000000, 0x04000000, 0x08000000,
@@ -711,7 +711,7 @@ uint32_t B5_AES256_GETUINT32 (const uint8_t *pt)
 {
     uint16_t ph,pl;
     uint32_t p;
-    
+
     ph = ((uint16_t) pt[0]) << 8;
     ph ^= ((uint16_t) pt[1]) & 0x00ff;
     pl = ((uint16_t) pt[2]) << 8;
@@ -745,21 +745,21 @@ void B5_AES256_PUTUINT32 (uint8_t *ct, const uint32_t st)
  * @param keyBits Key length. Key length. See \ref aesKeys for supported sizes.
  * @return Number of rounds for the given cipher key size (10, 12, 14).
  */
-static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint8_t *cipherKey, int16_t keyBits) 
+static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint8_t *cipherKey, int16_t keyBits)
 {
     int16_t i;
     uint32_t temp;
     uint32_t ut0, ut1, ut2, ut3, ut4;
-    
+
     i = 0;
     rk[0] = B5_AES256_GETUINT32(cipherKey     );
     rk[1] = B5_AES256_GETUINT32(cipherKey +  4);
     rk[2] = B5_AES256_GETUINT32(cipherKey +  8);
     rk[3] = B5_AES256_GETUINT32(cipherKey + 12);
-    
-    if (keyBits == 128) 
+
+    if (keyBits == 128)
     {
-        for (;;) 
+        for (;;)
         {
             temp  = rk[3];
             memcpy(&ut0, &ctx->Te4[(temp >> 16) & 0xff], sizeof(uint32_t));
@@ -767,29 +767,29 @@ static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint
             memcpy(&ut2, &ctx->Te4[(temp      ) & 0xff], sizeof(uint32_t));
             memcpy(&ut3, &ctx->Te4[(temp >> 24)       ], sizeof(uint32_t));
             memcpy(&ut4, &B5_rcon[i], sizeof(uint32_t));
-            
+
             rk[4] = rk[0] ^
                     (ut0 & 0xff000000) ^
                     (ut1 & 0x00ff0000) ^
                     (ut2 & 0x0000ff00) ^
                     (ut3 & 0x000000ff) ^
                     ut4;
-            
+
             rk[5] = rk[1] ^ rk[4];
             rk[6] = rk[2] ^ rk[5];
             rk[7] = rk[3] ^ rk[6];
-            
+
             if (++i == 10) return 10;
             rk += 4;
         }
     }
-    
+
     rk[4] = B5_AES256_GETUINT32(cipherKey + 16);
     rk[5] = B5_AES256_GETUINT32(cipherKey + 20);
-    
-    if (keyBits == 192) 
+
+    if (keyBits == 192)
     {
-        for (;;) 
+        for (;;)
         {
             temp = rk[5];
             memcpy(&ut0, &ctx->Te4[(temp >> 16) & 0xff], sizeof(uint32_t));
@@ -797,31 +797,31 @@ static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint
             memcpy(&ut2, &ctx->Te4[(temp      ) & 0xff], sizeof(uint32_t));
             memcpy(&ut3, &ctx->Te4[(temp >> 24)       ], sizeof(uint32_t));
             memcpy(&ut4, &B5_rcon[i], sizeof(uint32_t));
-            
+
             rk[ 6] = rk[ 0] ^
                     (ut0 & 0xff000000) ^
                     (ut1 & 0x00ff0000) ^
                     (ut2 & 0x0000ff00) ^
                     (ut3 & 0x000000ff) ^
                     ut4;
-            
+
             rk[ 7] = rk[ 1] ^ rk[ 6];
             rk[ 8] = rk[ 2] ^ rk[ 7];
             rk[ 9] = rk[ 3] ^ rk[ 8];
-            
+
             if (++i == 8) return 12;
             rk[10] = rk[ 4] ^ rk[ 9];
             rk[11] = rk[ 5] ^ rk[10];
             rk += 6;
         }
     }
-    
+
     rk[6] = B5_AES256_GETUINT32(cipherKey + 24);
     rk[7] = B5_AES256_GETUINT32(cipherKey + 28);
-    
-    if (keyBits == 256) 
+
+    if (keyBits == 256)
     {
-        for (;;) 
+        for (;;)
         {
             temp = rk[ 7];
             memcpy(&ut0, &ctx->Te4[(temp >> 16) & 0xff], sizeof(uint32_t));
@@ -829,35 +829,35 @@ static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint
             memcpy(&ut2, &ctx->Te4[(temp      ) & 0xff], sizeof(uint32_t));
             memcpy(&ut3, &ctx->Te4[(temp >> 24)       ], sizeof(uint32_t));
             memcpy(&ut4, &B5_rcon[i], sizeof(uint32_t));
-            
+
             rk[ 8] = rk[ 0] ^
                     (ut0 & 0xff000000) ^
                     (ut1 & 0x00ff0000) ^
                     (ut2 & 0x0000ff00) ^
                     (ut3 & 0x000000ff) ^
                     ut4;
-            
+
             rk[ 9] = rk[ 1] ^ rk[ 8];
             rk[10] = rk[ 2] ^ rk[ 9];
             rk[11] = rk[ 3] ^ rk[10];
-            
+
             if (++i == 7) return 14;
             temp = rk[11];
             memcpy(&ut0, &ctx->Te4[(temp >> 24)       ], sizeof(uint32_t));
             memcpy(&ut1, &ctx->Te4[(temp >> 16) & 0xff], sizeof(uint32_t));
             memcpy(&ut2, &ctx->Te4[(temp >>  8) & 0xff], sizeof(uint32_t));
             memcpy(&ut3, &ctx->Te4[(temp      ) & 0xff], sizeof(uint32_t));
-            
+
             rk[ 12] = rk[ 4] ^
                     (ut0 & 0xff000000) ^
                     (ut1 & 0x00ff0000) ^
                     (ut2 & 0x0000ff00) ^
                     (ut3 & 0x000000ff);
-            
+
             rk[13] = rk[ 5] ^ rk[12];
             rk[14] = rk[ 6] ^ rk[13];
             rk[15] = rk[ 7] ^ rk[14];
-            
+
             rk += 8;
         }
     }
@@ -873,14 +873,14 @@ static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint
  * @return Number of rounds for the given cipher key size (10, 12, 14).
  */
 static uint8_t B5_rijndaelKeySetupDec (B5_tAesCtx *ctx, uint32_t *rk, const uint8_t *cipherKey, int16_t keyBits)
-{ 
+{
     int Nr, i, j;
-    uint32_t temp;
-    
+
     /* expand the cipher key: */
     Nr = B5_rijndaelKeySetupEnc(ctx, rk, cipherKey, keyBits);
     /* invert the order of the round keys: */
     for (i = 0, j = 4*Nr; i < j; i += 4, j -= 4) {
+        uint32_t temp;
         temp = rk[i    ]; rk[i    ] = rk[j    ]; rk[j    ] = temp;
         temp = rk[i + 1]; rk[i + 1] = rk[j + 1]; rk[j + 1] = temp;
         temp = rk[i + 2]; rk[i + 2] = rk[j + 2]; rk[j + 2] = temp;
@@ -932,8 +932,8 @@ static void B5_rijndaelEncrypt (B5_tAesCtx *ctx, uint32_t *rk, int16_t Nr, const
     s1 = B5_AES256_GETUINT32(pt +  4) ^ rk[1];
     s2 = B5_AES256_GETUINT32(pt +  8) ^ rk[2];
     s3 = B5_AES256_GETUINT32(pt + 12) ^ rk[3];
-    
-    
+
+
     /* round 1: */
     t0 = ctx->Te0[s0 >> 24] ^ ctx->Te1[(s1 >> 16) & 0xff] ^ ctx->Te2[(s2 >>  8) & 0xff] ^ ctx->Te3[s3 & 0xff] ^ rk[ 4];
     t1 = ctx->Te0[s1 >> 24] ^ ctx->Te1[(s2 >> 16) & 0xff] ^ ctx->Te2[(s3 >>  8) & 0xff] ^ ctx->Te3[s0 & 0xff] ^ rk[ 5];
@@ -1049,7 +1049,7 @@ static void B5_rijndaelEncrypt (B5_tAesCtx *ctx, uint32_t *rk, int16_t Nr, const
 void B5_rijndaelDecrypt (B5_tAesCtx *ctx, uint32_t *rk, int16_t Nr, const uint8_t *ct, uint8_t *pt)
 {
     uint32_t s0, s1, s2, s3, t0, t1, t2, t3;
-    
+
     /*
      map byte array block to cipher state
      and add initial round key:
@@ -1058,8 +1058,8 @@ void B5_rijndaelDecrypt (B5_tAesCtx *ctx, uint32_t *rk, int16_t Nr, const uint8_
     s1 = B5_AES256_GETUINT32(ct +  4) ^ rk[1];
     s2 = B5_AES256_GETUINT32(ct +  8) ^ rk[2];
     s3 = B5_AES256_GETUINT32(ct + 12) ^ rk[3];
-    
-    
+
+
     /* round 1: */
     t0 = ctx->Td0[s0 >> 24] ^ ctx->Td1[(s3 >> 16) & 0xff] ^ ctx->Td2[(s2 >>  8) & 0xff] ^ ctx->Td3[s1 & 0xff] ^ rk[ 4];
     t1 = ctx->Td0[s1 >> 24] ^ ctx->Td1[(s0 >> 16) & 0xff] ^ ctx->Td2[(s3 >>  8) & 0xff] ^ ctx->Td3[s2 & 0xff] ^ rk[ 5];
@@ -1166,22 +1166,22 @@ void B5_rijndaelDecrypt (B5_tAesCtx *ctx, uint32_t *rk, int16_t Nr, const uint8_
 
 int32_t B5_Aes256_Init (B5_tAesCtx *ctx, const uint8_t *Key, int16_t keySize, uint8_t aesMode)
 {
-    if(Key == NULL) 
+    if(Key == NULL)
         return B5_AES256_RES_INVALID_ARGUMENT;
-    
+
     if(ctx == NULL)
         return  B5_AES256_RES_INVALID_CONTEXT;
-    
+
     memset(ctx, 0, sizeof(B5_tAesCtx));
-    
+
     if ((aesMode < B5_AES256_OFB) || (aesMode > B5_AES256_CTR ))
         return B5_AES256_RES_INVALID_MODE;
-    
-    if((keySize != B5_AES_128) && (keySize != B5_AES_192) && (keySize != B5_AES_256)) 
+
+    if((keySize != B5_AES_128) && (keySize != B5_AES_192) && (keySize != B5_AES_256))
         return B5_AES256_RES_INVALID_KEY_SIZE;
-    
+
     ctx->mode = aesMode;
-    
+
     ctx->Te0 = B5Te0_S;
     ctx->Te1 = B5Te1_S;
     ctx->Te2 = B5Te2_S;
@@ -1192,22 +1192,22 @@ int32_t B5_Aes256_Init (B5_tAesCtx *ctx, const uint8_t *Key, int16_t keySize, ui
     ctx->Td2 = B5Td2_S;
     ctx->Td3 = B5Td3_S;
     ctx->Td4 = B5Td4_S;
-    
+
     memset(ctx->InitVector, 0x55, B5_AES_IV_SIZE);
-    
-    if ((ctx->mode == B5_AES256_ECB_ENC) || (ctx->mode == B5_AES256_OFB) || (ctx->mode == B5_AES256_CBC_ENC) || (ctx->mode == B5_AES256_CTR) || (ctx->mode == B5_AES256_CFB_ENC) || (ctx->mode == B5_AES256_CFB_DEC)) 
+
+    if ((ctx->mode == B5_AES256_ECB_ENC) || (ctx->mode == B5_AES256_OFB) || (ctx->mode == B5_AES256_CBC_ENC) || (ctx->mode == B5_AES256_CTR) || (ctx->mode == B5_AES256_CFB_ENC) || (ctx->mode == B5_AES256_CFB_DEC))
     {
         ctx->Nr = B5_rijndaelKeySetupEnc(ctx, ctx->rk, Key, keySize<<3);
-    } 
-    else if ((ctx->mode == B5_AES256_ECB_DEC) || (ctx->mode == B5_AES256_CBC_DEC) )  
+    }
+    else if ((ctx->mode == B5_AES256_ECB_DEC) || (ctx->mode == B5_AES256_CBC_DEC) )
     {
         ctx->Nr = B5_rijndaelKeySetupDec(ctx, ctx->rk, Key, keySize<<3);
     }
     else
     {
-        return B5_AES256_RES_INVALID_MODE;        
+        return B5_AES256_RES_INVALID_MODE;
     }
-    
+
     return B5_AES256_RES_OK;
 }
 
@@ -1215,45 +1215,46 @@ int32_t B5_Aes256_SetIV (B5_tAesCtx    *ctx, const uint8_t *IV)
 {
     if(ctx == NULL)
         return  B5_AES256_RES_INVALID_CONTEXT;
-    
-    
-    if(IV == NULL) 
+
+
+    if(IV == NULL)
         return B5_AES256_RES_INVALID_ARGUMENT;
-    
-    
-    if ( (ctx->mode != B5_AES256_OFB) && (ctx->mode != B5_AES256_CBC_ENC) && (ctx->mode != B5_AES256_CBC_DEC) && (ctx->mode != B5_AES256_CTR) && 
-         (ctx->mode != B5_AES256_CFB_ENC) &&  (ctx->mode != B5_AES256_CFB_DEC))    
-        return B5_AES256_RES_INVALID_MODE; 
-    
+
+
+    if ( (ctx->mode != B5_AES256_OFB) && (ctx->mode != B5_AES256_CBC_ENC) && (ctx->mode != B5_AES256_CBC_DEC) && (ctx->mode != B5_AES256_CTR) &&
+         (ctx->mode != B5_AES256_CFB_ENC) &&  (ctx->mode != B5_AES256_CFB_DEC))
+        return B5_AES256_RES_INVALID_MODE;
+
     memcpy(ctx->InitVector, IV, B5_AES_IV_SIZE);
-    
+
     return B5_AES256_RES_OK;
 }
 
 int32_t B5_Aes256_Update (B5_tAesCtx	*ctx, uint8_t *encData, uint8_t *clrData, int16_t nBlk)
 {
-    int16_t    i, j, cb;
+    int16_t    i, j;
     uint8_t    tmp[B5_AES_BLK_SIZE];
-    
-    
-    
+
+
+
     if(ctx == NULL)
         return  B5_AES256_RES_INVALID_CONTEXT;
-    
-    
+
+
     if((encData == NULL) || (clrData == NULL) || (nBlk <= 0))
         return B5_AES256_RES_INVALID_ARGUMENT;
-    
-    
+
+
     switch(ctx->mode) {
-        
-        
-        case B5_AES256_CTR: 
+
+
+        case B5_AES256_CTR:
         {
-            for (i = 0; i < nBlk; i++) 
+            int16_t     cb;
+            for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, encData);
-                for (j = 0; j < B5_AES_BLK_SIZE; j++) 
+                for (j = 0; j < B5_AES_BLK_SIZE; j++)
                 {
                     //*encData = *clrData++ ^ encData[j];
                     //*encData++;
@@ -1262,155 +1263,155 @@ int32_t B5_Aes256_Update (B5_tAesCtx	*ctx, uint8_t *encData, uint8_t *clrData, i
 					encData++;
 					clrData++;
                 }
-                
+
                 j = 15;
                 do {
                     ctx->InitVector[j]++;
                     cb = ctx->InitVector[j] == 0;
-                } while( j-- && cb ); 
+                } while( j-- && cb );
             }
-            
+
             break;
         }
-        
-        
-        case B5_AES256_OFB: 
+
+
+        case B5_AES256_OFB:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, ctx->InitVector);
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     *encData++ = *clrData++ ^ ctx->InitVector[j];
                 }
             }
-            
+
             break;
         }
-        
-        
-        
+
+
+
         case B5_AES256_ECB_ENC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, clrData, encData);
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
         }
-        
-        
+
+
         case B5_AES256_ECB_DEC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelDecrypt(ctx, ctx->rk, ctx->Nr, encData, clrData);
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
         }
-        
-        
+
+
         case B5_AES256_CBC_ENC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     tmp[j] = clrData[j] ^ ctx->InitVector[j];
-                }      
-                
+                }
+
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, tmp, encData);
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     ctx->InitVector[j] = encData[j];
                 }
-                
+
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
         }
-        
-        
+
+
         case B5_AES256_CBC_DEC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     tmp[j] = encData[j];
                 }
-                
+
                 B5_rijndaelDecrypt(ctx, ctx->rk, ctx->Nr, encData, clrData);
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     clrData[j] ^= ctx->InitVector[j];
                     ctx->InitVector[j] = tmp[j];
-                }            
-                
+                }
+
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
         }
-        
-        
+
+
         case B5_AES256_CFB_ENC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
-                B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, tmp);             
-                for (j = 0; j < 16; j++) 
+                B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, tmp);
+                for (j = 0; j < 16; j++)
                 {
                     encData[j] = clrData[j] ^ tmp[j];
-                    ctx->InitVector[j] = encData[j]; 
-                }      
-                
-                
+                    ctx->InitVector[j] = encData[j];
+                }
+
+
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
         }
-        
-        
+
+
         case B5_AES256_CFB_DEC:
         {
-            for (i = 0; i < nBlk; i++) 
+            for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, tmp);
-                for (j = 0; j < 16; j++) 
+                for (j = 0; j < 16; j++)
                 {
                     ctx->InitVector[j] = encData[j];
                     clrData[j] = encData[j] ^ tmp[j];
-                }            
-                
+                }
+
                 clrData += 16;
                 encData += 16;
             }
-            
+
             break;
-        }   
-        
-        
+        }
+
+
         default:
         {
-            
+
             return B5_AES256_RES_INVALID_MODE;
         }
-        
+
     }
-    
-    
+
+
     return B5_AES256_RES_OK;
 }
 
@@ -1427,60 +1428,60 @@ int32_t B5_CmacAes256_Sign (const uint8_t *data, int32_t dataLen, const uint8_t 
     uint8_t        Rb16[16]={0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87};
     int32_t        i;
     B5_tAesCtx      aesCtx;
-    
-    
+
+
     if((data == NULL) || (dataLen < 0) || (Key == NULL) || (rSignature == NULL))
         return B5_CMAC_AES256_RES_INVALID_ARGUMENT;
-    
-    if((keySize != B5_CMAC_AES_128) && (keySize != B5_CMAC_AES_192) && (keySize != B5_CMAC_AES_256)) 
+
+    if((keySize != B5_CMAC_AES_128) && (keySize != B5_CMAC_AES_192) && (keySize != B5_CMAC_AES_256))
         return B5_CMAC_AES256_RES_INVALID_KEY_SIZE;
-    
-    
+
+
     memset(Z, 0x00, sizeof(Z));
-    
-    
+
+
     // Init AES to prepare K1 and K2 subKeys
     B5_Aes256_Init(&aesCtx, Key, keySize, B5_AES256_ECB_ENC);
     B5_Aes256_Update(&aesCtx, L, Z, 1);
-    
-    
+
+
     // Prepare K1
     for (i=0; i < (B5_AES_BLK_SIZE-1); i++)
         K1[i] = (L[i] << 1) + (L[i+1] >> 7);
     K1[i] = L[i] << 1;
-    
-    if ((L[0] & 0x80) == 0x80) 
+
+    if ((L[0] & 0x80) == 0x80)
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             K1[i] ^= Rb16[i];
     }
-    
-    
+
+
     // Prepare K2
     for (i=0; i < (B5_AES_BLK_SIZE-1); i++)
         K2[i] = (K1[i] << 1) + (K1[i+1] >> 7);
     K2[i] = K1[i] << 1;
-    
+
     if ((K1[0] & 0x80) == 0x80) {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             K2[i] ^= Rb16[i];
     }
-    
-    
+
+
     // Calculate MAC (from 1 to N-1 blk)
     memcpy(C, Z, sizeof(Z));
     while(dataLen > B5_AES_BLK_SIZE)
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             C[i] ^= data[i];
-        
+
         B5_Aes256_Update(&aesCtx, C, C, 1);
-        
+
         dataLen -= B5_AES_BLK_SIZE;
         data += B5_AES_BLK_SIZE;
     }
-    
-    
+
+
     // Last Block
     if(dataLen == B5_AES_BLK_SIZE)
     {
@@ -1490,20 +1491,20 @@ int32_t B5_CmacAes256_Sign (const uint8_t *data, int32_t dataLen, const uint8_t 
     else
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
-            MN[i] = K2[i];	
+            MN[i] = K2[i];
         for (i=0; i < dataLen; i++)
             MN[i] ^= data[i];
         MN[dataLen] ^= 0x80;
     }
-    
-    
+
+
     for (i=0; i<B5_AES_BLK_SIZE; i++)
         C[i] ^= MN[i];
-    
+
     B5_Aes256_Update(&aesCtx, rSignature, C, 1);
     B5_Aes256_Finit(&aesCtx);
-    
-    
+
+
     return B5_CMAC_AES256_RES_OK;
 }
 
@@ -1513,69 +1514,69 @@ int32_t B5_CmacAes256_Init (B5_tCmacAesCtx *ctx, const uint8_t *Key, int16_t key
     uint8_t    L[16];
     uint8_t    Rb16[16]={0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87};
     int32_t    i;
-    
-    
-    if(Key == NULL) 
+
+
+    if(Key == NULL)
         return B5_CMAC_AES256_RES_INVALID_ARGUMENT;
-    
+
     if(ctx == NULL)
         return  B5_CMAC_AES256_RES_INVALID_CONTEXT;
-    
+
     memset(ctx, 0, sizeof(B5_tCmacAesCtx));
-    
-    
+
+
     memset(Z, 0x00, sizeof(Z));
-    
-    
+
+
     // Init AES to prepare K1 and K2 subKeys
     B5_Aes256_Init(&ctx->aesCtx, Key, keySize, B5_AES256_ECB_ENC);
     B5_Aes256_Update(&ctx->aesCtx, L, Z, 1);
-    
+
     // Prepare K1
     for (i=0; i < (B5_AES_BLK_SIZE-1); i++)
         ctx->K1[i] = (L[i] << 1) + (L[i+1] >> 7);
     ctx->K1[i] = L[i] << 1;
-    
-    if ((L[0] & 0x80) == 0x80) 
+
+    if ((L[0] & 0x80) == 0x80)
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             ctx->K1[i] ^= Rb16[i];
     }
-    
+
     // Prepare K2
     for (i=0; i < (B5_AES_BLK_SIZE-1); i++)
         ctx->K2[i] = (ctx->K1[i] << 1) + (ctx->K1[i+1] >> 7);
     ctx->K2[i] = ctx->K1[i] << 1;
-    
+
     if ((ctx->K1[0] & 0x80) == 0x80) {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             ctx->K2[i] ^= Rb16[i];
     }
-    
+
     memcpy(ctx->C, Z, sizeof(Z));
-    
+
     ctx->tmpBlkLen = 0;
-    
+
     return B5_CMAC_AES256_RES_OK;
 }
 
 int32_t B5_CmacAes256_Update (B5_tCmacAesCtx *ctx, const uint8_t *data, int32_t dataLen)
 {
     int32_t    i;
-    
-    
+
+
     if(ctx == NULL)
         return  B5_CMAC_AES256_RES_INVALID_CONTEXT;
-    
-    
+
+
     if((data == NULL) || (dataLen < 0))
         return B5_CMAC_AES256_RES_INVALID_ARGUMENT;
-    
-    
+
+
     if(dataLen == 0)
         return B5_CMAC_AES256_RES_OK;
-    
-    
+
+
     if(ctx->tmpBlkLen > 0)
     {
         // Not enough
@@ -1585,34 +1586,34 @@ int32_t B5_CmacAes256_Update (B5_tCmacAesCtx *ctx, const uint8_t *data, int32_t 
             ctx->tmpBlkLen += dataLen;
             return B5_CMAC_AES256_RES_OK;
         }
-        
+
         // Process the first block (merging tmpBlk and data) and adjust data pointer
         memcpy(&ctx->tmpBlk[ctx->tmpBlkLen], data, B5_AES_BLK_SIZE-ctx->tmpBlkLen);
         for (i=0; i < B5_AES_BLK_SIZE; i++)
             ctx->C[i] ^= ctx->tmpBlk[i];
-                B5_Aes256_Update(&ctx->aesCtx, ctx->C, ctx->C, 1);   
+                B5_Aes256_Update(&ctx->aesCtx, ctx->C, ctx->C, 1);
         data += (B5_AES_BLK_SIZE-ctx->tmpBlkLen);
         dataLen -= (B5_AES_BLK_SIZE-ctx->tmpBlkLen);
         ctx->tmpBlkLen = 0;
     }
-    
-    
-    
+
+
+
     // Other Blocks
-    while (dataLen > B5_AES_BLK_SIZE) 
+    while (dataLen > B5_AES_BLK_SIZE)
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
-            ctx->C[i] ^= data[i];   
-                B5_Aes256_Update(&ctx->aesCtx, ctx->C, ctx->C, 1);   
+            ctx->C[i] ^= data[i];
+                B5_Aes256_Update(&ctx->aesCtx, ctx->C, ctx->C, 1);
         dataLen -= B5_AES_BLK_SIZE;
         data += B5_AES_BLK_SIZE;
     }
-    
-    
+
+
     memcpy(&ctx->tmpBlk[0], data, dataLen);
     ctx->tmpBlkLen = dataLen;
-    
-    
+
+
     return B5_CMAC_AES256_RES_OK;
 }
 
@@ -1620,16 +1621,16 @@ int32_t B5_CmacAes256_Finit (B5_tCmacAesCtx *ctx, uint8_t *rSignature)
 {
     int32_t    i;
     uint8_t    MN[B5_AES_BLK_SIZE];
-    
-    
+
+
     if(ctx == NULL)
         return B5_CMAC_AES256_RES_INVALID_CONTEXT;
-    
+
     if(rSignature == NULL)
         return B5_CMAC_AES256_RES_INVALID_ARGUMENT;
-    
-    
-    
+
+
+
     // Last Block
     if(ctx->tmpBlkLen == B5_AES_BLK_SIZE)
     {
@@ -1639,29 +1640,29 @@ int32_t B5_CmacAes256_Finit (B5_tCmacAesCtx *ctx, uint8_t *rSignature)
     else
     {
         for (i=0; i < B5_AES_BLK_SIZE; i++)
-            MN[i] = ctx->K2[i];	
+            MN[i] = ctx->K2[i];
         for (i=0; i < ctx->tmpBlkLen; i++)
             MN[i] ^= ctx->tmpBlk[i];
         MN[ctx->tmpBlkLen] ^= 0x80;
     }
-    
-    
+
+
     for (i=0; i<B5_AES_BLK_SIZE; i++)
         ctx->C[i] ^= MN[i];
-    
-    B5_Aes256_Update(&ctx->aesCtx, rSignature, ctx->C, 1);   
 
-    
+    B5_Aes256_Update(&ctx->aesCtx, rSignature, ctx->C, 1);
+
+
     return B5_CMAC_AES256_RES_OK;
 }
 
 int32_t B5_CmacAes256_Reset (B5_tCmacAesCtx *ctx)
 {
     if(ctx == NULL)
-        return B5_CMAC_AES256_RES_INVALID_CONTEXT;    
-    
+        return B5_CMAC_AES256_RES_INVALID_CONTEXT;
+
     memset(ctx->C, 0, sizeof(ctx->C));
     ctx->tmpBlkLen = 0;
-    
+
     return B5_CMAC_AES256_RES_OK;
 }

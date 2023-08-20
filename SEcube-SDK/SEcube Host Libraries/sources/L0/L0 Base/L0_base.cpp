@@ -469,7 +469,6 @@ uint16_t L0Support::Se3OpenExisting(se3Char* path, bool rw, uint64_t deadline, s
 uint16_t L0Support::Se3OpenExisting(se3Char* path, bool rw, uint64_t deadline, se3File* phFile) {
 	uint16_t ret = L0Communication::Error::OK;
 	int fd = -1; 	//set the file descriptor to an invalid value
-	bool lock_success = false;
 	se3Char mfPath[L0Communication::Parameter::SE3_MAX_PATH];
 	Se3MakePath(mfPath, path);
 //	Se3Trace(("se3c_open_existing %ls\n", mfPath));
@@ -487,6 +486,8 @@ uint16_t L0Support::Se3OpenExisting(se3Char* path, bool rw, uint64_t deadline, s
 	        }
 	 }
 	if (rw) {
+            bool lock_success = false;
+
 	        do
 	        {
 	            lock_success = se3UnixLock(fd);

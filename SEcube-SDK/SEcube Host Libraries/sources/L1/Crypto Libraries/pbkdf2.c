@@ -79,7 +79,6 @@ void PBKDF2HmacSha256(	const uint8_t *pw,
 {
 	uint32_t counter = 1;
 	uint8_t block[B5_SHA256_DIGEST_SIZE];
-	size_t taken;
 
 	/* Starting point for inner loop. */
 	B5_tHmacSha256Ctx ctx;
@@ -88,7 +87,7 @@ void PBKDF2HmacSha256(	const uint8_t *pw,
 	while(nout)
 	{
 		F(&ctx, counter, salt, nsalt, iterations, block);
-		taken = (nout < B5_SHA256_DIGEST_SIZE)?(nout):(B5_SHA256_DIGEST_SIZE);
+		size_t taken = (nout < B5_SHA256_DIGEST_SIZE)?(nout):(B5_SHA256_DIGEST_SIZE);
 		memcpy(out, block, taken);
 		out += taken;
 		nout -= taken;

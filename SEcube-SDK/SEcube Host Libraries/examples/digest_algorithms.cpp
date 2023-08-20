@@ -41,10 +41,6 @@ int digest_example() {
 	 * HMAC-SHA-256 because it involves the usage of a key (that you can select) stored inside the SEcube device, moreover it also
 	 * required a nonce (a random number used only once) that determines also the result. in order to check that HMAC-SHA-256 works
 	 * correctly, we will recompute its digest using the same key and the same nonce. */
-	char digest_input[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat ornare nunc vitae placerat. "
-			"Phasellus tincidunt dictum dui at tristique. Fusce at neque ac nisl hendrerit porta in quis ipsum. In at sollicitudin "
-			"nunc, et feugiat augue placerat.";
-	//int testsize = strlen(digest_input);
 
 	/* we recommend using smart pointers to manage L0 and L1 objects in order
 	   to ensure proper memory management by their constructors and destructors. */
@@ -92,9 +88,12 @@ int digest_example() {
 
 	// for later usage
 	vector<pair<uint32_t, uint16_t>> keys;
-	int cnt = 0, ch = 0;
 
 	if((sel >= 0) && (sel < numdevices)){
+        char digest_input[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat ornare nunc vitae placerat. "
+			"Phasellus tincidunt dictum dui at tristique. Fusce at neque ac nisl hendrerit porta in quis ipsum. In at sollicitudin "
+			"nunc, et feugiat augue placerat.";
+
         int testsize = strlen(digest_input);
 		array<uint8_t, L0Communication::Size::SERIAL> sn = {0};
 		if(devices.at(sel).second.length() > L0Communication::Size::SERIAL){
@@ -159,6 +158,8 @@ int digest_example() {
 				 * using a specific nonce to begin with, which is useful for instance if you already have the value
 				 * of the digest computed on the same data with the same algorithm, and you want to recompute it
 				 * (therefore using the same nonce you used before) to see if the digest is still the same or not. */
+                int cnt = 0, ch = 0;
+
 				cout << "\nThese are the keys stored on the SEcube." << endl;
 				cout << "Please enter the number of the key that you would like to use for computing the authenticated digest." << endl;
 				cout << "Notice that, if you choose a key that is not compatible with the algorithm you chose at the previous step, the digest computation will fail." << endl;
