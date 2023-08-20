@@ -67,7 +67,7 @@ void se3_key_read(se3_flash_it* it, se3_flash_key* key)
 	}
 }
 
-bool se3_key_equal(se3_flash_it* it, se3_flash_key* key)
+bool se3_key_equal(se3_flash_it* it, const se3_flash_key* key)
 {
 	uint32_t u32tmp = 0;
 	uint16_t u16tmp = 0;
