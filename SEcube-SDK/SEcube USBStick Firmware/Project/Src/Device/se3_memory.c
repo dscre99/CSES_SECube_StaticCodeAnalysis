@@ -39,7 +39,7 @@ void se3_mem_reset(se3_mem* mem)
 	uint16_t tmp;
     mem->used = 0;
     memset(mem->dat, 0, (mem->dat_size)*SE3_MEM_BLOCK);
-	
+
 	for (i = 0; i < mem->max_count; i++) {
 		mem->ptr[i] = NULL;
 	}
@@ -92,7 +92,7 @@ static uint8_t* se3_mem_defrag(se3_mem* mem)
 	uint16_t p2_size;
 	bool p2_valid;
 	uint16_t id;
-	uint8_t* end = mem->dat + mem->dat_size*SE3_MEM_BLOCK;
+	const uint8_t* end = mem->dat + mem->dat_size*SE3_MEM_BLOCK;
     uint16_t info, size;
 
 	//find first free block
@@ -130,9 +130,9 @@ static uint8_t* se3_mem_defrag(se3_mem* mem)
         info = SE3_MEM_INFO_MAKE(SE3_MEM_INFO_ID(info), 0);
         SE3_MEM_INFO_SET(p1, info);
 	}
-	
+
 	//rebuild ptr table
-	
+
 	p2 = mem->dat;
 	while (p2 < end) {
         SE3_MEM_INFO_GET(p2, info);
@@ -167,12 +167,12 @@ int32_t se3_mem_alloc(se3_mem* mem, size_t size)
     if (size % SE3_MEM_BLOCK != 0) {
         nblocks++;
     }
-    
+
 	if (mem->used + nblocks > mem->dat_size) {
 		//no more space
 		return -1;
 	}
-	
+
 	for (i = 0; i < mem->max_count; i++) {
 		if (mem->ptr[i] == NULL) {
 			break;
@@ -195,7 +195,7 @@ int32_t se3_mem_alloc(se3_mem* mem, size_t size)
             if (p_size < nblocks) {
 				se3_mem_compact(p, dat_end);
 			}
-            
+
 			if (p_size == nblocks) {
                 // ok, no need to resize entry
 				break;
