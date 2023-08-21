@@ -1317,6 +1317,7 @@ void ispVMStateMachine(char a_cNextState)
 			break;
 		}
 	}
+	cStateIndex=cStateIndex-1;
 	g_cCurrentJTAGState = a_cNextState;
 	for (cPathIndex = 0;cPathIndex < iStates[cStateIndex].Pulses; cPathIndex++)
 	{

@@ -89,7 +89,7 @@ static bool flash_erase(uint32_t sector) {
 	FLASH_EraseInitTypeDef EraseInitStruct;
 	uint32_t SectorError;
 	HAL_StatusTypeDef result;
-	
+
 	HAL_FLASH_Unlock();
 
 	EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
@@ -141,12 +141,12 @@ static bool flash_swap()
 	success = true;
 	other_used = SE3_FLASH_MAGIC_SIZE + SE3_FLASH_INDEX_SIZE;
 	other_pos = 0;
-	se3_flash_it_init(&it);	
+	se3_flash_it_init(&it);
 	while (se3_flash_it_next(&it)) {
 		if (it.type != SE3_FLASH_TYPE_INVALID) {
 			//copy data
 			b = flash_program(
-				other_base + other_used, 
+				other_base + other_used,
 				flash.data + it.pos*SE3_FLASH_BLOCK_SIZE,
 				it.blocks*SE3_FLASH_BLOCK_SIZE
 			);
@@ -221,7 +221,7 @@ bool se3_flash_init()
 	// check for flash magic
 	bool magic0 = !memcmp((void*)SE3_FLASH_S0_ADDR, se3_magic, SE3_FLASH_MAGIC_SIZE);
 	bool magic1 = !memcmp((void*)SE3_FLASH_S1_ADDR, se3_magic, SE3_FLASH_MAGIC_SIZE);
-	
+
 	//choose active sector
 	if (magic0 && magic1) {
 		//both marked, the one with last index programmed should be deleted
@@ -354,7 +354,7 @@ bool se3_flash_it_new(se3_flash_it* it, uint8_t type, uint16_t size)
 		}
 		flash.first_free_pos += nblocks - 1;
 	}
-	
+
 	if (!flash_program((uint32_t)node, (uint8_t*)&size, 2)) {
 		return false;
 	}
@@ -385,7 +385,7 @@ bool se3_flash_pos_delete(size_t pos)
 	return true;
 }
 
-bool se3_flash_it_delete(se3_flash_it* it)
+bool se3_flash_it_delete(const se3_flash_it* it)
 {
 	if (it->pos + it->blocks > SE3_FLASH_INDEX_SIZE) {
 		return false;

@@ -553,7 +553,9 @@ HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef* hcan, uint32_t Timeout)
      ((hcan->Instance->TSR&CAN_TSR_TME1) == CAN_TSR_TME1) || \
      ((hcan->Instance->TSR&CAN_TSR_TME2) == CAN_TSR_TME2))
   {
+
     uint32_t  transmitmailbox = 5U;
+
     /* Process locked */
     __HAL_LOCK(hcan);
 
@@ -1259,7 +1261,7 @@ __weak void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan)
   *         the configuration information for the specified CAN.
   * @retval HAL state
   */
-HAL_CAN_StateTypeDef HAL_CAN_GetState(CAN_HandleTypeDef* hcan)
+HAL_CAN_StateTypeDef HAL_CAN_GetState(const CAN_HandleTypeDef* hcan)
 {
   /* Return CAN state */
   return hcan->State;
@@ -1271,7 +1273,7 @@ HAL_CAN_StateTypeDef HAL_CAN_GetState(CAN_HandleTypeDef* hcan)
   *         the configuration information for the specified CAN.
   * @retval CAN Error Code
   */
-uint32_t HAL_CAN_GetError(CAN_HandleTypeDef *hcan)
+uint32_t HAL_CAN_GetError(const CAN_HandleTypeDef *hcan)
 {
   return hcan->ErrorCode;
 }

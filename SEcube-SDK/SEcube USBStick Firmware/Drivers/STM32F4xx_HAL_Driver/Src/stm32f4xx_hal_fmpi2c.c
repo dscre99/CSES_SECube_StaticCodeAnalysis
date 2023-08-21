@@ -5,22 +5,22 @@
   * @version V1.4.4
   * @date    22-January-2016
   * @brief   FMPI2C HAL module driver.
-  *    
-  *          This file provides firmware functions to manage the following 
+  *
+  *          This file provides firmware functions to manage the following
   *          functionalities of the Inter Integrated Circuit (FMPI2C) peripheral:
   *           + Initialization and de-initialization functions
   *           + IO operation functions
   *           + Peripheral State and Errors functions
-  *         
+  *
   @verbatim
   ==============================================================================
                         ##### How to use this driver #####
   ==============================================================================
     [..]
     The FMPI2C HAL driver can be used as follows:
-    
+
     (#) Declare a FMPI2C_HandleTypeDef handle structure, for example:
-        FMPI2C_HandleTypeDef  hfmpi2c; 
+        FMPI2C_HandleTypeDef  hfmpi2c;
 
     (#)Initialize the FMPI2C low level resources by implementing the HAL_FMPI2C_MspInit() API:
         (##) Enable the FMPI2Cx interface clock
@@ -36,13 +36,13 @@
             (+++) Configure the DMA handle parameters
             (+++) Configure the DMA Tx or Rx channel
             (+++) Associate the initialized DMA handle to the hfmpi2c DMA Tx or Rx handle
-            (+++) Configure the priority and enable the NVIC for the transfer complete interrupt on 
+            (+++) Configure the priority and enable the NVIC for the transfer complete interrupt on
                   the DMA Tx or Rx channel
 
     (#) Configure the Communication Clock Timing, Own Address1, Master Addressing mode, Dual Addressing mode,
         Own Address2, Own Address2 Mask, General call and Nostretch mode in the hfmpi2c Init structure.
 
-    (#) Initialize the FMPI2C registers by calling the HAL_FMPI2C_Init(), configures also the low level Hardware 
+    (#) Initialize the FMPI2C registers by calling the HAL_FMPI2C_Init(), configures also the low level Hardware
         (GPIO, CLOCK, NVIC...etc) by calling the customized HAL_FMPI2C_MspInit(&hfmpi2c) API.
 
     (#) To check if target device is ready for communication, use the function HAL_FMPI2C_IsDeviceReady()
@@ -81,7 +81,7 @@
            add his own code by customization of function pointer HAL_FMPI2C_SlaveRxCpltCallback()
       (+) In case of transfer Error, HAL_FMPI2C_ErrorCallback() function is executed and user can
            add his own code by customization of function pointer HAL_FMPI2C_ErrorCallback()
-		   
+
 	*** Interrupt mode IO sequential operation ***
     ==============================================
     [..]
@@ -89,11 +89,11 @@
           when a direction change during transfer
       (+) A specific option manage the different steps of a sequential transfer
       (+) Different steps option FMPI2C_XferOptions_definition are listed below :
-      (++) FMPI2C_FIRST_AND_LAST_FRAME: No sequential usage, functional is same as associated interfaces in no sequential mode 
-      (++) FMPI2C_FIRST_FRAME: Sequential usage, this option allow to manage a start condition with data to transfer without a final stop condition 
-      (++) FMPI2C_NEXT_FRAME: Sequential usage, this option allow to manage a restart condition with new data to transfer if the direction change or 
+      (++) FMPI2C_FIRST_AND_LAST_FRAME: No sequential usage, functional is same as associated interfaces in no sequential mode
+      (++) FMPI2C_FIRST_FRAME: Sequential usage, this option allow to manage a start condition with data to transfer without a final stop condition
+      (++) FMPI2C_NEXT_FRAME: Sequential usage, this option allow to manage a restart condition with new data to transfer if the direction change or
              manage only the new data to transfer if no direction change and without a final stop condition in both cases
-      (++) FMPI2C_LAST_FRAME: Sequential usage, this option allow to manage a restart condition with new data to transfer if the direction change or 
+      (++) FMPI2C_LAST_FRAME: Sequential usage, this option allow to manage a restart condition with new data to transfer if the direction change or
              manage only the new data to transfer if no direction change and with a final stop condition in both cases
 
       (+) Sequential transmit in master FMPI2C mode an amount of data in non blocking mode using HAL_FMPI2C_Master_Sequential_Transmit_IT()
@@ -117,7 +117,7 @@
            add his own code by customization of function pointer HAL_FMPI2C_SlaveTxCpltCallback()
       (+) Sequential receive in slave FMPI2C mode an amount of data in non-blocking mode using HAL_FMPI2C_Slave_Sequential_Receive_IT()
       (++) At reception end of current frame transfer, HAL_FMPI2C_SlaveRxCpltCallback() is executed and user can
-           add his own code by customization of function pointer HAL_FMPI2C_SlaveRxCpltCallback()	   
+           add his own code by customization of function pointer HAL_FMPI2C_SlaveRxCpltCallback()
 
     *** Interrupt mode IO MEM operation ***
     =======================================
@@ -307,19 +307,19 @@ static void FMPI2C_TransferConfig(FMPI2C_HandleTypeDef *hfmpi2c,  uint16_t DevAd
   */
 
 /** @defgroup FMPI2C_Exported_Functions_Group1 Initialization and de-initialization functions
-  * @brief    Initialization and Configuration functions 
+  * @brief    Initialization and Configuration functions
   *
-@verbatim    
+@verbatim
  ===============================================================================
               ##### Initialization and de-initialization functions #####
  ===============================================================================
-    [..]  This subsection provides a set of functions allowing to initialize and 
+    [..]  This subsection provides a set of functions allowing to initialize and
           deinitialize the FMPI2Cx peripheral:
 
-      (+) User must Implement HAL_FMPI2C_MspInit() function in which he configures 
+      (+) User must Implement HAL_FMPI2C_MspInit() function in which he configures
           all related peripherals resources (CLOCK, GPIO, DMA, IT and NVIC ).
 
-      (+) Call the function HAL_FMPI2C_Init() to configure the selected device with 
+      (+) Call the function HAL_FMPI2C_Init() to configure the selected device with
           the selected configuration:
         (++) Clock Timing
         (++) Own Address 1
@@ -330,15 +330,15 @@ static void FMPI2C_TransferConfig(FMPI2C_HandleTypeDef *hfmpi2c,  uint16_t DevAd
         (++) General call mode
         (++) Nostretch mode
 
-      (+) Call the function HAL_FMPI2C_DeInit() to restore the default configuration 
-          of the selected FMPI2Cx peripheral.       
+      (+) Call the function HAL_FMPI2C_DeInit() to restore the default configuration
+          of the selected FMPI2Cx peripheral.
 
 @endverbatim
   * @{
   */
 
 /**
-  * @brief  Initializes the FMPI2C according to the specified parameters 
+  * @brief  Initializes the FMPI2C according to the specified parameters
   *         in the FMPI2C_InitTypeDef and initialize the associated handle.
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
@@ -372,7 +372,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Init(FMPI2C_HandleTypeDef *hfmpi2c)
   }
 
   hfmpi2c->State = HAL_FMPI2C_STATE_BUSY;
-  
+
   /* Disable the selected FMPI2C peripheral */
   __HAL_FMPI2C_DISABLE(hfmpi2c);
 
@@ -419,12 +419,12 @@ HAL_StatusTypeDef HAL_FMPI2C_Init(FMPI2C_HandleTypeDef *hfmpi2c)
   hfmpi2c->State = HAL_FMPI2C_STATE_READY;
   hfmpi2c->PreviousState = FMPI2C_STATE_NONE;
   hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
-  
+
   return HAL_OK;
 }
 
 /**
-  * @brief  DeInitialize the FMPI2C peripheral. 
+  * @brief  DeInitialize the FMPI2C peripheral.
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @retval HAL status
@@ -471,7 +471,7 @@ HAL_StatusTypeDef HAL_FMPI2C_DeInit(FMPI2C_HandleTypeDef *hfmpi2c)
   UNUSED(hfmpi2c);
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_FMPI2C_MspInit could be implemented in the user file
-   */ 
+   */
 }
 
 /**
@@ -486,32 +486,32 @@ HAL_StatusTypeDef HAL_FMPI2C_DeInit(FMPI2C_HandleTypeDef *hfmpi2c)
   UNUSED(hfmpi2c);
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_FMPI2C_MspDeInit could be implemented in the user file
-   */ 
+   */
 }
 
 /**
   * @}
   */
 
-/** @defgroup FMPI2C_Exported_Functions_Group2 Input and Output operation functions 
-  *  @brief   Data transfers functions 
+/** @defgroup FMPI2C_Exported_Functions_Group2 Input and Output operation functions
+  *  @brief   Data transfers functions
   *
-@verbatim   
+@verbatim
  ===============================================================================
                       ##### IO operation functions #####
- ===============================================================================  
+ ===============================================================================
     [..]
-    This subsection provides a set of functions allowing to manage the FMPI2C data 
+    This subsection provides a set of functions allowing to manage the FMPI2C data
     transfers.
 
     (#) There are two modes of transfer:
-       (++) Blocking mode : The communication is performed in the polling mode. 
-            The status of all data processing is returned by the same function 
-            after finishing transfer.  
-       (++) No Blocking mode : The communication is performed using Interrupts 
+       (++) Blocking mode : The communication is performed in the polling mode.
+            The status of all data processing is returned by the same function
+            after finishing transfer.
+       (++) No Blocking mode : The communication is performed using Interrupts
             or DMA. These functions return the status of the transfer startup.
-            The end of the data processing will be indicated through the 
-            dedicated FMPI2C IRQ when using Interrupt mode or the DMA IRQ when 
+            The end of the data processing will be indicated through the
+            dedicated FMPI2C IRQ when using Interrupt mode or the DMA IRQ when
             using DMA mode.
 
     (#) Blocking mode functions are :
@@ -522,7 +522,7 @@ HAL_StatusTypeDef HAL_FMPI2C_DeInit(FMPI2C_HandleTypeDef *hfmpi2c)
         (++) HAL_FMPI2C_Mem_Write()
         (++) HAL_FMPI2C_Mem_Read()
         (++) HAL_FMPI2C_IsDeviceReady()
-        
+
     (#) No Blocking mode functions with Interrupt are :
         (++) HAL_FMPI2C_Master_Transmit_IT()
         (++) HAL_FMPI2C_Master_Receive_IT()
@@ -572,7 +572,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint
     {
       return  HAL_ERROR;
     }
-    
+
     if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BUSY) == SET)
     {
       return HAL_BUSY;
@@ -675,7 +675,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint
 }
 
 /**
-  * @brief  Receives in master mode an amount of data in blocking mode. 
+  * @brief  Receives in master mode an amount of data in blocking mode.
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  DevAddress Target device address
@@ -694,7 +694,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint1
     {
       return  HAL_ERROR;
     }
-    
+
     if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BUSY) == SET)
     {
       return HAL_BUSY;
@@ -724,7 +724,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint1
     do
     {
       /* Wait until RXNE flag is set */
-      if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_RXNE, RESET, Timeout) != HAL_OK)      
+      if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_RXNE, RESET, Timeout) != HAL_OK)
       {
         return HAL_TIMEOUT;
       }
@@ -737,11 +737,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint1
       if((sizetmp == 0U)&&(Size!=0U))
       {
         /* Wait until TCR flag is set */
-        if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_TCR, RESET, Timeout) != HAL_OK)      
+        if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_TCR, RESET, Timeout) != HAL_OK)
         {
           return HAL_TIMEOUT;
         }
-        
+
         if(Size > MAX_NBYTE_SIZE)
         {
           FMPI2C_TransferConfig(hfmpi2c,DevAddress,MAX_NBYTE_SIZE, FMPI2C_RELOAD_MODE, FMPI2C_NO_STARTSTOP);
@@ -775,10 +775,10 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint1
 
     /* Clear Configuration Register 2 */
     FMPI2C_RESET_CR2(hfmpi2c);
-    
+
     hfmpi2c->State = HAL_FMPI2C_STATE_READY;
-    hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;	
-    
+    hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
+
     /* Process Unlocked */
     __HAL_UNLOCK(hfmpi2c);
 
@@ -786,12 +786,12 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint1
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
 /**
-  * @brief  Transmits in slave mode an amount of data in blocking mode. 
+  * @brief  Transmits in slave mode an amount of data in blocking mode.
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -896,7 +896,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint8
     /* Clear STOP flag */
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_STOPF);
 
-    /* Wait until BUSY flag is reset */ 
+    /* Wait until BUSY flag is reset */
     if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_BUSY, SET, Timeout) != HAL_OK)
     {
       /* Disable Address Acknowledge */
@@ -912,17 +912,17 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint8
 
     /* Process Unlocked */
     __HAL_UNLOCK(hfmpi2c);
-    
+
     return HAL_OK;
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
 /**
-  * @brief  Receive in slave mode an amount of data in blocking mode 
+  * @brief  Receive in slave mode an amount of data in blocking mode
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -934,7 +934,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint8_
 {
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
-    if((pData == NULL ) || (Size == 0U)) 
+    if((pData == NULL ) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
@@ -959,7 +959,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint8_
 
     /* Clear ADDR flag */
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_ADDR);
-    
+
     /* Wait until DIR flag is reset Receiver mode */
     if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_DIR, SET, Timeout) != HAL_OK)
     {
@@ -1008,8 +1008,8 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint8_
 
     /* Clear STOP flag */
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_STOPF);
-    
-    /* Wait until BUSY flag is reset */ 
+
+    /* Wait until BUSY flag is reset */
     if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_BUSY, SET, Timeout) != HAL_OK)
     {
       /* Disable Address Acknowledge */
@@ -1017,10 +1017,10 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint8_
       return HAL_TIMEOUT;
     }
 
-    
+
     /* Disable Address Acknowledge */
     hfmpi2c->Instance->CR2 |= FMPI2C_CR2_NACK;
-    
+
     hfmpi2c->State = HAL_FMPI2C_STATE_READY;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
 
@@ -1031,7 +1031,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint8_
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
@@ -1048,7 +1048,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit_IT(FMPI2C_HandleTypeDef *hfmpi2c, u
 {
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
-    if((pData == NULL) || (Size == 0U)) 
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
@@ -1089,9 +1089,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit_IT(FMPI2C_HandleTypeDef *hfmpi2c, u
     }
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
 
@@ -1122,11 +1122,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
 {
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
-    if((pData == NULL) || (Size == 0U)) 
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
-    
+
     if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BUSY) == SET)
     {
       return HAL_BUSY;
@@ -1161,14 +1161,14 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
     {
       FMPI2C_TransferConfig(hfmpi2c,DevAddress,hfmpi2c->XferSize, FMPI2C_AUTOEND_MODE, FMPI2C_GENERATE_START_READ);
     }
-    
-    /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Process Unlocked */
+    __HAL_UNLOCK(hfmpi2c);
+
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
-    
+
     /* Enable ERR, TC, STOP, NACK, RXI interrupt */
     /* possible to enable all of these */
     /* FMPI2C_IT_ERRI | FMPI2C_IT_TCI| FMPI2C_IT_STOPI| FMPI2C_IT_NACKI | FMPI2C_IT_ADDRI | FMPI2C_IT_RXI | FMPI2C_IT_TXI */
@@ -1178,12 +1178,12 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
 /**
-  * @brief  Transmit in slave mode an amount of data in no blocking mode with Interrupt 
+  * @brief  Transmit in slave mode an amount of data in no blocking mode with Interrupt
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -1198,7 +1198,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
     {
       return  HAL_ERROR;
     }
-    
+
     /* Process Locked */
     __HAL_LOCK(hfmpi2c);
 
@@ -1213,11 +1213,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
     hfmpi2c->pBuffPtr = pData;
     hfmpi2c->XferSize = Size;
     hfmpi2c->XferCount = Size;
-    
-    /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Process Unlocked */
+    __HAL_UNLOCK(hfmpi2c);
+
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
 
@@ -1235,7 +1235,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit_IT(FMPI2C_HandleTypeDef *hfmpi2c, ui
 }
 
 /**
-  * @brief  Receive in slave mode an amount of data in no blocking mode with Interrupt 
+  * @brief  Receive in slave mode an amount of data in no blocking mode with Interrupt
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -1265,11 +1265,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive_IT(FMPI2C_HandleTypeDef *hfmpi2c, uin
     hfmpi2c->pBuffPtr = pData;
     hfmpi2c->XferSize = Size;
     hfmpi2c->XferCount = Size;
-    
-    /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Process Unlocked */
+    __HAL_UNLOCK(hfmpi2c);
+
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
 
@@ -1282,7 +1282,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive_IT(FMPI2C_HandleTypeDef *hfmpi2c, uin
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
@@ -1329,10 +1329,10 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit_DMA(FMPI2C_HandleTypeDef *hfmpi2c, 
 
     /* Set the FMPI2C DMA transfer complete callback */
     hfmpi2c->hdmatx->XferCpltCallback = FMPI2C_DMAMasterTransmitCplt;
-    
+
     /* Set the DMA error callback */
     hfmpi2c->hdmatx->XferErrorCallback = FMPI2C_DMAError;
-    
+
     /* Enable the DMA channel */
     HAL_DMA_Start_IT(hfmpi2c->hdmatx, (uint32_t)pData, (uint32_t)&hfmpi2c->Instance->TXDR, hfmpi2c->XferSize);
 
@@ -1378,7 +1378,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit_DMA(FMPI2C_HandleTypeDef *hfmpi2c, 
 }
 
 /**
-  * @brief  Receive in master mode an amount of data in no blocking mode with DMA 
+  * @brief  Receive in master mode an amount of data in no blocking mode with DMA
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  DevAddress Target device address
@@ -1444,7 +1444,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive_DMA(FMPI2C_HandleTypeDef *hfmpi2c, u
       return HAL_TIMEOUT;
     }
 
-    
+
     /* Enable DMA Request */
     hfmpi2c->Instance->CR1 |= FMPI2C_CR1_RXDMAEN;
 
@@ -1460,7 +1460,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Receive_DMA(FMPI2C_HandleTypeDef *hfmpi2c, u
 }
 
 /**
-  * @brief  Transmit in slave mode an amount of data in no blocking mode with DMA 
+  * @brief  Transmit in slave mode an amount of data in no blocking mode with DMA
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -1476,7 +1476,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit_DMA(FMPI2C_HandleTypeDef *hfmpi2c, u
       return  HAL_ERROR;
     }
     /* Process Locked */
-    __HAL_LOCK(hfmpi2c); 
+    __HAL_LOCK(hfmpi2c);
 
     hfmpi2c->State = HAL_FMPI2C_STATE_BUSY_TX;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_SLAVE;
@@ -1547,7 +1547,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Transmit_DMA(FMPI2C_HandleTypeDef *hfmpi2c, u
 }
 
 /**
-  * @brief  Receive in slave mode an amount of data in no blocking mode with DMA 
+  * @brief  Receive in slave mode an amount of data in no blocking mode with DMA
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
   * @param  pData Pointer to data buffer
@@ -1636,10 +1636,10 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
 
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
-  
+
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
-  { 
-    if((pData == NULL) || (Size == 0U)) 
+  {
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
@@ -1713,7 +1713,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
         {
           return HAL_TIMEOUT;
         }
-        
+
         if(Size > MAX_NBYTE_SIZE)
         {
           FMPI2C_TransferConfig(hfmpi2c,DevAddress,MAX_NBYTE_SIZE, FMPI2C_RELOAD_MODE, FMPI2C_NO_STARTSTOP);
@@ -1725,11 +1725,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
           Sizetmp = Size;
         }
       }
-      
+
     }while(Size > 0U);
 
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -1741,7 +1741,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
         return HAL_TIMEOUT;
       }
     }
-    
+
     /* Clear STOP Flag */
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
 
@@ -1780,9 +1780,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t De
 
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
-  
+
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
-  {    
+  {
     if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
@@ -1832,19 +1832,19 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t De
     }
 
     do
-    {  
+    {
       /* Wait until RXNE flag is set */
       if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_RXNE, RESET, Timeout) != HAL_OK)
       {
         return HAL_TIMEOUT;
       }
-          
+
       /* Read data from RXDR */
       (*pData++) = hfmpi2c->Instance->RXDR;
 
       /* Decrement the Size counter */
       Sizetmp--;
-      Size--;   
+      Size--;
 
       if((Sizetmp == 0U)&&(Size!=0U))
       {
@@ -1853,7 +1853,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t De
         {
           return HAL_TIMEOUT;
         }
-        
+
         if(Size > MAX_NBYTE_SIZE)
         {
           FMPI2C_TransferConfig(hfmpi2c,DevAddress,MAX_NBYTE_SIZE, FMPI2C_RELOAD_MODE, FMPI2C_NO_STARTSTOP);
@@ -1869,7 +1869,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t De
     }while(Size > 0U);
 
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -1948,7 +1948,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
     {
       hfmpi2c->XferSize = Size;
     }
-    
+
     /* Send Slave Address and Memory Address */
     if(FMPI2C_RequestMemoryWrite(hfmpi2c, DevAddress, MemAddress, MemAddSize, FMPI2C_TIMEOUT_FLAG) != HAL_OK)
     {
@@ -1978,17 +1978,17 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
     }
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
-    
+
     /* Enable ERR, TC, STOP, NACK, TXI interrupt */
     /* possible to enable all of these */
     /* FMPI2C_IT_ERRI | FMPI2C_IT_TCI| FMPI2C_IT_STOPI| FMPI2C_IT_NACKI | FMPI2C_IT_ADDRI | FMPI2C_IT_RXI | FMPI2C_IT_TXI */
     __HAL_FMPI2C_ENABLE_IT(hfmpi2c,FMPI2C_IT_ERRI | FMPI2C_IT_TCI| FMPI2C_IT_STOPI| FMPI2C_IT_NACKI | FMPI2C_IT_TXI );
-    
+
     return HAL_OK;
   }
   else
@@ -2012,14 +2012,14 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t
 {
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
-  
+
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
     if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
-    
+
     if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BUSY) == SET)
     {
       return HAL_BUSY;
@@ -2073,9 +2073,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t
     }
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
 
@@ -2088,7 +2088,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
@@ -2107,14 +2107,14 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16
 {
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
-  
+
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
-    if((pData == NULL) || (Size == 0U)) 
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
-    
+
     if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BUSY) == SET)
     {
       return HAL_BUSY;
@@ -2174,7 +2174,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16
     {
       FMPI2C_TransferConfig(hfmpi2c,DevAddress,hfmpi2c->XferSize, FMPI2C_AUTOEND_MODE, FMPI2C_NO_STARTSTOP);
     }
-    
+
     /* Wait until TXIS flag is set */
     if(FMPI2C_WaitOnTXISFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_TXIS) != HAL_OK)
     {
@@ -2190,7 +2190,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16
 
     /* Enable DMA Request */
     hfmpi2c->Instance->CR1 |= FMPI2C_CR1_TXDMAEN;
-    
+
     /* Process Unlocked */
     __HAL_UNLOCK(hfmpi2c);
 
@@ -2220,7 +2220,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
-    if((pData == NULL) || (Size == 0U)) 
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
@@ -2304,7 +2304,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
 }
 
 /**
-  * @brief  Checks if target device is ready for communication. 
+  * @brief  Checks if target device is ready for communication.
   * @note   This function is used with Memory devices
   * @param  hfmpi2c Pointer to a FMPI2C_HandleTypeDef structure that contains
   *                the configuration information for the specified FMPI2C.
@@ -2354,30 +2354,30 @@ HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16
           }
         }
       }
-      
+
       /* Check if the NACKF flag has not been set */
       if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_AF) == RESET)
       {
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_STOPF, RESET, Timeout) != HAL_OK)
         {
           return HAL_TIMEOUT;
         }
-        
+
         /* Clear STOP Flag */
         __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
 
         /* Device is ready */
         hfmpi2c->State = HAL_FMPI2C_STATE_READY;
-        
+
         /* Process Unlocked */
         __HAL_UNLOCK(hfmpi2c);
-        
+
         return HAL_OK;
       }
       else
       {
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_STOPF, RESET, Timeout) != HAL_OK)
         {
           return HAL_TIMEOUT;
@@ -2395,7 +2395,7 @@ HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16
       {
         /* Generate Stop */
         hfmpi2c->Instance->CR2 |= FMPI2C_CR2_STOP;
-        
+
         /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_STOPF, RESET, Timeout) != HAL_OK)
         {
@@ -2411,7 +2411,7 @@ HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16
 
     /* Process Unlocked */
     __HAL_UNLOCK(hfmpi2c);
-        
+
     return HAL_TIMEOUT;
   }
   else
@@ -2440,7 +2440,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Sequential_Transmit_IT(FMPI2C_HandleTypeDef 
   {
     /* Process Locked */
     __HAL_LOCK(hfmpi2c);
-    
+
     hfmpi2c->State = HAL_FMPI2C_STATE_BUSY_TX;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_MASTER;
     hfmpi2c->ErrorCode = HAL_FMPI2C_ERROR_NONE;
@@ -2481,9 +2481,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Sequential_Transmit_IT(FMPI2C_HandleTypeDef 
     }
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
     FMPI2C_Enable_IRQ(hfmpi2c, FMPI2C_IT_TX);
@@ -2516,11 +2516,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Sequential_Receive_IT(FMPI2C_HandleTypeDef *
   {
     /* Process Locked */
     __HAL_LOCK(hfmpi2c);
-    
+
     hfmpi2c->State = HAL_FMPI2C_STATE_BUSY_RX;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_MASTER;
     hfmpi2c->ErrorCode = HAL_FMPI2C_ERROR_NONE;
-    
+
     /* Prepare transfer parameters */
     hfmpi2c->pBuffPtr = pData;
     hfmpi2c->XferCount = Size;
@@ -2557,18 +2557,18 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Sequential_Receive_IT(FMPI2C_HandleTypeDef *
     }
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
     FMPI2C_Enable_IRQ(hfmpi2c, FMPI2C_IT_RX);
-    
+
     return HAL_OK;
   }
   else
   {
-    return HAL_BUSY; 
+    return HAL_BUSY;
   }
 }
 
@@ -2603,7 +2603,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Transmit_IT(FMPI2C_HandleTypeDef *
     hfmpi2c->State = HAL_FMPI2C_STATE_BUSY_TX_LISTEN;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_SLAVE;
     hfmpi2c->ErrorCode = HAL_FMPI2C_ERROR_NONE;
-    
+
     /* Enable Address Acknowledge */
     hfmpi2c->Instance->CR2 &= ~FMPI2C_CR2_NACK;
 
@@ -2618,9 +2618,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Transmit_IT(FMPI2C_HandleTypeDef *
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_ADDR);
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
     to avoid the risk of FMPI2C interrupt handle execution before current
     process unlock */
     /* REnable ADDR interrupt */
@@ -2630,7 +2630,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Transmit_IT(FMPI2C_HandleTypeDef *
   }
   else
   {
-    return HAL_ERROR; 
+    return HAL_ERROR;
   }
 }
 
@@ -2651,7 +2651,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Receive_IT(FMPI2C_HandleTypeDef *h
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_LISTEN)
   {
-    if((pData == NULL) || (Size == 0U)) 
+    if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
     }
@@ -2680,9 +2680,9 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Receive_IT(FMPI2C_HandleTypeDef *h
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_ADDR);
 
     /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
+    __HAL_UNLOCK(hfmpi2c);
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
     to avoid the risk of FMPI2C interrupt handle execution before current
     process unlock */
     /* REnable ADDR interrupt */
@@ -2692,7 +2692,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Sequential_Receive_IT(FMPI2C_HandleTypeDef *h
   }
   else
   {
-    return HAL_ERROR; 
+    return HAL_ERROR;
   }
 }
 
@@ -2764,7 +2764,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Abort_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint
   {
     /* Process Locked */
     __HAL_LOCK(hfmpi2c);
-    
+
     /* Keep the same state as previous */
     /* to perform as well the call of the corresponding end of transfer callback */
     if((hfmpi2c->PreviousState == FMPI2C_STATE_MASTER_BUSY_TX) && (hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE))
@@ -2779,15 +2779,15 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Abort_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint
     }
 
     hfmpi2c->ErrorCode = HAL_FMPI2C_ERROR_NONE;
-    
+
     /* Set NBYTES to 1 to generate a dummy read on FMPI2C peripheral */
     /* Set AUTOEND mode, this will generate a NACK then STOP condition to abort the current transfer */
     FMPI2C_TransferConfig(hfmpi2c, DevAddress, 1U, FMPI2C_AUTOEND_MODE, FMPI2C_GENERATE_STOP);
-    
-    /* Process Unlocked */
-    __HAL_UNLOCK(hfmpi2c); 
 
-    /* Note : The FMPI2C interrupts must be enabled after unlocking current process 
+    /* Process Unlocked */
+    __HAL_UNLOCK(hfmpi2c);
+
+    /* Note : The FMPI2C interrupts must be enabled after unlocking current process
               to avoid the risk of FMPI2C interrupt handle execution before current
               process unlock */
     if((hfmpi2c->State == HAL_FMPI2C_STATE_BUSY_TX) && (hfmpi2c->Mode == HAL_FMPI2C_MODE_MASTER))
@@ -2826,7 +2826,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Abort_IT(FMPI2C_HandleTypeDef *hfmpi2c, uint
 void HAL_FMPI2C_EV_IRQHandler(FMPI2C_HandleTypeDef *hfmpi2c)
 {
   uint32_t tmpisrvalue = 0U;
-  
+
   /* Use a local variable to store the current ISR flags */
   /* This action will avoid a wrong treatment due to ISR flags change during interrupt handler */
   tmpisrvalue = FMPI2C_GET_ISR_REG(hfmpi2c);
@@ -2891,13 +2891,13 @@ void HAL_FMPI2C_ER_IRQHandler(FMPI2C_HandleTypeDef *hfmpi2c)
 {
   /* FMPI2C Bus error interrupt occurred ------------------------------------*/
   if((__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_BERR) == SET) && (__HAL_FMPI2C_GET_IT_SOURCE(hfmpi2c, FMPI2C_IT_ERRI) == SET))
-  { 
+  {
     hfmpi2c->ErrorCode |= HAL_FMPI2C_ERROR_BERR;
-   
+
     /* Clear BERR flag */
     __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_BERR);
   }
-  
+
   /* FMPI2C Over-Run/Under-Run interrupt occurred ----------------------------------------*/
   if((__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_OVR) == SET) && (__HAL_FMPI2C_GET_IT_SOURCE(hfmpi2c, FMPI2C_IT_ERRI) == SET))
   {
@@ -3041,7 +3041,7 @@ __weak void HAL_FMPI2C_ListenCpltCallback(FMPI2C_HandleTypeDef *hfmpi2c)
   UNUSED(hfmpi2c);
   /* NOTE : This function should not be modified, when the callback is needed,
             the HAL_FMPI2C_TxCpltCallback could be implemented in the user file
-   */ 
+   */
 }
 
 /**
@@ -3081,12 +3081,12 @@ __weak void HAL_FMPI2C_MemRxCpltCallback(FMPI2C_HandleTypeDef *hfmpi2c)
 /** @defgroup FMPI2C_Exported_Functions_Group3 Peripheral State and Errors functions
   *  @brief   Peripheral State and Errors functions
   *
-@verbatim   
+@verbatim
  ===============================================================================
             ##### Peripheral State and Errors functions #####
- ===============================================================================  
+ ===============================================================================
     [..]
-    This subsection permit to get in run-time the status of the peripheral 
+    This subsection permit to get in run-time the status of the peripheral
     and the data flow.
 
 @endverbatim
@@ -3099,7 +3099,7 @@ __weak void HAL_FMPI2C_MemRxCpltCallback(FMPI2C_HandleTypeDef *hfmpi2c)
   *                the configuration information for the specified FMPI2C.
   * @retval HAL state
   */
-HAL_FMPI2C_StateTypeDef HAL_FMPI2C_GetState(FMPI2C_HandleTypeDef *hfmpi2c)
+HAL_FMPI2C_StateTypeDef HAL_FMPI2C_GetState(const FMPI2C_HandleTypeDef *hfmpi2c)
 {
   /* Return FMPI2C handle state */
   return hfmpi2c->State;
@@ -3111,7 +3111,7 @@ HAL_FMPI2C_StateTypeDef HAL_FMPI2C_GetState(FMPI2C_HandleTypeDef *hfmpi2c)
   *         the configuration information for FMPI2C module
   * @retval HAL mode
   */
-HAL_FMPI2C_ModeTypeDef HAL_FMPI2C_GetMode(FMPI2C_HandleTypeDef *hfmpi2c)
+HAL_FMPI2C_ModeTypeDef HAL_FMPI2C_GetMode(const FMPI2C_HandleTypeDef *hfmpi2c)
 {
   return hfmpi2c->Mode;
 }
@@ -3122,18 +3122,18 @@ HAL_FMPI2C_ModeTypeDef HAL_FMPI2C_GetMode(FMPI2C_HandleTypeDef *hfmpi2c)
   *              the configuration information for the specified FMPI2C.
   * @retval FMPI2C Error Code
   */
-uint32_t HAL_FMPI2C_GetError(FMPI2C_HandleTypeDef *hfmpi2c)
+uint32_t HAL_FMPI2C_GetError(const FMPI2C_HandleTypeDef *hfmpi2c)
 {
   return hfmpi2c->ErrorCode;
 }
 
 /**
   * @}
-  */  
+  */
 
 /**
   * @}
-  */   
+  */
 
 /** @addtogroup FMPI2C_Private_Functions
   * @{
@@ -3144,7 +3144,7 @@ uint32_t HAL_FMPI2C_GetError(FMPI2C_HandleTypeDef *hfmpi2c)
   *                the configuration information for the specified FMPI2C.
   * @retval HAL status
   */
-static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c) 
+static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 {
   uint16_t DevAddress;
 
@@ -3162,7 +3162,7 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 
     /* Process Unlocked */
     __HAL_UNLOCK(hfmpi2c);
-    
+
     /* Call the Error callback to prevent upper layer */
     HAL_FMPI2C_ErrorCallback(hfmpi2c);
   }
@@ -3243,7 +3243,7 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 
         /* Process Unlocked */
         __HAL_UNLOCK(hfmpi2c);
-        
+
         /* Call the corresponding callback to inform upper layer of End of Transfer */
         HAL_FMPI2C_MasterRxCpltCallback(hfmpi2c);
       }
@@ -3261,14 +3261,14 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
     /* Write data to TXDR */
     hfmpi2c->Instance->TXDR = (*hfmpi2c->pBuffPtr++);
     hfmpi2c->XferSize--;
-    hfmpi2c->XferCount--;	
+    hfmpi2c->XferCount--;
   }
   else if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_TCR) != RESET)
   {
     if((hfmpi2c->XferSize == 0U)&&(hfmpi2c->XferCount!=0U))
     {
       DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
-      
+
       if(hfmpi2c->XferCount > MAX_NBYTE_SIZE)
       {
         FMPI2C_TransferConfig(hfmpi2c, DevAddress, MAX_NBYTE_SIZE, FMPI2C_RELOAD_MODE, FMPI2C_NO_STARTSTOP);
@@ -3301,7 +3301,7 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 
           /* Process Unlocked */
           __HAL_UNLOCK(hfmpi2c);
-          
+
           /* Call the corresponding callback to inform upper layer of End of Transfer */
           if(hfmpi2c->Mode == HAL_FMPI2C_MODE_MEM)
           {
@@ -3370,7 +3370,7 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 
           /* Process Unlocked */
           __HAL_UNLOCK(hfmpi2c);
-          
+
           /* Call the corresponding callback to inform upper layer of End of Transfer */
           if(hfmpi2c->Mode == HAL_FMPI2C_MODE_MEM)
           {
@@ -3386,9 +3386,9 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
   }
 
   /* Process Unlocked */
-  __HAL_UNLOCK(hfmpi2c); 
+  __HAL_UNLOCK(hfmpi2c);
 
-  return HAL_OK; 
+  return HAL_OK;
 }
 
 /**
@@ -3397,7 +3397,7 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
   *                the configuration information for the specified FMPI2C.
   * @retval HAL status
   */
-static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c) 
+static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 {
   uint8_t TransferDirection = 0U;
   uint16_t SlaveAddrCode = 0U;
@@ -3414,7 +3414,7 @@ static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
     /* Mean XferCount == 0*/
     /* So clear Flag NACKF only */
     if(hfmpi2c->XferCount == 0U)
-    {  
+    {
        if(((hfmpi2c->XferOptions == FMPI2C_FIRST_AND_LAST_FRAME) || (hfmpi2c->XferOptions == FMPI2C_LAST_FRAME)) && \
         (hfmpi2c->State == HAL_FMPI2C_STATE_LISTEN))
       {
@@ -3477,7 +3477,7 @@ static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
       __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_AF);
 
       if(hfmpi2c->XferOptions != FMPI2C_NO_OPTION_FRAME)
-      { 
+      {
         /* Set HAL State to "Idle" State, mean to LISTEN state */
         /* So reset Slave Busy state */
         hfmpi2c->PreviousState = hfmpi2c->State;
@@ -3563,7 +3563,7 @@ static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
     {
       /* Clear ADDR flag */
       __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_ADDR);
-      
+
       /* Process Unlocked */
       __HAL_UNLOCK(hfmpi2c);
     }
@@ -3571,7 +3571,7 @@ static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
   else if(__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_RXNE) != RESET)
   {
     if(hfmpi2c->XferOptions != FMPI2C_NO_OPTION_FRAME)
-    { 
+    {
       if(hfmpi2c->State == HAL_FMPI2C_STATE_BUSY_RX_LISTEN)
       {
         /* Read data from RXDR */
@@ -3587,7 +3587,7 @@ static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
           /* Remove HAL_FMPI2C_STATE_SLAVE_BUSY_RX, keep only HAL_FMPI2C_STATE_LISTEN */
           hfmpi2c->PreviousState = hfmpi2c->State;
           hfmpi2c->State = HAL_FMPI2C_STATE_LISTEN;
-          
+
           /* Process Unlocked */
           __HAL_UNLOCK(hfmpi2c);
 
@@ -3786,7 +3786,7 @@ static HAL_StatusTypeDef FMPI2C_RequestMemoryRead(FMPI2C_HandleTypeDef *hfmpi2c,
   {
     /* Send MSB of Memory Address */
     hfmpi2c->Instance->TXDR = FMPI2C_MEM_ADD_MSB(MemAddress);
-    
+
     /* Wait until TXIS flag is set */
     if(FMPI2C_WaitOnTXISFlagUntilTimeout(hfmpi2c, Timeout) != HAL_OK)
     {
@@ -3822,7 +3822,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
 {
   uint16_t DevAddress;
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
-  
+
   /* Check if last DMA request was done with RELOAD */
   /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
   if( (hfmpi2c->XferSize == MAX_NBYTE_SIZE) && (hfmpi2c->XferSize < hfmpi2c->XferCount) )
@@ -3834,13 +3834,13 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
     }
 
     /* Disable DMA Request */
-    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN; 
+    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN;
 
     /* Check if Errors has been detected during transfer */
     if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
     {
       /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-      /* Wait until STOPF flag is reset */ 
+      /* Wait until STOPF flag is reset */
       if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
       {
         if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -3882,7 +3882,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmatx, (uint32_t)hfmpi2c->pBuffPtr, (uint32_t)&hfmpi2c->Instance->TXDR, hfmpi2c->XferSize);
-      
+
       /* Send Slave Address */
       /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
       if( (hfmpi2c->XferSize == MAX_NBYTE_SIZE) && (hfmpi2c->XferSize < hfmpi2c->XferCount) )
@@ -3892,13 +3892,13 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
       else
       {
         FMPI2C_TransferConfig(hfmpi2c,DevAddress,hfmpi2c->XferSize, FMPI2C_AUTOEND_MODE, FMPI2C_NO_STARTSTOP);
-      }  
+      }
 
       /* Wait until TXIS flag is set */
       if(FMPI2C_WaitOnTXISFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_TXIS) != HAL_OK)
       {
         /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
         {
           if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -3918,7 +3918,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
         FMPI2C_RESET_CR2(hfmpi2c);
 
         hfmpi2c->XferCount = 0U;
-      
+
         hfmpi2c->State = HAL_FMPI2C_STATE_READY;
         HAL_FMPI2C_ErrorCallback(hfmpi2c);
       }
@@ -3932,7 +3932,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
   else
   {
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -3952,7 +3952,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
     FMPI2C_RESET_CR2(hfmpi2c);
 
     /* Disable DMA Request */
-    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN; 
+    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN;
 
     hfmpi2c->XferCount = 0U;
 
@@ -3972,14 +3972,14 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
 }
 
 /**
-  * @brief  DMA FMPI2C slave transmit process complete callback. 
+  * @brief  DMA FMPI2C slave transmit process complete callback.
   * @param  hdma DMA handle
   * @retval None
   */
-static void FMPI2C_DMASlaveTransmitCplt(DMA_HandleTypeDef *hdma) 
+static void FMPI2C_DMASlaveTransmitCplt(DMA_HandleTypeDef *hdma)
 {
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
-  
+
   /* Wait until STOP flag is set */
   if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
   {
@@ -3998,7 +3998,7 @@ static void FMPI2C_DMASlaveTransmitCplt(DMA_HandleTypeDef *hdma)
   /* Clear STOP flag */
   __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c,FMPI2C_FLAG_STOPF);
 
-  /* Wait until BUSY flag is reset */ 
+  /* Wait until BUSY flag is reset */
   if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_BUSY, SET, FMPI2C_TIMEOUT_BUSY) != HAL_OK)
   {
     hfmpi2c->ErrorCode |= HAL_FMPI2C_ERROR_TIMEOUT;
@@ -4024,11 +4024,11 @@ static void FMPI2C_DMASlaveTransmitCplt(DMA_HandleTypeDef *hdma)
 }
 
 /**
-  * @brief DMA FMPI2C master receive process complete callback 
+  * @brief DMA FMPI2C master receive process complete callback
   * @param  hdma DMA handle
   * @retval None
   */
-static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma) 
+static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
 {
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
   uint16_t DevAddress;
@@ -4044,13 +4044,13 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
     }
 
     /* Disable DMA Request */
-    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN; 
+    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN;
 
     /* Check if Errors has been detected during transfer */
     if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
     {
       /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-      /* Wait until STOPF flag is reset */ 
+      /* Wait until STOPF flag is reset */
       if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
       {
         if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4065,7 +4065,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
 
       /* Clear STOP Flag */
       __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
-          
+
       /* Clear Configuration Register 2 */
       FMPI2C_RESET_CR2(hfmpi2c);
 
@@ -4092,7 +4092,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmarx, (uint32_t)&hfmpi2c->Instance->RXDR, (uint32_t)hfmpi2c->pBuffPtr, hfmpi2c->XferSize);
-      
+
       /* Send Slave Address */
       /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
       if( (hfmpi2c->XferSize == MAX_NBYTE_SIZE) && (hfmpi2c->XferSize < hfmpi2c->XferCount) )
@@ -4102,7 +4102,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
       else
       {
         FMPI2C_TransferConfig(hfmpi2c,DevAddress,hfmpi2c->XferSize, FMPI2C_AUTOEND_MODE, FMPI2C_NO_STARTSTOP);
-      }  
+      }
 
       /* Wait until RXNE flag is set */
       if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_RXNE, RESET, FMPI2C_TIMEOUT_RXNE) != HAL_OK)
@@ -4114,7 +4114,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
       if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
       {
         /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
         {
           if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4150,7 +4150,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
   else
   {
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4194,11 +4194,11 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
   * @param  hdma DMA handle
   * @retval None
   */
-static void FMPI2C_DMASlaveReceiveCplt(DMA_HandleTypeDef *hdma) 
+static void FMPI2C_DMASlaveReceiveCplt(DMA_HandleTypeDef *hdma)
 {
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
 
-  /* Wait until STOPF flag is reset */ 
+  /* Wait until STOPF flag is reset */
   if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
   {
     if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4214,21 +4214,21 @@ static void FMPI2C_DMASlaveReceiveCplt(DMA_HandleTypeDef *hdma)
   /* Clear STOPF flag */
   __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
 
-  /* Wait until BUSY flag is reset */ 
+  /* Wait until BUSY flag is reset */
   if(FMPI2C_WaitOnFlagUntilTimeout(hfmpi2c, FMPI2C_FLAG_BUSY, SET, FMPI2C_TIMEOUT_BUSY) != HAL_OK)
 
   {
     hfmpi2c->ErrorCode |= HAL_FMPI2C_ERROR_TIMEOUT;
   }
-  
+
   /* Disable DMA Request */
-  hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN; 
+  hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN;
 
   /* Disable Address Acknowledge */
   hfmpi2c->Instance->CR2 |= FMPI2C_CR2_NACK;
 
   hfmpi2c->XferCount = 0U;
-  
+
   hfmpi2c->State = HAL_FMPI2C_STATE_READY;
   hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
 
@@ -4244,7 +4244,7 @@ static void FMPI2C_DMASlaveReceiveCplt(DMA_HandleTypeDef *hdma)
 }
 
 /**
-  * @brief DMA FMPI2C Memory Write process complete callback 
+  * @brief DMA FMPI2C Memory Write process complete callback
   * @param hdma DMA handle
   * @retval None
   */
@@ -4265,12 +4265,12 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
 
     /* Disable DMA Request */
     hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN;
-    
+
     /* Check if Errors has been detected during transfer */
     if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
     {
       /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-      /* Wait until STOPF flag is reset */ 
+      /* Wait until STOPF flag is reset */
       if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
       {
         if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4312,7 +4312,7 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmatx, (uint32_t)hfmpi2c->pBuffPtr, (uint32_t)&hfmpi2c->Instance->TXDR, hfmpi2c->XferSize);
-      
+
       /* Send Slave Address */
       /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
       if( (hfmpi2c->XferSize == MAX_NBYTE_SIZE) && (hfmpi2c->XferSize < hfmpi2c->XferCount) )
@@ -4328,7 +4328,7 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
       if(FMPI2C_WaitOnTXISFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_TXIS) != HAL_OK)
       {
         /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
         {
           if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4363,7 +4363,7 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
   else
   {
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4384,9 +4384,9 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
 
     /* Disable DMA Request */
     hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_TXDMAEN;
-  
+
     hfmpi2c->XferCount = 0U;
-  
+
     hfmpi2c->State = HAL_FMPI2C_STATE_READY;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
 
@@ -4423,13 +4423,13 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
     }
 
     /* Disable DMA Request */
-    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN; 
+    hfmpi2c->Instance->CR1 &= ~FMPI2C_CR1_RXDMAEN;
 
     /* Check if Errors has been detected during transfer */
     if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
     {
       /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-      /* Wait until STOPF flag is reset */ 
+      /* Wait until STOPF flag is reset */
       if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
       {
         if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4444,7 +4444,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
 
       /* Clear STOP Flag */
       __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
-          
+
       /* Clear Configuration Register 2 */
       FMPI2C_RESET_CR2(hfmpi2c);
 
@@ -4471,7 +4471,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmarx, (uint32_t)&hfmpi2c->Instance->RXDR, (uint32_t)hfmpi2c->pBuffPtr, hfmpi2c->XferSize);
-      
+
       /* Send Slave Address */
       /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
       if( (hfmpi2c->XferSize == MAX_NBYTE_SIZE) && (hfmpi2c->XferSize < hfmpi2c->XferCount) )
@@ -4493,7 +4493,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
       if(hfmpi2c->ErrorCode != HAL_FMPI2C_ERROR_NONE)
       {
         /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-        /* Wait until STOPF flag is reset */ 
+        /* Wait until STOPF flag is reset */
         if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
         {
           if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4508,7 +4508,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
 
         /* Clear STOP Flag */
         __HAL_FMPI2C_CLEAR_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF);
-            
+
         /* Clear Configuration Register 2 */
         FMPI2C_RESET_CR2(hfmpi2c);
 
@@ -4528,7 +4528,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
   else
   {
     /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
-    /* Wait until STOPF flag is reset */ 
+    /* Wait until STOPF flag is reset */
     if(FMPI2C_WaitOnSTOPFlagUntilTimeout(hfmpi2c, FMPI2C_TIMEOUT_STOPF) != HAL_OK)
     {
       if(hfmpi2c->ErrorCode == HAL_FMPI2C_ERROR_AF)
@@ -4568,7 +4568,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
 }
 
 /**
-  * @brief  DMA FMPI2C communication error callback. 
+  * @brief  DMA FMPI2C communication error callback.
   * @param hdma DMA handle
   * @retval None
   */
@@ -4852,14 +4852,14 @@ static void FMPI2C_TransferConfig(FMPI2C_HandleTypeDef *hfmpi2c,  uint16_t DevAd
 
   /* Get the CR2 register value */
   tmpreg = hfmpi2c->Instance->CR2;
-  
+
   /* clear tmpreg specific bits */
   tmpreg &= (uint32_t)~((uint32_t)(FMPI2C_CR2_SADD | FMPI2C_CR2_NBYTES | FMPI2C_CR2_RELOAD | FMPI2C_CR2_AUTOEND | FMPI2C_CR2_RD_WRN | FMPI2C_CR2_START | FMPI2C_CR2_STOP));
 
   /* update tmpreg */
   tmpreg |= (uint32_t)(((uint32_t)DevAddress & FMPI2C_CR2_SADD) | (((uint32_t)Size << 16U) & FMPI2C_CR2_NBYTES) | \
             (uint32_t)Mode | (uint32_t)Request);
-  
+
   /* update CR2 register */
   hfmpi2c->Instance->CR2 = tmpreg;
 }
@@ -4874,7 +4874,7 @@ static void FMPI2C_TransferConfig(FMPI2C_HandleTypeDef *hfmpi2c,  uint16_t DevAd
 static HAL_StatusTypeDef FMPI2C_Enable_IRQ(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t InterruptRequest)
 {
   uint32_t tmpisr = 0U;
-  
+
   if((InterruptRequest & FMPI2C_IT_ADDR) == FMPI2C_IT_ADDR)
   {
     /* Enable ADDR and STOP interrupt */
@@ -4916,7 +4916,7 @@ static HAL_StatusTypeDef FMPI2C_Disable_IRQ(FMPI2C_HandleTypeDef *hfmpi2c, uint1
   {
     /* Disable TC and TXI interrupts */
     tmpisr |= FMPI2C_IT_TCI | FMPI2C_IT_TXI;
-    
+
     if((hfmpi2c->State & HAL_FMPI2C_STATE_LISTEN) != HAL_FMPI2C_STATE_LISTEN)
     {
       /* Disable NACK and STOP interrupts */
@@ -4946,7 +4946,7 @@ static HAL_StatusTypeDef FMPI2C_Disable_IRQ(FMPI2C_HandleTypeDef *hfmpi2c, uint1
   /* to avoid a breaking situation like at "t" time */
   /* all disable interrupts request are not done */
   __HAL_FMPI2C_DISABLE_IT(hfmpi2c, tmpisr);
-  
+
   return HAL_OK;
 }
 

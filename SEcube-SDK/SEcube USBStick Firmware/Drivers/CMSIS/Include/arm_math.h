@@ -563,7 +563,7 @@ extern "C"
   static __INLINE uint32_t arm_recip_q31(
   q31_t in,
   q31_t * dst,
-  q31_t * pRecipTable)
+  const q31_t * pRecipTable)
   {
     q31_t out;
     uint32_t index, i;
@@ -613,7 +613,7 @@ extern "C"
   static __INLINE uint32_t arm_recip_q15(
   q15_t in,
   q15_t * dst,
-  q15_t * pRecipTable)
+  const q15_t * pRecipTable)
   {
     q15_t out = 0;
     uint32_t index = 0, i = 0;
@@ -5429,7 +5429,7 @@ void arm_rfft_fast_f32(
    *
    */
   static __INLINE float32_t arm_linear_interp_f32(
-  arm_linear_interp_instance_f32 * S,
+  const arm_linear_interp_instance_f32 * S,
   float32_t x)
   {
     float32_t y;
@@ -5437,7 +5437,7 @@ void arm_rfft_fast_f32(
     float32_t y0, y1;                            /* Nearest output values */
     float32_t xSpacing = S->xSpacing;            /* spacing between input values */
     int32_t i;                                   /* Index variable */
-    float32_t *pYData = S->pYData;               /* pointer to output table */
+    const float32_t *pYData = S->pYData;               /* pointer to output table */
 
     /* Calculation of index */
     i = (int32_t) ((x - S->x1) / xSpacing);
@@ -5847,7 +5847,7 @@ void arm_rfft_fast_f32(
    * @brief floating-point Circular Read function.
    */
   static __INLINE void arm_circularRead_f32(
-  int32_t * circBuffer,
+  const int32_t * circBuffer,
   int32_t L,
   int32_t * readOffset,
   int32_t bufferInc,
@@ -5946,7 +5946,7 @@ void arm_rfft_fast_f32(
    * @brief Q15 Circular Read function.
    */
   static __INLINE void arm_circularRead_q15(
-  q15_t * circBuffer,
+  const q15_t * circBuffer,
   int32_t L,
   int32_t * readOffset,
   int32_t bufferInc,
@@ -6046,7 +6046,7 @@ void arm_rfft_fast_f32(
    * @brief Q7 Circular Read function.
    */
   static __INLINE void arm_circularRead_q7(
-  q7_t * circBuffer,
+  const q7_t * circBuffer,
   int32_t L,
   int32_t * readOffset,
   int32_t bufferInc,
@@ -6755,7 +6755,7 @@ void arm_rfft_fast_f32(
   {
     float32_t out;
     float32_t f00, f01, f10, f11;
-    float32_t *pData = S->pData;
+    const float32_t *pData = S->pData;
     int32_t xIndex, yIndex, index;
     float32_t xdiff, ydiff;
     float32_t b1, b2, b3, b4;
@@ -6815,7 +6815,7 @@ void arm_rfft_fast_f32(
   * @return out interpolated value.
   */
   static __INLINE q31_t arm_bilinear_interp_q31(
-  arm_bilinear_interp_instance_q31 * S,
+  const arm_bilinear_interp_instance_q31 * S,
   q31_t X,
   q31_t Y)
   {
@@ -6824,7 +6824,7 @@ void arm_rfft_fast_f32(
     q31_t xfract, yfract;                        /* X, Y fractional parts */
     q31_t x1, x2, y1, y2;                        /* Nearest output values */
     int32_t rI, cI;                              /* Row and column indices */
-    q31_t *pYData = S->pData;                    /* pointer to output table values */
+    const q31_t *pYData = S->pData;                    /* pointer to output table values */
     uint32_t nCols = S->numCols;                 /* num of rows */
 
     /* Input is in 12.20 format */
@@ -6889,7 +6889,7 @@ void arm_rfft_fast_f32(
   * @return out interpolated value.
   */
   static __INLINE q15_t arm_bilinear_interp_q15(
-  arm_bilinear_interp_instance_q15 * S,
+  const arm_bilinear_interp_instance_q15 * S,
   q31_t X,
   q31_t Y)
   {
@@ -6898,7 +6898,7 @@ void arm_rfft_fast_f32(
     q15_t x1, x2, y1, y2;                        /* Nearest output values */
     q31_t xfract, yfract;                        /* X, Y fractional parts */
     int32_t rI, cI;                              /* Row and column indices */
-    q15_t *pYData = S->pData;                    /* pointer to output table values */
+    const q15_t *pYData = S->pData;                    /* pointer to output table values */
     uint32_t nCols = S->numCols;                 /* num of rows */
 
     /* Input is in 12.20 format */
@@ -6967,7 +6967,7 @@ void arm_rfft_fast_f32(
   * @return out interpolated value.
   */
   static __INLINE q7_t arm_bilinear_interp_q7(
-  arm_bilinear_interp_instance_q7 * S,
+  const arm_bilinear_interp_instance_q7 * S,
   q31_t X,
   q31_t Y)
   {
@@ -6976,7 +6976,7 @@ void arm_rfft_fast_f32(
     q31_t xfract, yfract;                        /* X, Y fractional parts */
     q7_t x1, x2, y1, y2;                         /* Nearest output values */
     int32_t rI, cI;                              /* Row and column indices */
-    q7_t *pYData = S->pData;                     /* pointer to output table values */
+    const q7_t *pYData = S->pData;                     /* pointer to output table values */
     uint32_t nCols = S->numCols;                 /* num of rows */
 
     /* Input is in 12.20 format */

@@ -46,7 +46,7 @@ typedef struct {
 
 
 
-uint16_t se3_algo_AesHmacSha256s_init(se3_flash_key* key, uint16_t mode, uint8_t* ctx){
+uint16_t se3_algo_AesHmacSha256s_init(const se3_flash_key* key, uint16_t mode, uint8_t* ctx){
 	AesHmacSha256s_ctx myctx;
 	uint8_t* p = ctx;
 

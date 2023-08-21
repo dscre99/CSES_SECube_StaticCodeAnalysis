@@ -50,7 +50,7 @@ void MX_RNG_Init(void)
 
 }
 
-void HAL_RNG_MspInit(RNG_HandleTypeDef* hrng)
+void HAL_RNG_MspInit(const RNG_HandleTypeDef* hrng)
 {
 
   if(hrng->Instance==RNG)
@@ -66,7 +66,7 @@ void HAL_RNG_MspInit(RNG_HandleTypeDef* hrng)
   }
 }
 
-void HAL_RNG_MspDeInit(RNG_HandleTypeDef* hrng)
+void HAL_RNG_MspDeInit(const RNG_HandleTypeDef* hrng)
 {
 
   if(hrng->Instance==RNG)
@@ -80,7 +80,7 @@ void HAL_RNG_MspDeInit(RNG_HandleTypeDef* hrng)
   /* USER CODE BEGIN RNG_MspDeInit 1 */
 
   /* USER CODE END RNG_MspDeInit 1 */
-} 
+}
 
 /* USER CODE BEGIN 1 */
 

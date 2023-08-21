@@ -71,7 +71,7 @@ __attribute__((always_inline)) __STATIC_INLINE void __disable_irq(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_CONTROL(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, control" : "=r" (result) );
   return(result);
@@ -125,7 +125,7 @@ __attribute__((always_inline)) __STATIC_INLINE void __TZ_set_CONTROL_NS(uint32_t
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_IPSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
   return(result);
@@ -155,7 +155,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_IPSR_NS(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_APSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
   return(result);
@@ -185,7 +185,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_APSR_NS(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_xPSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
   return(result);
@@ -200,7 +200,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_xPSR(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_xPSR_NS(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, xpsr_ns" : "=r" (result) );
   return(result);
@@ -215,7 +215,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_xPSR_NS(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_PSP(void)
 {
-  register uint32_t result;
+  register uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, psp"  : "=r" (result) );
   return(result);
@@ -230,7 +230,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_PSP(void)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_PSP_NS(void)
 {
-  register uint32_t result;
+  register uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
   return(result);
@@ -269,7 +269,7 @@ __attribute__((always_inline)) __STATIC_INLINE void __TZ_set_PSP_NS(uint32_t top
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_MSP(void)
 {
-  register uint32_t result;
+  register uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, msp" : "=r" (result) );
   return(result);
@@ -323,7 +323,7 @@ __attribute__((always_inline)) __STATIC_INLINE void __TZ_set_MSP_NS(uint32_t top
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __get_PRIMASK(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, primask" : "=r" (result) );
   return(result);
@@ -835,7 +835,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __REV16(uint32_t value)
                                                           /* ToDo:  ARMCC_V6: check if __builtin_bswap16 could be used */
 __attribute__((always_inline)) __STATIC_INLINE int32_t __REVSH(int32_t value)
 {
-  int32_t result;
+  int32_t result = 0U;
 
   __ASM volatile ("revsh %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
   return(result);

@@ -50,7 +50,7 @@ void MX_CRC_Init(void)
 
 }
 
-void HAL_CRC_MspInit(CRC_HandleTypeDef* hcrc)
+void HAL_CRC_MspInit(const CRC_HandleTypeDef* hcrc)
 {
 
   if(hcrc->Instance==CRC)
@@ -66,7 +66,7 @@ void HAL_CRC_MspInit(CRC_HandleTypeDef* hcrc)
   }
 }
 
-void HAL_CRC_MspDeInit(CRC_HandleTypeDef* hcrc)
+void HAL_CRC_MspDeInit(const CRC_HandleTypeDef* hcrc)
 {
 
   if(hcrc->Instance==CRC)
@@ -80,7 +80,7 @@ void HAL_CRC_MspDeInit(CRC_HandleTypeDef* hcrc)
   /* USER CODE BEGIN CRC_MspDeInit 1 */
 
   /* USER CODE END CRC_MspDeInit 1 */
-} 
+}
 
 /* USER CODE BEGIN 1 */
 
