@@ -455,7 +455,7 @@ HAL_StatusTypeDef HAL_HCD_HC_SubmitRequest(HCD_HandleTypeDef *hhcd,
   */
 void HAL_HCD_IRQHandler(HCD_HandleTypeDef *hhcd)
 {
-  USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
+  const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint32_t i = 0U , interrupt = 0U;
 
   /* Ensure that we are in device mode */
@@ -799,7 +799,7 @@ uint32_t HAL_HCD_GetCurrentSpeed(HCD_HandleTypeDef *hhcd)
   */
 static void HCD_HC_IN_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
 {
-  USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
+  const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint32_t tmpreg = 0U;
 
   if ((USBx_HC(chnum)->HCINT) &  USB_OTG_HCINT_AHBERR)
@@ -942,7 +942,7 @@ static void HCD_HC_IN_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
   */
 static void HCD_HC_OUT_IRQHandler  (HCD_HandleTypeDef *hhcd, uint8_t chnum)
 {
-  USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
+  const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint32_t tmpreg = 0U;
 
   if ((USBx_HC(chnum)->HCINT) &  USB_OTG_HCINT_AHBERR)
@@ -1085,7 +1085,7 @@ static void HCD_HC_OUT_IRQHandler  (HCD_HandleTypeDef *hhcd, uint8_t chnum)
   */
 static void HCD_RXQLVL_IRQHandler(HCD_HandleTypeDef *hhcd)
 {
-  USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
+  const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint8_t  channelnum = 0U;
   uint32_t pktsts;
   uint32_t pktcnt;
@@ -1138,7 +1138,7 @@ static void HCD_RXQLVL_IRQHandler(HCD_HandleTypeDef *hhcd)
   */
 static void HCD_Port_IRQHandler  (HCD_HandleTypeDef *hhcd)
 {
-  USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
+  const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   __IO uint32_t hprt0, hprt0_dup;
 
   /* Handle Host Port Interrupts */
