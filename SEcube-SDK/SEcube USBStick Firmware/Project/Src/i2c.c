@@ -60,7 +60,7 @@ void MX_I2C2_Init(void)
 
 }
 
-void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+void HAL_I2C_MspInit(const I2C_HandleTypeDef* hi2c)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
@@ -69,10 +69,10 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
   /* USER CODE BEGIN I2C2_MspInit 0 */
 
   /* USER CODE END I2C2_MspInit 0 */
-  
-    /**I2C2 GPIO Configuration    
+
+    /**I2C2 GPIO Configuration
     PH4     ------> I2C2_SCL
-    PH5     ------> I2C2_SDA 
+    PH5     ------> I2C2_SDA
     */
     GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
@@ -89,7 +89,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
   }
 }
 
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+void HAL_I2C_MspDeInit(const I2C_HandleTypeDef* hi2c)
 {
 
   if(hi2c->Instance==I2C2)
@@ -99,10 +99,10 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
   /* USER CODE END I2C2_MspDeInit 0 */
     /* Peripheral clock disable */
     __I2C2_CLK_DISABLE();
-  
-    /**I2C2 GPIO Configuration    
+
+    /**I2C2 GPIO Configuration
     PH4     ------> I2C2_SCL
-    PH5     ------> I2C2_SDA 
+    PH5     ------> I2C2_SDA
     */
     HAL_GPIO_DeInit(GPIOH, GPIO_PIN_4|GPIO_PIN_5);
 
@@ -110,7 +110,7 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
   /* USER CODE BEGIN I2C2_MspDeInit 1 */
 
   /* USER CODE END I2C2_MspDeInit 1 */
-} 
+}
 
 /* USER CODE BEGIN 1 */
 

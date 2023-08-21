@@ -64,7 +64,7 @@ void se3_mem_init(se3_mem* mem, size_t index_size, uint8_t** index, size_t buf_s
     se3_mem_reset(mem);
 }
 
-static void se3_mem_compact(uint8_t* p, uint8_t* end)
+static void se3_mem_compact(uint8_t* p, const uint8_t* end)
 {
 	uint8_t* p2 = p;
 	bool empty = false;

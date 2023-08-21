@@ -81,7 +81,7 @@ void MX_USART6_SMARTCARD_Init(void)
 
 }
 
-void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+void HAL_UART_MspInit(const UART_HandleTypeDef* huart)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
@@ -92,12 +92,12 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   /* USER CODE END USART1_MspInit 0 */
     /* Peripheral clock enable */
     __USART1_CLK_ENABLE();
-  
-    /**USART1 GPIO Configuration    
+
+    /**USART1 GPIO Configuration
     PB6     ------> USART1_TX
     PA12     ------> USART1_RTS
     PA11     ------> USART1_CTS
-    PA10     ------> USART1_RX 
+    PA10     ------> USART1_RX
     */
     GPIO_InitStruct.Pin = GPIO_PIN_6;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -126,7 +126,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   }
 }
 
-void HAL_SMARTCARD_MspInit(SMARTCARD_HandleTypeDef* hsmartcard)
+void HAL_SMARTCARD_MspInit(const SMARTCARD_HandleTypeDef* hsmartcard)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
@@ -137,10 +137,10 @@ void HAL_SMARTCARD_MspInit(SMARTCARD_HandleTypeDef* hsmartcard)
   /* USER CODE END USART6_MspInit 0 */
     /* Peripheral clock enable */
     __USART6_CLK_ENABLE();
-  
-    /**USART6 GPIO Configuration    
+
+    /**USART6 GPIO Configuration
     PC6     ------> USART6_TX
-    PG7     ------> USART6_CK 
+    PG7     ------> USART6_CK
     */
     GPIO_InitStruct.Pin = GPIO_PIN_6;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
@@ -162,7 +162,7 @@ void HAL_SMARTCARD_MspInit(SMARTCARD_HandleTypeDef* hsmartcard)
   }
 }
 
-void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+void HAL_UART_MspDeInit(const UART_HandleTypeDef* huart)
 {
 
   if(huart->Instance==USART1)
@@ -172,12 +172,12 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
   /* USER CODE END USART1_MspDeInit 0 */
     /* Peripheral clock disable */
     __USART1_CLK_DISABLE();
-  
-    /**USART1 GPIO Configuration    
+
+    /**USART1 GPIO Configuration
     PB6     ------> USART1_TX
     PA12     ------> USART1_RTS
     PA11     ------> USART1_CTS
-    PA10     ------> USART1_RX 
+    PA10     ------> USART1_RX
     */
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
 
@@ -189,7 +189,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
   /* USER CODE END USART1_MspDeInit 1 */
 }
 
-void HAL_SMARTCARD_MspDeInit(SMARTCARD_HandleTypeDef* hsmartcard)
+void HAL_SMARTCARD_MspDeInit(const SMARTCARD_HandleTypeDef* hsmartcard)
 {
 
   if(hsmartcard->Instance==USART6)
@@ -199,10 +199,10 @@ void HAL_SMARTCARD_MspDeInit(SMARTCARD_HandleTypeDef* hsmartcard)
   /* USER CODE END USART6_MspDeInit 0 */
     /* Peripheral clock disable */
     __USART6_CLK_DISABLE();
-  
-    /**USART6 GPIO Configuration    
+
+    /**USART6 GPIO Configuration
     PC6     ------> USART6_TX
-    PG7     ------> USART6_CK 
+    PG7     ------> USART6_CK
     */
     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_6);
 
@@ -212,7 +212,7 @@ void HAL_SMARTCARD_MspDeInit(SMARTCARD_HandleTypeDef* hsmartcard)
   /* USER CODE BEGIN USART6_MspDeInit 1 */
 
   /* USER CODE END USART6_MspDeInit 1 */
-} 
+}
 
 /* USER CODE BEGIN 1 */
 
