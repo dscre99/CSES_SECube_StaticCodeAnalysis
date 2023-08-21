@@ -90,7 +90,6 @@ static uint8_t* se3_mem_defrag(se3_mem* mem)
 {
 	uint8_t* p1, *p2;
 	uint16_t p2_size;
-	bool p2_valid;
 	uint16_t id;
 	const uint8_t* end = mem->dat + mem->dat_size*SE3_MEM_BLOCK;
     uint16_t info, size;
@@ -114,7 +113,7 @@ static uint8_t* se3_mem_defrag(se3_mem* mem)
 	while(p2<end) {
         SE3_MEM_SIZE_GET(p2, p2_size);
         SE3_MEM_INFO_GET(p2, info);
-        p2_valid = SE3_MEM_INFO_ISVALID(info);
+        bool p2_valid = SE3_MEM_INFO_ISVALID(info);
 		if ( p2_valid ) {
 			memmove(p1, p2, p2_size*SE3_MEM_BLOCK);
 			p1 += p2_size*SE3_MEM_BLOCK;
@@ -157,7 +156,6 @@ int32_t se3_mem_alloc(se3_mem* mem, size_t size)
 	uint16_t p_size;
     uint16_t u16tmp;
     uint16_t nblocks;
-	bool valid;
 
 	// header size
 	size += SE3_MEM_HEADER;
@@ -185,7 +183,7 @@ int32_t se3_mem_alloc(se3_mem* mem, size_t size)
 	while (p < dat_end) {
         SE3_MEM_SIZE_GET(p, p_size);
         SE3_MEM_INFO_GET(p, p_info);
-		valid = SE3_MEM_INFO_ISVALID(p_info);
+		bool valid = SE3_MEM_INFO_ISVALID(p_info);
 		if (p_size == 0 ) {
 			SE3_TRACE(("E mem_alloc memory corrupted, block with size=0\n"));
 			return -1;
@@ -263,14 +261,12 @@ uint8_t* se3_mem_ptr(se3_mem* mem, int32_t id)
 
 void se3_mem_free(se3_mem* mem, int32_t id)
 {
-	uint8_t* p;
-    uint16_t info;
-    uint16_t size;
     if (id < 0) {
         return;
     }
 	if ((uint32_t)id < mem->max_count) {
-		p = mem->ptr[id];
+        uint16_t info, size;
+		uint8_t* p = mem->ptr[id];
 		mem->ptr[id] = NULL;
         SE3_MEM_SIZE_GET(p, size);
         SE3_MEM_INFO_GET(p, info);

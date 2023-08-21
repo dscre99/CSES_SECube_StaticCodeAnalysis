@@ -115,10 +115,6 @@ uint16_t se3_algo_AesHmacSha256s_update(
 	AesHmacSha256s_ctx myctx;
 	uint8_t* p = ctx;
 
-	size_t nblocks = 0;
-	size_t outsize = 0;
-	uint8_t* pdataout = dataout;
-
 	bool do_setnonce = (flags & SE3_CRYPTO_FLAG_SETNONCE);
 	bool do_update = (datain2_len > 0);
 	bool do_finit = (flags & SE3_CRYPTO_FLAG_FINIT);
@@ -177,7 +173,7 @@ uint16_t se3_algo_AesHmacSha256s_update(
 		}
 
 		// compute output size
-		outsize = 0;
+		size_t outsize = 0;
 		if (do_update){
 			outsize += datain2_len;
 		}
@@ -200,9 +196,11 @@ uint16_t se3_algo_AesHmacSha256s_update(
 		}
 
 		if (do_update) {
-			nblocks = datain2_len / B5_AES_BLK_SIZE;
+			size_t nblocks = datain2_len / B5_AES_BLK_SIZE;
 
 			if (*myctx.direction == 1) { // decrypt
+                uint8_t* pdataout = dataout;
+
 				if (B5_AES256_RES_OK != B5_HmacSha256_Update(myctx.hmac, datain2, datain2_len)) {
 					return SE3_ERR_HW;
 				}

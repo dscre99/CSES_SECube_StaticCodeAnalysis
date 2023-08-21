@@ -51,7 +51,7 @@ static void F(const B5_tHmacSha256Ctx *startctx,
 	/* First iteration:
 	*   U_1 = PRF(P, S || INT_32_BE(i))
 	*/
-	
+
 	B5_HmacSha256_Update(&ctx, salt, nsalt);
 	B5_HmacSha256_Update(&ctx, countbuf, sizeof(countbuf));
 	B5_HmacSha256_Finit(&ctx, U);
@@ -77,7 +77,6 @@ void PBKDF2HmacSha256(
 {
 	uint32_t counter = 1;
 	uint8_t block[B5_SHA256_DIGEST_SIZE];
-	size_t taken;
 
 	/* Starting point for inner loop. */
 	B5_tHmacSha256Ctx ctx;
@@ -86,7 +85,7 @@ void PBKDF2HmacSha256(
 	while(nout)
 	{
 		F(&ctx, counter, salt, nsalt, iterations, block);
-		taken = (nout < B5_SHA256_DIGEST_SIZE)?(nout):(B5_SHA256_DIGEST_SIZE);
+		size_t taken = (nout < B5_SHA256_DIGEST_SIZE)?(nout):(B5_SHA256_DIGEST_SIZE);
 		memcpy(out, block, taken);
 		out += taken;
 		nout -= taken;

@@ -114,7 +114,6 @@ static bool flash_swap()
 	size_t other_used;
 	size_t other_pos;
 
-	size_t n;
 	bool success, b;
 	se3_flash_it it;
 	if (flash.sector == SE3_FLASH_S0) {
@@ -133,7 +132,7 @@ static bool flash_swap()
 	flash_erase(other);
 	//zero non-programmed slots in index table (first_free_pos to end)
 	if (flash.first_free_pos < SE3_FLASH_INDEX_SIZE) {
-		n = SE3_FLASH_INDEX_SIZE - flash.first_free_pos;
+		size_t n = SE3_FLASH_INDEX_SIZE - flash.first_free_pos;
 		flash_zero((uint32_t)flash.index + flash.first_free_pos, n);
 	}
 
@@ -285,7 +284,6 @@ void se3_flash_it_init(se3_flash_it* it)
 
 bool se3_flash_it_next(se3_flash_it* it)
 {
-	uint8_t type;
 	const uint8_t* node;
 	size_t pos2;
 	if (it->addr == NULL) {
@@ -296,7 +294,7 @@ bool se3_flash_it_next(se3_flash_it* it)
 		(it->pos)+=it->blocks;
 	}
 	while (it->pos < SE3_FLASH_INDEX_SIZE) {
-		type = *(flash.index + it->pos);
+		uint8_t type = *(flash.index + it->pos);
 		if (type == 0xFF) return false;
 		if (type != 0xFE) {
 			node = flash.data + (it->pos) * SE3_FLASH_BLOCK_SIZE;
