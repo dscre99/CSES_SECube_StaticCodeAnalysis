@@ -79,7 +79,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_irq(void)
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_CONTROL(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, control" : "=r" (result) );
   return(result);
@@ -104,7 +104,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_CONTROL(uint32_t c
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_IPSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
   return(result);
@@ -118,7 +118,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_IPSR(void)
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_APSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
   return(result);
@@ -133,7 +133,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_APSR(void)
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_xPSR(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
   return(result);
@@ -147,7 +147,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_xPSR(void)
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PSP(void)
 {
-  register uint32_t result;
+  register uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, psp\n"  : "=r" (result) );
   return(result);
@@ -172,7 +172,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_PSP(uint32_t topOf
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_MSP(void)
 {
-  register uint32_t result;
+  register uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
   return(result);
@@ -198,7 +198,7 @@ __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_MSP(uint32_t topOf
  */
 __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PRIMASK(void)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("MRS %0, primask" : "=r" (result) );
   return(result);
@@ -452,7 +452,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __REV(uint32_t value)
 #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
   return __builtin_bswap32(value);
 #else
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("rev %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
   return(result);
@@ -468,7 +468,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __REV(uint32_t value)
  */
 __attribute__((always_inline)) __STATIC_INLINE uint32_t __REV16(uint32_t value)
 {
-  uint32_t result;
+  uint32_t result = 0U;
 
   __ASM volatile ("rev16 %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
   return(result);
@@ -486,7 +486,7 @@ __attribute__((always_inline)) __STATIC_INLINE int32_t __REVSH(int32_t value)
 #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
   return (short)__builtin_bswap16(value);
 #else
-  int32_t result;
+  int32_t result = 0U;
 
   __ASM volatile ("revsh %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
   return(result);

@@ -642,10 +642,9 @@ HAL_StatusTypeDef HAL_CEC_Transmit_IT(CEC_HandleTypeDef *hcec, uint8_t Destinati
     __HAL_LOCK(hcec);
     /* set state to BUSY TX, in case it wasn't set already (case
      * of transmission new attempt after arbitration loss) */
-    if (hcec->State != HAL_CEC_STATE_BUSY_TX)
-    {
+
       hcec->State = HAL_CEC_STATE_BUSY_TX;
-    }
+
 
     /* if all data have been sent */
     if(hcec->TxXferCount == 0U)
@@ -969,10 +968,8 @@ static HAL_StatusTypeDef CEC_Transmit_IT(CEC_HandleTypeDef *hcec)
     __HAL_LOCK(hcec);
     /* set state to BUSY TX, in case it wasn't set already (case
      * of transmission new attempt after arbitration loss) */
-    if (hcec->State != HAL_CEC_STATE_BUSY_TX)
-    {
+
       hcec->State = HAL_CEC_STATE_BUSY_TX;
-    }
 
     /* if all data have been sent */
     if(hcec->TxXferCount == 0U)
