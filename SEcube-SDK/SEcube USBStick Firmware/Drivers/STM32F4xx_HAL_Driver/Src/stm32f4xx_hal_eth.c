@@ -669,7 +669,7 @@ __weak void HAL_ETH_MspDeInit(ETH_HandleTypeDef *heth)
   */
 HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameLength)
 {
-  uint32_t bufcount = 0U, size = 0U, i = 0U;
+  uint32_t bufcount = 0U, size, i;
 
   /* Process Locked */
   __HAL_LOCK(heth);
@@ -782,7 +782,7 @@ HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameL
   */
 HAL_StatusTypeDef HAL_ETH_GetReceivedFrame(ETH_HandleTypeDef *heth)
 {
-  uint32_t framelength = 0U;
+  uint32_t framelength;
 
   /* Process Locked */
   __HAL_LOCK(heth);

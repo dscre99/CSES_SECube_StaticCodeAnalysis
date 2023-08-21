@@ -18,7 +18,7 @@
  *
  *            1. Configure the NVIC Priority Grouping using NVIC_PriorityGroupConfig()
  *                function according to the following table.
- 
+
  *  The table below gives the allowed values of the pre-emption priority and subpriority according
  *  to the Priority Grouping configuration performed by NVIC_PriorityGroupConfig function
  *    ==========================================================================================================================
@@ -119,7 +119,7 @@ void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
 {
     /* Check the parameters */
     assert_param(IS_NVIC_PRIORITY_GROUP(NVIC_PriorityGroup));
-    
+
     /* Set the PRIGROUP[10:8] bits according to NVIC_PriorityGroup value */
     SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
 }
@@ -135,27 +135,27 @@ void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
  */
 void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
 {
-    uint8_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
-    
+    uint8_t tmppriority, tmppre, tmpsub = 0x0F;
+
     /* Check the parameters */
     assert_param(IS_FUNCTIONAL_STATE(NVIC_InitStruct->NVIC_IRQChannelCmd));
     assert_param(IS_NVIC_PREEMPTION_PRIORITY(NVIC_InitStruct->NVIC_IRQChannelPreemptionPriority));
     assert_param(IS_NVIC_SUB_PRIORITY(NVIC_InitStruct->NVIC_IRQChannelSubPriority));
-    
+
     if (NVIC_InitStruct->NVIC_IRQChannelCmd != DISABLE)
     {
         /* Compute the Corresponding IRQ Priority --------------------------------*/
         tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
         tmppre = (0x4 - tmppriority);
         tmpsub = tmpsub >> tmppriority;
-        
+
         tmppriority = NVIC_InitStruct->NVIC_IRQChannelPreemptionPriority << tmppre;
         tmppriority |=  (uint8_t)(NVIC_InitStruct->NVIC_IRQChannelSubPriority & tmpsub);
-        
+
         tmppriority = tmppriority << 0x04;
-        
+
         NVIC->IP[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority;
-        
+
         /* Enable the Selected IRQ Channels --------------------------------------*/
         NVIC->ISER[NVIC_InitStruct->NVIC_IRQChannel >> 0x05] =
         (uint32_t)0x01 << (NVIC_InitStruct->NVIC_IRQChannel & (uint8_t)0x1F);
@@ -182,7 +182,7 @@ void NVIC_SetVectorTable(uint32_t NVIC_VectTab, uint32_t Offset)
     /* Check the parameters */
     assert_param(IS_NVIC_VECTTAB(NVIC_VectTab));
     assert_param(IS_NVIC_OFFSET(Offset));
-    
+
     SCB->VTOR = NVIC_VectTab | (Offset & (uint32_t)0x1FFFFF80);
 }
 
@@ -201,7 +201,7 @@ void NVIC_SystemLPConfig(uint8_t LowPowerMode, FunctionalState NewState)
     /* Check the parameters */
     assert_param(IS_NVIC_LP(LowPowerMode));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
-    
+
     if (NewState != DISABLE)
     {
         SCB->SCR |= LowPowerMode;

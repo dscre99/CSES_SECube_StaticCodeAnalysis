@@ -1086,7 +1086,7 @@ int16_t ispVMRead(uint32_t a_uiDataSize)
 	uint8_t ucTDIByte = 0;
 	uint8_t ucTDOByte = 0;
 	uint8_t ucMaskByte = 0;
-	uint8_t ucCurBit = 0;
+	uint8_t ucCurBit;
 
 	for (uiIndex = 0;uiIndex < a_uiDataSize; uiIndex++)
 	{
@@ -1212,7 +1212,7 @@ void ispVMSend(uint32_t a_uiDataSize)
 {
 	uint32_t iIndex;
 	uint8_t ucCurByte = 0;
-	uint8_t ucBitState = 0;
+	uint8_t ucBitState;
 
 	/*************************************************************
 	*                                                            *

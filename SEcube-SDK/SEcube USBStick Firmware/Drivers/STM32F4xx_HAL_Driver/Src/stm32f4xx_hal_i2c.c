@@ -3066,7 +3066,7 @@ HAL_StatusTypeDef HAL_I2C_Mem_Read_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddr
   */
 HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint32_t Trials, uint32_t Timeout)
 {
-  uint32_t tickstart = 0U, tmp1 = 0U, tmp2 = 0U, tmp3 = 0U, I2C_Trials = 1U;
+  uint32_t tickstart, tmp1, tmp2, tmp3, I2C_Trials = 1U;
 
   if(hi2c->State == HAL_I2C_STATE_READY)
   {
@@ -3285,7 +3285,7 @@ void HAL_I2C_EV_IRQHandler(I2C_HandleTypeDef *hi2c)
   */
 void HAL_I2C_ER_IRQHandler(I2C_HandleTypeDef *hi2c)
 {
-  uint32_t tmp1 = 0U, tmp2 = 0U, tmp3 = 0U, tmp4 = 0U;
+  uint32_t tmp1 = 0U, tmp2 = 0U, tmp3, tmp4;
 
   tmp1 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_BERR);
   tmp2 = __HAL_I2C_GET_IT_SOURCE(hi2c, I2C_IT_ERR);

@@ -115,8 +115,8 @@ uint16_t se3_algo_AesHmacSha256s_update(
 	AesHmacSha256s_ctx myctx;
 	uint8_t* p = ctx;
 
-	size_t nblocks = 0;
-	size_t outsize = 0;
+	size_t nblocks;
+	size_t outsize;
 	uint8_t* pdataout = dataout;
 
 	bool do_setnonce = (flags & SE3_CRYPTO_FLAG_SETNONCE);

@@ -435,9 +435,9 @@ HAL_StatusTypeDef HAL_NAND_Reset(NAND_HandleTypeDef *hnand)
 HAL_StatusTypeDef HAL_NAND_Read_Page(NAND_HandleTypeDef *hnand, const NAND_AddressTypeDef *pAddress, uint8_t *pBuffer, uint32_t NumPageToRead)
 {
   __IO uint32_t index  = 0U;
-  uint32_t deviceaddress = 0U, size = 0U, numpagesread = 0U, addressstatus = NAND_VALID_ADDRESS;
+  uint32_t deviceaddress = 0U, size, numpagesread = 0U, addressstatus = NAND_VALID_ADDRESS;
   NAND_AddressTypeDef nandaddress;
-  uint32_t addressoffset = 0U;
+  uint32_t addressoffset;
 
   /* Process Locked */
   __HAL_LOCK(hnand);
@@ -529,10 +529,10 @@ HAL_StatusTypeDef HAL_NAND_Read_Page(NAND_HandleTypeDef *hnand, const NAND_Addre
 HAL_StatusTypeDef HAL_NAND_Write_Page(NAND_HandleTypeDef *hnand, const NAND_AddressTypeDef *pAddress, uint8_t *pBuffer, uint32_t NumPageToWrite)
 {
   __IO uint32_t index   = 0U;
-  uint32_t tickstart = 0U;
-  uint32_t deviceaddress = 0U , size = 0U, numpageswritten = 0U, addressstatus = NAND_VALID_ADDRESS;
+  uint32_t tickstart;
+  uint32_t deviceaddress = 0U , size, numpageswritten = 0U, addressstatus = NAND_VALID_ADDRESS;
   NAND_AddressTypeDef nandaddress;
-  uint32_t addressoffset = 0U;
+  uint32_t addressoffset;
 
   /* Process Locked */
   __HAL_LOCK(hnand);
@@ -636,9 +636,9 @@ HAL_StatusTypeDef HAL_NAND_Write_Page(NAND_HandleTypeDef *hnand, const NAND_Addr
 HAL_StatusTypeDef HAL_NAND_Read_SpareArea(NAND_HandleTypeDef *hnand, const NAND_AddressTypeDef *pAddress, uint8_t *pBuffer, uint32_t NumSpareAreaToRead)
 {
   __IO uint32_t index   = 0U;
-  uint32_t deviceaddress = 0U, size = 0U, num_spare_area_read = 0U, addressstatus = NAND_VALID_ADDRESS;
+  uint32_t deviceaddress = 0U, size, num_spare_area_read = 0U, addressstatus = NAND_VALID_ADDRESS;
   NAND_AddressTypeDef nandaddress;
-  uint32_t addressoffset = 0U;
+  uint32_t addressoffset;
 
   /* Process Locked */
   __HAL_LOCK(hnand);
@@ -729,10 +729,10 @@ HAL_StatusTypeDef HAL_NAND_Read_SpareArea(NAND_HandleTypeDef *hnand, const NAND_
 HAL_StatusTypeDef HAL_NAND_Write_SpareArea(NAND_HandleTypeDef *hnand, const NAND_AddressTypeDef *pAddress, uint8_t *pBuffer, uint32_t NumSpareAreaTowrite)
 {
   __IO uint32_t index = 0U;
-  uint32_t tickstart = 0U;
-  uint32_t deviceaddress = 0U, size = 0U, num_spare_area_written = 0U, addressstatus = NAND_VALID_ADDRESS;
+  uint32_t tickstart;
+  uint32_t deviceaddress = 0U, size, num_spare_area_written = 0U, addressstatus = NAND_VALID_ADDRESS;
   NAND_AddressTypeDef nandaddress;
-  uint32_t addressoffset = 0U;
+  uint32_t addressoffset;
 
   /* Process Locked */
   __HAL_LOCK(hnand);

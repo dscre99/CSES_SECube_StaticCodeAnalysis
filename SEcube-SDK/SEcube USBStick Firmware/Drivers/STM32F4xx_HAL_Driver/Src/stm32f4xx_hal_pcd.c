@@ -325,8 +325,8 @@ HAL_StatusTypeDef HAL_PCD_Stop(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
 {
   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
-  uint32_t i = 0U, ep_intr = 0U, epint = 0U, epnum = 0U;
-  uint32_t fifoemptymsk = 0U, temp = 0U;
+  uint32_t i, ep_intr, epint, epnum = 0U;
+  uint32_t fifoemptymsk, temp;
   USB_OTG_EPTypeDef *ep;
 
   /* ensure that we are in device mode */
@@ -1203,7 +1203,7 @@ static HAL_StatusTypeDef PCD_WriteEmptyTxFifo(PCD_HandleTypeDef *hpcd, uint32_t 
   USB_OTG_EPTypeDef *ep;
   int32_t len = 0U;
   uint32_t len32b;
-  uint32_t fifoemptymsk = 0U;
+  uint32_t fifoemptymsk;
 
   ep = &hpcd->IN_ep[epnum];
   len = ep->xfer_len - ep->xfer_count;

@@ -327,9 +327,9 @@ HAL_StatusTypeDef HAL_CEC_DeInit(CEC_HandleTypeDef *hcec)
   */
 HAL_StatusTypeDef HAL_CEC_Transmit(CEC_HandleTypeDef *hcec, uint8_t DestinationAddress, uint8_t *pData, uint32_t Size, uint32_t Timeout)
 {
- uint8_t  temp = 0U;
-  uint32_t tempisr = 0U;
-  uint32_t tickstart = 0U;
+ uint8_t  temp;
+  uint32_t tempisr;
+  uint32_t tickstart;
 
   if((hcec->State == HAL_CEC_STATE_READY) && (__HAL_CEC_GET_TRANSMISSION_START_FLAG(hcec) == RESET))
   {
@@ -476,7 +476,7 @@ HAL_StatusTypeDef HAL_CEC_Transmit(CEC_HandleTypeDef *hcec, uint8_t DestinationA
 HAL_StatusTypeDef HAL_CEC_Receive(CEC_HandleTypeDef *hcec, uint8_t *pData, uint32_t Timeout)
 {
   uint32_t temp;
-  uint32_t tickstart = 0U;
+  uint32_t tickstart;
 
   if (hcec->State == HAL_CEC_STATE_READY)
   {
@@ -576,7 +576,7 @@ HAL_StatusTypeDef HAL_CEC_Receive(CEC_HandleTypeDef *hcec, uint8_t *pData, uint3
   */
 HAL_StatusTypeDef HAL_CEC_Transmit_IT(CEC_HandleTypeDef *hcec, uint8_t DestinationAddress, uint8_t *pData, uint32_t Size)
 {
-  uint8_t  temp = 0U;
+  uint8_t  temp;
   /* if the IP isn't already busy and if there is no previous transmission
      already pending due to arbitration lost */
   if (((hcec->State == HAL_CEC_STATE_READY) || (hcec->State == HAL_CEC_STATE_STANDBY_RX))

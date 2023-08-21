@@ -189,9 +189,9 @@
 void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
 {
   uint32_t position;
-  uint32_t ioposition = 0x00U;
-  uint32_t iocurrent = 0x00U;
-  uint32_t temp = 0x00U;
+  uint32_t ioposition;
+  uint32_t iocurrent;
+  uint32_t temp;
 
   /* Check the parameters */
   assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));
@@ -314,9 +314,9 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
 void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
 {
   uint32_t position;
-  uint32_t ioposition = 0x00U;
-  uint32_t iocurrent = 0x00U;
-  uint32_t tmp = 0x00U;
+  uint32_t ioposition;
+  uint32_t iocurrent;
+  uint32_t tmp;
 
   /* Check the parameters */
   assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));

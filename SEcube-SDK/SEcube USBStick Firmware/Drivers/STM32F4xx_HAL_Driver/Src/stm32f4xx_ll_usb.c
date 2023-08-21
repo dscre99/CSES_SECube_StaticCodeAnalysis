@@ -564,7 +564,7 @@ HAL_StatusTypeDef USB_DeactivateDedicatedEndpoint(USB_OTG_GlobalTypeDef *USBx, U
   */
 HAL_StatusTypeDef USB_EPStartXfer(USB_OTG_GlobalTypeDef *USBx , USB_OTG_EPTypeDef *ep, uint8_t dma)
 {
-  uint16_t pktcnt = 0U;
+  uint16_t pktcnt;
 
   /* IN endpoint */
   if (ep->is_in == 1U)
@@ -775,7 +775,7 @@ HAL_StatusTypeDef USB_EP0StartXfer(USB_OTG_GlobalTypeDef *USBx , USB_OTG_EPTypeD
   */
 HAL_StatusTypeDef USB_WritePacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *src, uint8_t ch_ep_num, uint16_t len, uint8_t dma)
 {
-  uint32_t count32b = 0U , i = 0U;
+  uint32_t count32b, i;
 
   if (dma == 0U)
   {

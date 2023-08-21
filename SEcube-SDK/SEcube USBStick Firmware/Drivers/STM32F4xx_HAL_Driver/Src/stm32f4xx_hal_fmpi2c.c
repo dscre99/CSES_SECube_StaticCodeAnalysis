@@ -564,7 +564,7 @@ HAL_StatusTypeDef HAL_FMPI2C_DeInit(FMPI2C_HandleTypeDef *hfmpi2c)
   */
 HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t sizetmp = 0U;
+  uint32_t sizetmp;
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
@@ -686,7 +686,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint
   */
 HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t sizetmp = 0U;
+  uint32_t sizetmp;
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
@@ -1632,7 +1632,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive_DMA(FMPI2C_HandleTypeDef *hfmpi2c, ui
   */
 HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t Sizetmp = 0U;
+  uint32_t Sizetmp;
 
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
@@ -1776,7 +1776,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
   */
 HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t Sizetmp = 0U;
+  uint32_t Sizetmp;
 
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
@@ -2315,7 +2315,7 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
   */
 HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint32_t Trials, uint32_t Timeout)
 {
-  uint32_t tickstart = 0U;
+  uint32_t tickstart;
 
   __IO uint32_t FMPI2C_Trials = 0U;
 
@@ -3399,10 +3399,10 @@ static HAL_StatusTypeDef FMPI2C_Master_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
   */
 static HAL_StatusTypeDef FMPI2C_Slave_ISR(FMPI2C_HandleTypeDef *hfmpi2c)
 {
-  uint8_t TransferDirection = 0U;
-  uint16_t SlaveAddrCode = 0U;
-  uint16_t OwnAdd1Code = 0U;
-  uint16_t OwnAdd2Code = 0U;
+  uint8_t TransferDirection ;
+  uint16_t SlaveAddrCode;
+  uint16_t OwnAdd1Code;
+  uint16_t OwnAdd2Code;
 
   /* Process Locked */
   __HAL_LOCK(hfmpi2c);

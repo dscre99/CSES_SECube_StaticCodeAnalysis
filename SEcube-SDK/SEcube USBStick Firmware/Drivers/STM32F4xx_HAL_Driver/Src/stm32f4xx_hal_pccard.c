@@ -263,7 +263,7 @@ __weak void HAL_PCCARD_MspDeInit(PCCARD_HandleTypeDef *hpccard)
   */
 HAL_StatusTypeDef HAL_PCCARD_Read_ID(PCCARD_HandleTypeDef *hpccard, uint8_t CompactFlash_ID[], uint8_t *pStatus)
 {
-  uint32_t timeout = PCCARD_TIMEOUT_READ_ID, index = 0U;
+  uint32_t timeout = PCCARD_TIMEOUT_READ_ID, index;
   uint8_t status = 0U;
 
   /* Process Locked */

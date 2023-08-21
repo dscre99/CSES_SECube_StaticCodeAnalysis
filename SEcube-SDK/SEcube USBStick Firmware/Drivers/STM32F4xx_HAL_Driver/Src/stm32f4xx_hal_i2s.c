@@ -206,7 +206,7 @@
 __weak HAL_StatusTypeDef HAL_I2S_Init(I2S_HandleTypeDef *hi2s)
 {
   uint32_t tmpreg = 0U, i2sdiv = 2U, i2sodd = 0U, packetlength = 1U;
-  uint32_t tmp = 0U, i2sclk = 0U;
+  uint32_t tmp, i2sclk;
 
   /* Check the I2S handle allocation */
   if(hi2s == NULL)
@@ -441,7 +441,7 @@ HAL_StatusTypeDef HAL_I2S_DeInit(I2S_HandleTypeDef *hi2s)
   */
 HAL_StatusTypeDef HAL_I2S_Transmit(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
   if((pData == NULL ) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -524,7 +524,7 @@ HAL_StatusTypeDef HAL_I2S_Transmit(I2S_HandleTypeDef *hi2s, uint16_t *pData, uin
   */
 HAL_StatusTypeDef HAL_I2S_Receive(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
   if((pData == NULL ) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -605,7 +605,7 @@ HAL_StatusTypeDef HAL_I2S_Receive(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint
   */
 HAL_StatusTypeDef HAL_I2S_Transmit_IT(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size)
 {
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
   if(hi2s->State == HAL_I2S_STATE_READY)
   {
     if((pData == NULL) || (Size == 0U))
@@ -671,7 +671,7 @@ HAL_StatusTypeDef HAL_I2S_Transmit_IT(I2S_HandleTypeDef *hi2s, uint16_t *pData, 
   */
 HAL_StatusTypeDef HAL_I2S_Receive_IT(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size)
 {
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
   if(hi2s->State == HAL_I2S_STATE_READY)
   {
     if((pData == NULL) || (Size == 0U))
@@ -736,7 +736,7 @@ HAL_StatusTypeDef HAL_I2S_Receive_IT(I2S_HandleTypeDef *hi2s, uint16_t *pData, u
 HAL_StatusTypeDef HAL_I2S_Transmit_DMA(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size)
 {
   uint32_t *tmp;
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
 
   if((pData == NULL) || (Size == 0U))
   {
@@ -819,7 +819,7 @@ HAL_StatusTypeDef HAL_I2S_Transmit_DMA(I2S_HandleTypeDef *hi2s, uint16_t *pData,
 HAL_StatusTypeDef HAL_I2S_Receive_DMA(I2S_HandleTypeDef *hi2s, uint16_t *pData, uint16_t Size)
 {
   uint32_t *tmp;
-  uint32_t tmp1 = 0U;
+  uint32_t tmp1;
 
   if((pData == NULL) || (Size == 0U))
   {
@@ -1026,7 +1026,7 @@ __weak HAL_StatusTypeDef HAL_I2S_DMAStop(I2S_HandleTypeDef *hi2s)
   */
 __weak void HAL_I2S_IRQHandler(I2S_HandleTypeDef *hi2s)
 {
-  uint32_t tmp1 = 0U, tmp2 = 0U;
+  uint32_t tmp1, tmp2;
 
     if(hi2s->State == HAL_I2S_STATE_BUSY_RX)
     {

@@ -750,7 +750,7 @@ uint32_t HAL_DCMI_GetError(const DCMI_HandleTypeDef *hdcmi)
   */
 static void DCMI_DMAXferCplt(DMA_HandleTypeDef *hdma)
 {
-  uint32_t tmp = 0U;
+  uint32_t tmp;
 
   DCMI_HandleTypeDef* hdcmi = ( DCMI_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
   hdcmi->State= HAL_DCMI_STATE_READY;

@@ -277,7 +277,7 @@ HAL_StatusTypeDef HAL_RTC_Init(RTC_HandleTypeDef *hrtc)
   */
 HAL_StatusTypeDef HAL_RTC_DeInit(RTC_HandleTypeDef *hrtc)
 {
-  uint32_t tickstart = 0U;
+  uint32_t tickstart;
 
   /* Set RTC state */
   hrtc->State = HAL_RTC_STATE_BUSY;
@@ -1480,7 +1480,7 @@ HAL_RTCStateTypeDef HAL_RTC_GetState(const RTC_HandleTypeDef* hrtc)
   */
 HAL_StatusTypeDef RTC_EnterInitMode(RTC_HandleTypeDef* hrtc)
 {
-  uint32_t tickstart = 0U;
+  uint32_t tickstart;
 
   /* Check if the Initialization mode is set */
   if((hrtc->Instance->ISR & RTC_ISR_INITF) == (uint32_t)RESET)

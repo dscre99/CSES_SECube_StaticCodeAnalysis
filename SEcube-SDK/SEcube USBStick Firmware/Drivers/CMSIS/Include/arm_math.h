@@ -617,7 +617,7 @@ extern "C"
   const q15_t * pRecipTable)
   {
     q15_t out = 0;
-    uint32_t tempVal = 0;
+    uint32_t tempVal;
     uint32_t index = 0, i = 0;
     uint32_t signBits = 0;
 

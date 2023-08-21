@@ -540,9 +540,9 @@ HAL_StatusTypeDef HAL_LTDC_ConfigColorKeying(LTDC_HandleTypeDef *hltdc, uint32_t
   */
 HAL_StatusTypeDef HAL_LTDC_ConfigCLUT(LTDC_HandleTypeDef *hltdc, uint32_t *pCLUT, uint32_t CLUTSize, uint32_t LayerIdx)
 {
-  uint32_t tmp = 0U;
+  uint32_t tmp;
   uint32_t counter = 0U;
-  uint32_t pcounter = 0U;
+  uint32_t pcounter;
 
   /* Process locked */
   __HAL_LOCK(hltdc);

@@ -103,12 +103,12 @@ uint16_t se3_algo_Aes_update(
     uint16_t* dataout_len, uint8_t* dataout)
 {
     B5_tAesCtx* aes = (B5_tAesCtx*)ctx;
-    size_t nblocks = 0;
+    size_t nblocks;
     uint8_t* data_enc, *data_dec;
     bool do_setiv = false;
     bool do_update = false;
     bool do_finit = false;
-	
+
 
 	do_setiv = flags & SE3_CRYPTO_FLAG_SETIV;
 	do_update = datain2_len > 0;

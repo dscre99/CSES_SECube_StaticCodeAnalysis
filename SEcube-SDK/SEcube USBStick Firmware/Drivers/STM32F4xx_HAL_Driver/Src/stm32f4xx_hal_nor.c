@@ -937,7 +937,7 @@ HAL_NOR_StateTypeDef HAL_NOR_GetState(const NOR_HandleTypeDef *hnor)
 HAL_NOR_StatusTypeDef HAL_NOR_GetStatus(NOR_HandleTypeDef *hnor, uint32_t Address, uint32_t Timeout)
 {
   HAL_NOR_StatusTypeDef status = HAL_NOR_STATUS_ONGOING;
-  uint16_t tmpSR1 = 0U, tmpSR2 = 0U;
+  uint16_t tmpSR1, tmpSR2;
   uint32_t tickstart = 0U;
 
   /* Poll on NOR memory Ready/Busy signal ------------------------------------*/

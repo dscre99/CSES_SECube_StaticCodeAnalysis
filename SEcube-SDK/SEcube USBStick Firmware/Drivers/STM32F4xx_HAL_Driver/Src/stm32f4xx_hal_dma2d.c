@@ -667,7 +667,7 @@ HAL_StatusTypeDef HAL_DMA2D_CLUTLoad_IT(DMA2D_HandleTypeDef *hdma2d, DMA2D_CLUTC
   */
 HAL_StatusTypeDef HAL_DMA2D_PollForTransfer(DMA2D_HandleTypeDef *hdma2d, uint32_t Timeout)
 {
-  uint32_t tickstart = 0U;
+  uint32_t tickstart;
 
   /* Polling for DMA2D transfer */
   if((hdma2d->Instance->CR & DMA2D_CR_START) != 0U)
@@ -1354,10 +1354,10 @@ uint32_t HAL_DMA2D_GetError(const DMA2D_HandleTypeDef *hdma2d)
 static void DMA2D_SetConfig(DMA2D_HandleTypeDef *hdma2d, uint32_t pdata, uint32_t DstAddress, uint32_t Width, uint32_t Height)
 {
   uint32_t tmp = 0U;
-  uint32_t tmp1 = 0U;
-  uint32_t tmp2 = 0U;
-  uint32_t tmp3 = 0U;
-  uint32_t tmp4 = 0U;
+  uint32_t tmp1;
+  uint32_t tmp2;
+  uint32_t tmp3;
+  uint32_t tmp4;
 
   tmp = Width << 16U;
 

@@ -169,7 +169,7 @@ bool L1::L1SEkey_InsertKey(uint32_t key_id, uint16_t key_len, uint32_t dec_id, s
 
 bool L1::L1SEkey_Info(string& id, string& name, uint8_t mode)
 {
-	uint16_t data_len = 0;
+	uint16_t data_len;
 	uint16_t resp_len = 0;
 	unique_ptr<char[]> resp_buffer;
 	uint16_t op, offset;
