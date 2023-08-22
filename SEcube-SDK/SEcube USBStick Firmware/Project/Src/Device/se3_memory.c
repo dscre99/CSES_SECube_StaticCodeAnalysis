@@ -150,7 +150,7 @@ static uint8_t* se3_mem_defrag(se3_mem* mem)
 int32_t se3_mem_alloc(se3_mem* mem, size_t size)
 {
 	uint8_t* p = mem->dat, *p2;
-	uint8_t* dat_end = mem->dat + (mem->dat_size)*SE3_MEM_BLOCK;
+	const uint8_t* dat_end = mem->dat + (mem->dat_size)*SE3_MEM_BLOCK;
 	size_t i;
     uint16_t p_info;
 	uint16_t p_size;
