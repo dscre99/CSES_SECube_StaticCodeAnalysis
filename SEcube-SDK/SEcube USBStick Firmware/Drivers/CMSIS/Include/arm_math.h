@@ -566,7 +566,6 @@ extern "C"
   const q31_t * pRecipTable)
   {
     q31_t out;
-    uint32_t tempVal;
     uint32_t index, i;
     uint32_t signBits;
 
@@ -593,7 +592,7 @@ extern "C"
     /* running approximation for two iterations */
     for (i = 0u; i < 2u; i++)
     {
-      tempVal = (uint32_t) (((q63_t) in * out) >> 31);
+      uint32_t tempVal = (uint32_t) (((q63_t) in * out) >> 31);
       tempVal = 0x7FFFFFFFu - tempVal;
       /*      1.31 with exp 1 */
       /* out = (q31_t) (((q63_t) out * tempVal) >> 30); */
@@ -617,7 +616,6 @@ extern "C"
   const q15_t * pRecipTable)
   {
     q15_t out = 0;
-    uint32_t tempVal;
     uint32_t index = 0, i = 0;
     uint32_t signBits = 0;
 
@@ -644,7 +642,7 @@ extern "C"
     /* running approximation for two iterations */
     for (i = 0u; i < 2u; i++)
     {
-      tempVal = (uint32_t) (((q31_t) in * out) >> 15);
+      uint32_t tempVal = (uint32_t) (((q31_t) in * out) >> 15);
       tempVal = 0x7FFFu - tempVal;
       /*      1.15 with exp 1 */
       out = (q15_t) (((q31_t) out * tempVal) >> 14);
@@ -667,7 +665,7 @@ extern "C"
   q31_t x,
   uint32_t y)
   {
-    int32_t posMax, negMin;
+    int32_t posMax;
     uint32_t i;
 
     posMax = 1;
@@ -687,7 +685,7 @@ extern "C"
     }
     else
     {
-      negMin = -posMax;
+      int32_t negMin = -posMax;
 
       if(x < negMin)
       {
@@ -5607,9 +5605,6 @@ void arm_rfft_fast_f32(
   q31_t x,
   uint32_t nValues)
   {
-    q31_t y;                                     /* output */
-    q7_t y0, y1;                                 /* Nearest output values */
-    q31_t fract;                                 /* fractional part */
     uint32_t index;                              /* Index to read nearest output values */
 
     /* Input is in 12.20 format */
@@ -5627,6 +5622,10 @@ void arm_rfft_fast_f32(
     }
     else
     {
+      q31_t y;                                     /* output */
+      q7_t y0, y1;                                 /* Nearest output values */
+      q31_t fract;                                 /* fractional part */
+
       /* 20 bits for the fractional part */
       /* fract is in 12.20 format */
       fract = (x & 0x000FFFFF);

@@ -875,12 +875,12 @@ static uint8_t B5_rijndaelKeySetupEnc (B5_tAesCtx *ctx, uint32_t *rk, const uint
 static uint8_t B5_rijndaelKeySetupDec (B5_tAesCtx *ctx, uint32_t *rk, const uint8_t *cipherKey, int16_t keyBits)
 {
     int Nr, i, j;
-    uint32_t temp;
 
     /* expand the cipher key: */
     Nr = B5_rijndaelKeySetupEnc(ctx, rk, cipherKey, keyBits);
     /* invert the order of the round keys: */
     for (i = 0, j = 4*Nr; i < j; i += 4, j -= 4) {
+        uint32_t temp;
         temp = rk[i    ]; rk[i    ] = rk[j    ]; rk[j    ] = temp;
         temp = rk[i + 1]; rk[i + 1] = rk[j + 1]; rk[j + 1] = temp;
         temp = rk[i + 2]; rk[i + 2] = rk[j + 2]; rk[j + 2] = temp;
@@ -1232,7 +1232,7 @@ int32_t B5_Aes256_SetIV (B5_tAesCtx    *ctx, const uint8_t *IV)
 
 int32_t B5_Aes256_Update (B5_tAesCtx	*ctx, uint8_t *encData, uint8_t *clrData, int16_t nBlk)
 {
-    int16_t    i, j, cb;
+    int16_t    i, j;
     uint8_t    tmp[B5_AES_BLK_SIZE];
 
 
@@ -1250,6 +1250,7 @@ int32_t B5_Aes256_Update (B5_tAesCtx	*ctx, uint8_t *encData, uint8_t *clrData, i
 
         case B5_AES256_CTR:
         {
+            int16_t     cb;
             for (i = 0; i < nBlk; i++)
             {
                 B5_rijndaelEncrypt(ctx, ctx->rk, ctx->Nr, ctx->InitVector, encData);

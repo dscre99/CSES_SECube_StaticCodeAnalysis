@@ -103,8 +103,6 @@ uint16_t se3_algo_Aes_update(
     uint16_t* dataout_len, uint8_t* dataout)
 {
     B5_tAesCtx* aes = (B5_tAesCtx*)ctx;
-    size_t nblocks;
-    uint8_t* data_enc, *data_dec;
     bool do_setiv = false;
     bool do_update = false;
     bool do_finit = false;
@@ -136,7 +134,8 @@ uint16_t se3_algo_Aes_update(
     }
 
     if (do_update) { // update
-		nblocks = datain2_len / B5_AES_BLK_SIZE;
+        uint8_t* data_enc, *data_dec;
+		size_t nblocks = datain2_len / B5_AES_BLK_SIZE;
 
         switch (aes->mode) {
         case B5_AES256_ECB_DEC:

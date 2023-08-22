@@ -177,8 +177,6 @@ static void ADC_MultiModeDMAHalfConvCplt(DMA_HandleTypeDef *hdma);
 HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
 {
   __IO uint32_t counter = 0U;
-  uint32_t tmp1, tmp2;
-
 
   /* Process locked */
   __HAL_LOCK(hadc);
@@ -233,8 +231,8 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
     /* Check if Multimode enabled */
     if(HAL_IS_BIT_CLR(ADC->CCR, ADC_CCR_MULTI))
     {
-      tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
-      tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
+      uint32_t tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
+      uint32_t tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
       if(tmp1 && tmp2)
       {
         /* Enable the selected ADC software conversion for injected group */
@@ -245,7 +243,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
     {
       tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
       tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
-      if((hadc->Instance == ADC1) && tmp1 && tmp2)
+      if((hadc->Instance == ADC1) && tmp1 && tmp2)  
       {
         /* Enable the selected ADC software conversion for injected group */
         hadc->Instance->CR2 |= ADC_CR2_JSWSTART;
@@ -267,8 +265,8 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
 HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
 {
   __IO uint32_t counter = 0U;
-  uint32_t tmp1, tmp2;
-
+  uint32_t tmp1 = 0U, tmp2 = 0U;
+  
   /* Process locked */
   __HAL_LOCK(hadc);
 
@@ -325,8 +323,8 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
     /* Check if Multimode enabled */
     if(HAL_IS_BIT_CLR(ADC->CCR, ADC_CCR_MULTI))
     {
-      tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
-      tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
+      uint32_t tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
+      uint32_t tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
       if(tmp1 && tmp2)
       {
         /* Enable the selected ADC software conversion for injected group */
@@ -335,8 +333,8 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
     }
     else
     {
-      tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
-      tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
+      uint32_t tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
+      uint32_t tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
       if((hadc->Instance == ADC1) && tmp1 && tmp2)
       {
         /* Enable the selected ADC software conversion for injected group */

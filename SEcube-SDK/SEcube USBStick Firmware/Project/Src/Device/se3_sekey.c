@@ -492,7 +492,6 @@ uint16_t insert_key(uint16_t req_size, const uint8_t* req, uint16_t* resp_size, 
 	uint32_t wrapping_key_id = 0; // id of key used to encrypt the key provided by the caller (if any)
 	uint16_t key_data_len = 0; // length of key provided by the caller (this may be encrypted)
 	uint8_t *key_data = NULL;
-	const uint8_t *keyptr;
     se3_flash_key key;
     bool equal = false;
 	se3_flash_it it = { .addr = NULL };
@@ -523,7 +522,7 @@ uint16_t insert_key(uint16_t req_size, const uint8_t* req, uint16_t* resp_size, 
 		if(se3_rand(key_data_len, key_data) != key_data_len){
 			if(key_data != NULL){ free(key_data);	}
 			return SE3_ERR_HW;
-		}		
+		}
 	} else {
 
 		// the caller provided ID, key size and key data (+ id of wrapping key if key data is encrypted. wrapping key = 0 if key data in clear, != 0 if encrypted).
@@ -533,7 +532,7 @@ uint16_t insert_key(uint16_t req_size, const uint8_t* req, uint16_t* resp_size, 
 			return SE3_ERR_PARAMS;
 		}
 		memcpy(&wrapping_key_id, req+6, 4); // get id of wrapping key from request buffer
-		keyptr = req + 10; // memory address of key data passed in input
+		const uint8_t *keyptr = req + 10; // memory address of key data passed in input
 
 		if(wrapping_key_id == 0){ // key was sent as plaintext
 			memcpy(key_data, keyptr, key_data_len);

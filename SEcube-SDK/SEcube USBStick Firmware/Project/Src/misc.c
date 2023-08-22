@@ -135,7 +135,7 @@ void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
  */
 void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
 {
-    uint8_t tmppriority, tmppre, tmpsub = 0x0F;
+    uint8_t tmpsub = 0x0F;
 
     /* Check the parameters */
     assert_param(IS_FUNCTIONAL_STATE(NVIC_InitStruct->NVIC_IRQChannelCmd));
@@ -145,8 +145,8 @@ void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
     if (NVIC_InitStruct->NVIC_IRQChannelCmd != DISABLE)
     {
         /* Compute the Corresponding IRQ Priority --------------------------------*/
-        tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
-        tmppre = (0x4 - tmppriority);
+        uint8_t tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
+        uint8_t tmppre = (0x4 - tmppriority);
         tmpsub = tmpsub >> tmppriority;
 
         tmppriority = NVIC_InitStruct->NVIC_IRQChannelPreemptionPriority << tmppre;

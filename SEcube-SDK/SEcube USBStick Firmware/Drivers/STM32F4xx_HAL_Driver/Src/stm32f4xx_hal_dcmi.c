@@ -779,7 +779,7 @@ static void DCMI_DMAXferCplt(DMA_HandleTypeDef *hdma)
     hdcmi->DMA_Handle->Instance->M0AR = hdcmi->pBuffPtr;
   }
   /* Update memory 1 address location */
-  else if((hdcmi->DMA_Handle->Instance->CR & DMA_SxCR_CT) == 0U)
+  else
   {
     tmp = hdcmi->pBuffPtr;
     hdcmi->DMA_Handle->Instance->M1AR = (tmp + (4U*hdcmi->XferSize));

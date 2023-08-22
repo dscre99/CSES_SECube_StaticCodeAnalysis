@@ -1086,7 +1086,6 @@ int16_t ispVMRead(uint32_t a_uiDataSize)
 	uint8_t ucTDIByte = 0;
 	uint8_t ucTDOByte = 0;
 	uint8_t ucMaskByte = 0;
-	uint8_t ucCurBit;
 
 	for (uiIndex = 0;uiIndex < a_uiDataSize; uiIndex++)
 	{
@@ -1160,7 +1159,7 @@ int16_t ispVMRead(uint32_t a_uiDataSize)
 			}
 		}
 
-		ucCurBit = readPort();
+		uint8_t ucCurBit = readPort();
 
 		if ((((ucMaskByte << uiIndex % 8) & 0x80) ? 0x01 : 0x00))
 		{
@@ -1212,7 +1211,7 @@ void ispVMSend(uint32_t a_uiDataSize)
 {
 	uint32_t iIndex;
 	uint8_t ucCurByte = 0;
-	uint8_t ucBitState;
+	uint8_t ucBitState = 0;
 
 	/*************************************************************
 	*                                                            *
@@ -1271,7 +1270,7 @@ void ispVMSend(uint32_t a_uiDataSize)
 			}
 		}
 
-		ucBitState =(uint8_t)(((ucCurByte << iIndex % 8) & 0x80) ? 0x01 : 0x00);
+		uint8_t ucBitState =(uint8_t)(((ucCurByte << iIndex % 8) & 0x80) ? 0x01 : 0x00);
 		writePort(pinTDI, ucBitState);
 
 		if (iIndex < a_uiDataSize - 1)
@@ -1317,6 +1316,7 @@ void ispVMStateMachine(char a_cNextState)
 			break;
 		}
 	}
+	cStateIndex=cStateIndex-1;
 	g_cCurrentJTAGState = a_cNextState;
 	for (cPathIndex = 0;cPathIndex < iStates[cStateIndex].Pulses; cPathIndex++)
 	{

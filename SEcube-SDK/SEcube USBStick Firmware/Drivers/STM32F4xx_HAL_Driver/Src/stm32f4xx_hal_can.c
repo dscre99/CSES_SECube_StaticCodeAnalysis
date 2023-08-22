@@ -544,9 +544,6 @@ __weak void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
   */
 HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef* hcan, uint32_t Timeout)
 {
-  uint32_t  transmitmailbox = 5U;
-  uint32_t tickstart;
-
   /* Check the parameters */
   assert_param(IS_CAN_IDTYPE(hcan->pTxMsg->IDE));
   assert_param(IS_CAN_RTR(hcan->pTxMsg->RTR));
@@ -556,6 +553,9 @@ HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef* hcan, uint32_t Timeout)
      ((hcan->Instance->TSR&CAN_TSR_TME1) == CAN_TSR_TME1) || \
      ((hcan->Instance->TSR&CAN_TSR_TME2) == CAN_TSR_TME2))
   {
+
+    uint32_t  transmitmailbox = 5U;
+
     /* Process locked */
     __HAL_LOCK(hcan);
 
@@ -618,7 +618,7 @@ HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef* hcan, uint32_t Timeout)
     hcan->Instance->sTxMailBox[transmitmailbox].TIR |= CAN_TI0R_TXRQ;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     /* Check End of transmission flag */
     while(!(__HAL_CAN_TRANSMIT_STATUS(hcan, transmitmailbox)))

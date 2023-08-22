@@ -139,10 +139,8 @@ void L0::L0DiscoverInit() {
 
 bool L0::L0DiscoverNext() {
 	se3DiscoverInfo discovNfo;
-	uint64_t deadline;
-
 	while(Se3DriveNext()) {
-		deadline = L0Support::Se3Deadline(0);
+		uint64_t deadline = L0Support::Se3Deadline(0);
 		if (Se3Info(deadline, &discovNfo)) {
 			memcpy(this->base.GetDiscoDeviceSerialNo(), discovNfo.serialno, L0Communication::Size::SERIAL);
 			memcpy(this->base.GetDiscoDeviceHelloMsg(), discovNfo.hello_msg, L0Communication::Size::HELLO);

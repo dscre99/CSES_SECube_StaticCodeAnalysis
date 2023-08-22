@@ -201,7 +201,7 @@ uint16_t challenge(uint16_t req_size, const uint8_t* req, uint16_t* resp_size, u
     uint8_t pin[SE3_PIN_SIZE];
     struct {
         const uint8_t* cc1;
-        const uint16_t access;
+        const uint16_t access = 0U;
         const uint8_t* cc2;
     } req_params;
     struct {
