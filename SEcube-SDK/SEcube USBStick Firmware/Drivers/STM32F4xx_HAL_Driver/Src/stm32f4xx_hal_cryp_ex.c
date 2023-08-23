@@ -288,7 +288,6 @@ static void CRYPEx_GCMCCM_SetInitVector(CRYP_HandleTypeDef *hcryp, uint8_t *Init
   */
 static HAL_StatusTypeDef CRYPEx_GCMCCM_ProcessData(CRYP_HandleTypeDef *hcryp, uint8_t *Input, uint16_t Ilength, uint8_t *Output, uint32_t Timeout)
 {
-  uint32_t tickstart;
   uint32_t i = 0U;
   uint32_t inputaddr  = (uint32_t)Input;
   uint32_t outputaddr = (uint32_t)Output;
@@ -306,7 +305,7 @@ static HAL_StatusTypeDef CRYPEx_GCMCCM_ProcessData(CRYP_HandleTypeDef *hcryp, ui
     inputaddr+=4U;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
@@ -350,8 +349,6 @@ static HAL_StatusTypeDef CRYPEx_GCMCCM_ProcessData(CRYP_HandleTypeDef *hcryp, ui
   */
 static HAL_StatusTypeDef CRYPEx_GCMCCM_SetHeaderPhase(CRYP_HandleTypeDef *hcryp, uint8_t* Input, uint16_t Ilength, uint32_t Timeout)
 {
-  uint32_t tickstart;
-  uint32_t loopcounter;
   uint32_t headeraddr = (uint32_t)Input;
 
   /***************************** Header phase *********************************/
@@ -362,10 +359,10 @@ static HAL_StatusTypeDef CRYPEx_GCMCCM_SetHeaderPhase(CRYP_HandleTypeDef *hcryp,
     /* Enable the CRYP peripheral */
     __HAL_CRYP_ENABLE(hcryp);
 
-    for(loopcounter = 0U; (loopcounter < hcryp->Init.HeaderSize); loopcounter+=16U)
+    for(uint32_t loopcounter = 0U; (loopcounter < hcryp->Init.HeaderSize); loopcounter+=16U)
     {
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_IFEM))
       {
@@ -502,11 +499,8 @@ static void CRYPEx_GCMCCM_SetDMAConfig(CRYP_HandleTypeDef *hcryp, uint32_t input
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData, uint32_t Timeout)
 {
-  uint32_t tickstart;
   uint32_t headersize = hcryp->Init.HeaderSize;
   uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -520,9 +514,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   /* Check if initialization phase has already been performed */
   if(hcryp->Phase == HAL_CRYP_PHASE_READY)
   {
+    uint32_t loopcounter;
+
     /************************ Formatting the header block *********************/
     if(headersize != 0U)
     {
+      uint32_t bufferidx = 0U;
+
       /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
       if(headersize < 65280U)
       {
@@ -574,7 +572,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     {
       blockb0[loopcounter+1U] = hcryp->Init.pInitVect[loopcounter];
     }
-    for ( ; loopcounter < 13U; loopcounter++)
+    for (; loopcounter < 13U; loopcounter++)
     {
       blockb0[loopcounter+1U] = 0U;
     }
@@ -624,7 +622,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
     {
@@ -758,7 +756,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData, uint32_t Timeout)
 {
-  uint32_t tickstart;
 
   /* Process Locked */
   __HAL_LOCK(hcryp);
@@ -785,7 +782,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
     {
@@ -856,7 +853,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData, uint32_t Timeout)
 {
-  uint32_t tickstart;
 
   /* Process Locked */
   __HAL_LOCK(hcryp);
@@ -883,7 +879,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
     {
@@ -948,7 +944,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Finish(CRYP_HandleTypeDef *hcryp, uint32_t Size, uint8_t *AuthTag, uint32_t Timeout)
 {
-  uint32_t tickstart;
   uint64_t headerlength = hcryp->Init.HeaderSize * 8U; /* Header length in bits */
   uint64_t inputlength = Size * 8U; /* input length in bits */
   uint32_t tagaddr = (uint32_t)AuthTag;
@@ -1005,7 +1000,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Finish(CRYP_HandleTypeDef *hcryp, uint32_t S
       hcryp->Instance->DR = (uint32_t)(inputlength);
     }
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
@@ -1056,7 +1051,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Finish(CRYP_HandleTypeDef *hcryp, uint32_t S
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Finish(CRYP_HandleTypeDef *hcryp, uint8_t *AuthTag, uint32_t Timeout)
 {
-  uint32_t tickstart;
   uint32_t tagaddr = (uint32_t)AuthTag;
   uint32_t ctraddr = (uint32_t)hcryp->Init.pScratch;
   uint32_t temptag[4U] = {0U}; /* Temporary TAG (MAC) */
@@ -1093,7 +1087,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Finish(CRYP_HandleTypeDef *hcryp, uint8_t *A
     hcryp->Instance->DR = *(uint32_t*)ctraddr;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
@@ -1150,11 +1144,8 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Finish(CRYP_HandleTypeDef *hcryp, uint8_t *A
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData, uint32_t Timeout)
 {
-  uint32_t tickstart;
   uint32_t headersize = hcryp->Init.HeaderSize;
   uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -1168,9 +1159,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   /* Check if initialization phase has already been performed */
   if(hcryp->Phase == HAL_CRYP_PHASE_READY)
   {
+    uint32_t loopcounter;
+
     /************************ Formatting the header block *********************/
     if(headersize != 0U)
     {
+      uint32_t bufferidx = 0U;
+
       /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
       if(headersize < 65280U)
       {
@@ -1222,7 +1217,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     {
       blockb0[loopcounter+1U] = hcryp->Init.pInitVect[loopcounter];
     }
-    for ( ; loopcounter < 13U; loopcounter++)
+    for (; loopcounter < 13U; loopcounter++)
     {
       blockb0[loopcounter+1U] = 0U;
     }
@@ -1272,7 +1267,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
     {
@@ -1401,7 +1396,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t tickstart;
   uint32_t inputaddr;
   uint32_t outputaddr;
 
@@ -1438,7 +1432,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
       __HAL_CRYP_ENABLE(hcryp);
 
      /* Get tick */
-     tickstart = HAL_GetTick();
+     uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -1552,14 +1546,11 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t tickstart;
   uint32_t inputaddr;
   uint32_t outputaddr;
 
   uint32_t headersize = hcryp->Init.HeaderSize;
   uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -1580,9 +1571,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
     /* Check if initialization phase has already been performed */
     if(hcryp->Phase == HAL_CRYP_PHASE_READY)
     {
+      uint32_t loopcounter;
+
       /************************ Formatting the header block *******************/
       if(headersize != 0U)
       {
+        uint32_t bufferidx = 0U;
+
         /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
         if(headersize < 65280U)
         {
@@ -1684,7 +1679,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
       __HAL_CRYP_ENABLE(hcryp);
 
      /* Get tick */
-     tickstart = HAL_GetTick();
+     uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -1851,7 +1846,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
   uint32_t inputaddr;
   uint32_t outputaddr;
 
@@ -1888,7 +1882,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
       __HAL_CRYP_ENABLE(hcryp);
 
         /* Get tick */
-        tickstart = HAL_GetTick();
+        uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -2001,11 +1995,8 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
 {
   uint32_t inputaddr;
   uint32_t outputaddr;
-  uint32_t tickstart;
   uint32_t headersize = hcryp->Init.HeaderSize;
   uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -2026,9 +2017,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
     /* Check if initialization phase has already been performed */
     if(hcryp->Phase == HAL_CRYP_PHASE_READY)
     {
+      uint32_t loopcounter;
+
       /************************ Formatting the header block *******************/
       if(headersize != 0U)
       {
+        uint32_t bufferidx = 0U;
+
         /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
         if(headersize < 65280U)
         {
@@ -2130,7 +2125,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -2289,17 +2284,14 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP peripheral state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2323,7 +2315,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -2386,13 +2378,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
-  uint32_t headersize;
-  uint32_t headeraddr;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -2402,11 +2387,11 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
-    headersize = hcryp->Init.HeaderSize;
-    headeraddr = (uint32_t)hcryp->Init.Header;
+    uint32_t headersize = hcryp->Init.HeaderSize;
+    uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
 
     hcryp->CrypInCount = Size;
     hcryp->pCrypInBuffPtr = pPlainData;
@@ -2419,9 +2404,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
     /* Check if initialization phase has already been performed */
     if(hcryp->Phase == HAL_CRYP_PHASE_READY)
     {
+      uint32_t loopcounter;
+
       /************************ Formatting the header block *******************/
       if(headersize != 0U)
       {
+        uint32_t bufferidx = 0U;
+
         /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
         if(headersize < 65280U)
         {
@@ -2523,7 +2512,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -2640,17 +2629,14 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP peripheral state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2671,7 +2657,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {
@@ -2730,13 +2716,6 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
   */
 HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
-  uint32_t headersize;
-  uint32_t headeraddr;
-  uint32_t loopcounter;
-  uint32_t bufferidx = 0U;
   uint8_t blockb0[16U] = {0U};/* Block B0 */
   uint8_t ctr[16U] = {0U}; /* Counter */
   uint32_t b0addr = (uint32_t)blockb0;
@@ -2746,11 +2725,11 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
-    headersize = hcryp->Init.HeaderSize;
-    headeraddr = (uint32_t)hcryp->Init.Header;
+    uint32_t headersize = hcryp->Init.HeaderSize;
+    uint32_t headeraddr = (uint32_t)hcryp->Init.Header;
 
     hcryp->CrypInCount = Size;
     hcryp->pCrypInBuffPtr = pCypherData;
@@ -2763,9 +2742,13 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
     /* Check if initialization phase has already been performed */
     if(hcryp->Phase == HAL_CRYP_PHASE_READY)
     {
+      uint32_t loopcounter;
+
       /************************ Formatting the header block *******************/
       if(headersize != 0U)
       {
+        uint32_t bufferidx = 0U;
+
         /* Check that the associated data (or header) length is lower than 2^16 - 2^8 = 65536 - 256 = 65280 */
         if(headersize < 65280U)
         {
@@ -2867,7 +2850,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while((CRYP->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
       {

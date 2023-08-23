@@ -478,7 +478,6 @@ HAL_StatusTypeDef HAL_ETH_DeInit(ETH_HandleTypeDef *heth)
 HAL_StatusTypeDef HAL_ETH_DMATxDescListInit(ETH_HandleTypeDef *heth, ETH_DMADescTypeDef *DMATxDescTab, uint8_t *TxBuff, uint32_t TxBuffCount)
 {
   uint32_t i = 0U;
-  ETH_DMADescTypeDef *dmatxdesc;
 
   /* Process Locked */
   __HAL_LOCK(heth);
@@ -493,7 +492,7 @@ HAL_StatusTypeDef HAL_ETH_DMATxDescListInit(ETH_HandleTypeDef *heth, ETH_DMADesc
   for(i=0U; i < TxBuffCount; i++)
   {
     /* Get the pointer on the ith member of the Tx Desc list */
-    dmatxdesc = DMATxDescTab + i;
+    ETH_DMADescTypeDef *dmatxdesc = DMATxDescTab + i;
 
     /* Set Second Address Chained bit */
     dmatxdesc->Status = ETH_DMATXDESC_TCH;
@@ -545,7 +544,6 @@ HAL_StatusTypeDef HAL_ETH_DMATxDescListInit(ETH_HandleTypeDef *heth, ETH_DMADesc
 HAL_StatusTypeDef HAL_ETH_DMARxDescListInit(ETH_HandleTypeDef *heth, ETH_DMADescTypeDef *DMARxDescTab, uint8_t *RxBuff, uint32_t RxBuffCount)
 {
   uint32_t i = 0U;
-  ETH_DMADescTypeDef *DMARxDesc;
 
   /* Process Locked */
   __HAL_LOCK(heth);
@@ -560,7 +558,7 @@ HAL_StatusTypeDef HAL_ETH_DMARxDescListInit(ETH_HandleTypeDef *heth, ETH_DMADesc
   for(i=0U; i < RxBuffCount; i++)
   {
     /* Get the pointer on the ith member of the Rx Desc list */
-    DMARxDesc = DMARxDescTab+i;
+    ETH_DMADescTypeDef *DMARxDesc = DMARxDescTab+i;
 
     /* Set Own bit of the Rx descriptor Status */
     DMARxDesc->Status = ETH_DMARXDESC_OWN;
@@ -669,7 +667,7 @@ __weak void HAL_ETH_MspDeInit(ETH_HandleTypeDef *heth)
   */
 HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameLength)
 {
-  uint32_t bufcount = 0U, size, i;
+  uint32_t bufcount = 0U;
 
   /* Process Locked */
   __HAL_LOCK(heth);
@@ -726,7 +724,7 @@ HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameL
   }
   else
   {
-    for (i=0U; i< bufcount; i++)
+    for (uint32_t i=0U; i< bufcount; i++)
     {
       /* Clear FIRST and LAST segment bits */
       heth->TxDesc->Status &= ~(ETH_DMATXDESC_FS | ETH_DMATXDESC_LS);
@@ -744,7 +742,7 @@ HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameL
       {
         /* Setting the last segment bit */
         heth->TxDesc->Status |= ETH_DMATXDESC_LS;
-        size = FrameLength - (bufcount-1U)*ETH_TX_BUF_SIZE;
+        uint32_t size = FrameLength - (bufcount-1U)*ETH_TX_BUF_SIZE;
         heth->TxDesc->ControlBufferSize = (size & ETH_DMATXDESC_TBS1);
       }
 
@@ -782,8 +780,6 @@ HAL_StatusTypeDef HAL_ETH_TransmitFrame(ETH_HandleTypeDef *heth, uint32_t FrameL
   */
 HAL_StatusTypeDef HAL_ETH_GetReceivedFrame(ETH_HandleTypeDef *heth)
 {
-  uint32_t framelength;
-
   /* Process Locked */
   __HAL_LOCK(heth);
 
@@ -809,7 +805,7 @@ HAL_StatusTypeDef HAL_ETH_GetReceivedFrame(ETH_HandleTypeDef *heth)
       heth->RxFrameInfos.LSRxDesc = heth->RxDesc;
 
       /* Get the Frame Length of the received packet: substruct 4 bytes of the CRC */
-      framelength = (((heth->RxDesc)->Status & ETH_DMARXDESC_FL) >> ETH_DMARXDESC_FRAMELENGTHSHIFT) - 4U;
+      uint32_t framelength = (((heth->RxDesc)->Status & ETH_DMARXDESC_FL) >> ETH_DMARXDESC_FRAMELENGTHSHIFT) - 4U;
       heth->RxFrameInfos.length = framelength;
 
       /* Get the address of the buffer start address */

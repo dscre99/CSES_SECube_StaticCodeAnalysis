@@ -327,12 +327,13 @@ HAL_StatusTypeDef HAL_CEC_DeInit(CEC_HandleTypeDef *hcec)
   */
 HAL_StatusTypeDef HAL_CEC_Transmit(CEC_HandleTypeDef *hcec, uint8_t DestinationAddress, uint8_t *pData, uint32_t Size, uint32_t Timeout)
 {
- uint8_t  temp;
-  uint32_t tempisr;
-  uint32_t tickstart;
 
   if((hcec->State == HAL_CEC_STATE_READY) && (__HAL_CEC_GET_TRANSMISSION_START_FLAG(hcec) == RESET))
   {
+    uint8_t  temp;
+    uint32_t tempisr;
+    uint32_t tickstart;
+
     hcec->ErrorCode = HAL_CEC_ERROR_NONE;
     if((pData == NULL ) && (Size > 0U))
     {
@@ -475,11 +476,11 @@ HAL_StatusTypeDef HAL_CEC_Transmit(CEC_HandleTypeDef *hcec, uint8_t DestinationA
   */
 HAL_StatusTypeDef HAL_CEC_Receive(CEC_HandleTypeDef *hcec, uint8_t *pData, uint32_t Timeout)
 {
-  uint32_t temp;
-  uint32_t tickstart;
 
   if (hcec->State == HAL_CEC_STATE_READY)
   {
+    uint32_t temp;
+
     hcec->ErrorCode = HAL_CEC_ERROR_NONE;
     if (pData == NULL )
     {
@@ -494,7 +495,7 @@ HAL_StatusTypeDef HAL_CEC_Receive(CEC_HandleTypeDef *hcec, uint8_t *pData, uint3
     /* Rx loop until CEC_ISR_RXEND  is set */
     while (HAL_IS_BIT_CLR(hcec->Instance->ISR, CEC_FLAG_RXEND))
     {
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
       /* Wait for next byte to be received */
       while (HAL_IS_BIT_CLR(hcec->Instance->ISR, CEC_FLAG_RXBR))
       {
@@ -576,7 +577,6 @@ HAL_StatusTypeDef HAL_CEC_Receive(CEC_HandleTypeDef *hcec, uint8_t *pData, uint3
   */
 HAL_StatusTypeDef HAL_CEC_Transmit_IT(CEC_HandleTypeDef *hcec, uint8_t DestinationAddress, uint8_t *pData, uint32_t Size)
 {
-  uint8_t  temp;
   /* if the IP isn't already busy and if there is no previous transmission
      already pending due to arbitration lost */
   if (((hcec->State == HAL_CEC_STATE_READY) || (hcec->State == HAL_CEC_STATE_STANDBY_RX))
@@ -628,7 +628,7 @@ HAL_StatusTypeDef HAL_CEC_Transmit_IT(CEC_HandleTypeDef *hcec, uint8_t Destinati
     }
 
     /* send header block */
-    temp = (uint8_t)((uint32_t)(hcec->Init.InitiatorAddress) << CEC_INITIATOR_LSB_POS) | DestinationAddress;
+    uint8_t temp = (uint8_t)((uint32_t)(hcec->Init.InitiatorAddress) << CEC_INITIATOR_LSB_POS) | DestinationAddress;
     hcec->Instance->TXDR = temp;
     /* Set TX Start of Message  (TXSOM) bit */
     __HAL_CEC_FIRST_BYTE_TX_SET(hcec);
@@ -1030,7 +1030,6 @@ static HAL_StatusTypeDef CEC_Transmit_IT(CEC_HandleTypeDef *hcec)
   */
 static HAL_StatusTypeDef CEC_Receive_IT(CEC_HandleTypeDef *hcec)
 {
-  uint32_t tempisr;
 
   /* Three different conditions are tested to carry out the RX IT processing:
    * - the IP is in reception stand-by (the IP state is HAL_CEC_STATE_STANDBY_RX) and
@@ -1047,7 +1046,7 @@ static HAL_StatusTypeDef CEC_Receive_IT(CEC_HandleTypeDef *hcec)
   {
     /* reception is starting */
     hcec->State = HAL_CEC_STATE_BUSY_RX;
-    tempisr =  (uint32_t) (hcec->Instance->ISR);
+    uint32_t tempisr =  (uint32_t) (hcec->Instance->ISR);
     if ((tempisr & CEC_FLAG_RXBR) != 0U)
     {
       /* Process Locked */

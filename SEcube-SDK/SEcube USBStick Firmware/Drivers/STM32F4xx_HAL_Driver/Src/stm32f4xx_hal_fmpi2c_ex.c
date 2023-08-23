@@ -158,8 +158,6 @@ HAL_StatusTypeDef HAL_FMPI2CEx_ConfigAnalogFilter(FMPI2C_HandleTypeDef *hfmpi2c,
   */
 HAL_StatusTypeDef HAL_FMPI2CEx_ConfigDigitalFilter(FMPI2C_HandleTypeDef *hfmpi2c, uint32_t DigitalFilter)
 {
-  uint32_t tmpreg;
-
   /* Check the parameters */
   assert_param(IS_FMPI2C_ALL_INSTANCE(hfmpi2c->Instance));
   assert_param(IS_FMPI2C_DIGITAL_FILTER(DigitalFilter));
@@ -175,7 +173,7 @@ HAL_StatusTypeDef HAL_FMPI2CEx_ConfigDigitalFilter(FMPI2C_HandleTypeDef *hfmpi2c
     __HAL_FMPI2C_DISABLE(hfmpi2c);
 
     /* Get the old register value */
-    tmpreg = hfmpi2c->Instance->CR1;
+    uint32_t tmpreg = hfmpi2c->Instance->CR1;
 
     /* Reset FMPI2Cx DNF bits [11:8] */
     tmpreg &= ~(FMPI2C_CR1_DFN);

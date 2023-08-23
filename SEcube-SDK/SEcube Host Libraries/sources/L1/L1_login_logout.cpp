@@ -145,10 +145,10 @@ void L1::L1Logout() {
 		throw logOutExc;
 	}
 
-	uint16_t dataLen = 0;
 	uint16_t respLen = 0;
 
 	try {
+	    uint16_t dataLen = 0;
 		TXRXData(L1Commands::Codes::LOGOUT, dataLen, 0, &respLen);
 	}
 	catch (L1Exception& e) {
@@ -162,10 +162,10 @@ void L1::L1Logout() {
 void L1::L1LogoutForced() {
 	L1LogoutException logOutExc;
 
-	uint16_t dataLen = 0;
 	uint16_t respLen = 0;
 
 	try {
+	    uint16_t dataLen = 0;
 		TXRXData(L1Commands::Codes::FORCED_LOGOUT, dataLen, 0, &respLen);
 	}
 	catch (L1Exception& e) {

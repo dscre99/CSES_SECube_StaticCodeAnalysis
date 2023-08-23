@@ -140,8 +140,6 @@ static void HASH_WriteData(uint8_t *pInBuffer, uint32_t Size);
 static void HASH_DMAXferCplt(DMA_HandleTypeDef *hdma)
 {
   HASH_HandleTypeDef* hhash = ( HASH_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
-  uint32_t inputaddr = 0U;
-  uint32_t buffersize = 0U;
 
   if((HASH->CR & HASH_CR_MODE) != HASH_CR_MODE)
   {
@@ -163,6 +161,9 @@ static void HASH_DMAXferCplt(DMA_HandleTypeDef *hdma)
 
     if(hhash->HashInCount <= 2U)
     {
+      uint32_t inputaddr = 0U;
+      uint32_t buffersize = 0U;
+
       /* In case HashInCount = 1, set the DMA to transfer data to HASH DIN register */
       if(hhash->HashInCount == 1U)
       {
@@ -798,11 +799,6 @@ HAL_StatusTypeDef HAL_HASH_SHA1_Accumulate(HASH_HandleTypeDef *hhash, uint8_t *p
   */
 HAL_StatusTypeDef HAL_HASH_MD5_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInBuffer, uint32_t Size, uint8_t* pOutBuffer)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
-  uint32_t buffercounter;
-  uint32_t inputcounter;
-
   /* Process Locked */
   __HAL_LOCK(hhash);
 
@@ -841,7 +837,7 @@ HAL_StatusTypeDef HAL_HASH_MD5_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInB
   }
   if(__HAL_HASH_GET_FLAG(HASH_FLAG_DCIS))
   {
-    outputaddr = (uint32_t)hhash->pHashOutBuffPtr;
+    uint32_t outputaddr = (uint32_t)hhash->pHashOutBuffPtr;
     /* Read the Output block from the Output FIFO */
     *(uint32_t*)(outputaddr) = __REV(HASH->HR[0U]);
     outputaddr+=4U;
@@ -869,11 +865,13 @@ HAL_StatusTypeDef HAL_HASH_MD5_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInB
   }
   if(__HAL_HASH_GET_FLAG(HASH_FLAG_DINIS))
   {
+    uint32_t inputaddr;
+
     if(hhash->HashInCount >= 68U)
     {
       inputaddr = (uint32_t)hhash->pHashInBuffPtr;
       /* Write the Input block in the Data IN register */
-      for(buffercounter = 0U; buffercounter < 64U; buffercounter+=4U)
+      for(uint32_t buffercounter = 0U; buffercounter < 64U; buffercounter+=4U)
       {
         HASH->DIN = *(uint32_t*)inputaddr;
         inputaddr+=4U;
@@ -908,7 +906,7 @@ HAL_StatusTypeDef HAL_HASH_MD5_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInB
       /* Get the buffer address */
       inputaddr = (uint32_t)hhash->pHashInBuffPtr;
       /* Get the buffer counter */
-      inputcounter = hhash->HashInCount;
+      uint32_t inputcounter = hhash->HashInCount;
       /* Disable Interrupts */
       HASH->IMR &= ~(HASH_IT_DINI);
       /* Configure the number of valid bits in last word of the message */
@@ -957,11 +955,6 @@ HAL_StatusTypeDef HAL_HASH_MD5_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInB
   */
 HAL_StatusTypeDef HAL_HASH_SHA1_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pInBuffer, uint32_t Size, uint8_t* pOutBuffer)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
-  uint32_t buffercounter;
-  uint32_t inputcounter;
-
   /* Process Locked */
   __HAL_LOCK(hhash);
 
@@ -1000,7 +993,7 @@ HAL_StatusTypeDef HAL_HASH_SHA1_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pIn
   }
   if(__HAL_HASH_GET_FLAG(HASH_FLAG_DCIS))
   {
-    outputaddr = (uint32_t)hhash->pHashOutBuffPtr;
+    uint32_t outputaddr = (uint32_t)hhash->pHashOutBuffPtr;
     /* Read the Output block from the Output FIFO */
     *(uint32_t*)(outputaddr) = __REV(HASH->HR[0U]);
     outputaddr+=4U;
@@ -1029,11 +1022,13 @@ HAL_StatusTypeDef HAL_HASH_SHA1_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pIn
   }
   if(__HAL_HASH_GET_FLAG(HASH_FLAG_DINIS))
   {
+    uint32_t inputaddr;
+
     if(hhash->HashInCount >= 68U)
     {
       inputaddr = (uint32_t)hhash->pHashInBuffPtr;
       /* Write the Input block in the Data IN register */
-      for(buffercounter = 0U; buffercounter < 64U; buffercounter+=4U)
+      for(uint32_t buffercounter = 0U; buffercounter < 64U; buffercounter+=4U)
       {
         HASH->DIN = *(uint32_t*)inputaddr;
         inputaddr+=4U;
@@ -1067,7 +1062,7 @@ HAL_StatusTypeDef HAL_HASH_SHA1_Start_IT(HASH_HandleTypeDef *hhash, uint8_t *pIn
       /* Get the buffer address */
       inputaddr = (uint32_t)hhash->pHashInBuffPtr;
       /* Get the buffer counter */
-      inputcounter = hhash->HashInCount;
+      uint32_t inputcounter = hhash->HashInCount;
       /* Disable Interrupts */
       HASH->IMR &= ~(HASH_IT_DINI);
       /* Configure the number of valid bits in last word of the message */

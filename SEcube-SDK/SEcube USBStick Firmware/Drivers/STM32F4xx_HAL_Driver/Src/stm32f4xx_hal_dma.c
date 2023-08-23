@@ -483,7 +483,7 @@ HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma)
   */
 HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef *hdma, uint32_t CompleteLevel, uint32_t Timeout)
 {
-  uint32_t temp, tmp, tmp1, tmp2;
+  uint32_t temp;
   uint32_t tickstart = 0U;
 
   /* calculate DMA base and stream number */
@@ -508,9 +508,9 @@ HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef *hdma, uint32_t Comp
 
   while((regs->ISR & temp) == RESET)
   {
-    tmp  = regs->ISR & (DMA_FLAG_TEIF0_4 << hdma->StreamIndex);
-    tmp1 = regs->ISR & (DMA_FLAG_FEIF0_4 << hdma->StreamIndex);
-    tmp2 = regs->ISR & (DMA_FLAG_DMEIF0_4 << hdma->StreamIndex);
+    uint32_t tmp  = regs->ISR & (DMA_FLAG_TEIF0_4 << hdma->StreamIndex);
+    uint32_t tmp1 = regs->ISR & (DMA_FLAG_FEIF0_4 << hdma->StreamIndex);
+    uint32_t tmp2 = regs->ISR & (DMA_FLAG_DMEIF0_4 << hdma->StreamIndex);
     if((tmp != RESET) || (tmp1 != RESET) || (tmp2 != RESET))
     {
       if(tmp != RESET)

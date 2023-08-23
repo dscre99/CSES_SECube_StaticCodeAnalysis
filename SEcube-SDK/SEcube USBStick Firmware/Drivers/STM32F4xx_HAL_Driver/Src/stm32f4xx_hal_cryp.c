@@ -315,8 +315,6 @@ static void CRYP_SetInitVector(CRYP_HandleTypeDef *hcryp, uint8_t *InitVector, u
   */
 static HAL_StatusTypeDef CRYP_ProcessData(CRYP_HandleTypeDef *hcryp, uint8_t* Input, uint16_t Ilength, uint8_t* Output, uint32_t Timeout)
 {
-  uint32_t tickstart;
-
   uint32_t i = 0U;
   uint32_t inputaddr  = (uint32_t)Input;
   uint32_t outputaddr = (uint32_t)Output;
@@ -334,7 +332,7 @@ static HAL_StatusTypeDef CRYP_ProcessData(CRYP_HandleTypeDef *hcryp, uint8_t* In
     inputaddr+=4U;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
@@ -379,8 +377,6 @@ static HAL_StatusTypeDef CRYP_ProcessData(CRYP_HandleTypeDef *hcryp, uint8_t* In
   */
 static HAL_StatusTypeDef CRYP_ProcessData2Words(CRYP_HandleTypeDef *hcryp, uint8_t* Input, uint16_t Ilength, uint8_t* Output, uint32_t Timeout)
 {
-  uint32_t tickstart;
-
   uint32_t i = 0U;
   uint32_t inputaddr  = (uint32_t)Input;
   uint32_t outputaddr = (uint32_t)Output;
@@ -394,7 +390,7 @@ static HAL_StatusTypeDef CRYP_ProcessData2Words(CRYP_HandleTypeDef *hcryp, uint8
     inputaddr+=4U;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
@@ -923,8 +919,6 @@ HAL_StatusTypeDef HAL_CRYP_AESCTR_Encrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pP
   */
 HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData, uint32_t Timeout)
 {
-   uint32_t tickstart;
-
   /* Process Locked */
   __HAL_LOCK(hcryp);
 
@@ -944,7 +938,7 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pC
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
     {
@@ -1011,8 +1005,6 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pC
   */
 HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData, uint32_t Timeout)
 {
-  uint32_t tickstart;
-
   /* Process Locked */
   __HAL_LOCK(hcryp);
 
@@ -1032,7 +1024,7 @@ HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt(CRYP_HandleTypeDef *hcryp, uint8_t *pC
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
     {
@@ -1463,8 +1455,6 @@ HAL_StatusTypeDef HAL_CRYP_AESCTR_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
   */
 HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
-
   uint32_t inputaddr;
   uint32_t outputaddr;
 
@@ -1493,7 +1483,7 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
     {
@@ -1592,8 +1582,6 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
   */
 HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-
-  uint32_t tickstart;
   uint32_t inputaddr;
   uint32_t outputaddr;
 
@@ -1624,7 +1612,7 @@ HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
       __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
     {
@@ -1834,16 +1822,13 @@ HAL_StatusTypeDef HAL_CRYP_AESCTR_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
   */
 HAL_StatusTypeDef HAL_CRYP_AESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
-
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -1889,16 +1874,14 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_AESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -1947,16 +1930,14 @@ HAL_StatusTypeDef HAL_CRYP_AESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_AESCTR_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
   /* Change the CRYP state */
   hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2006,17 +1987,14 @@ HAL_StatusTypeDef HAL_CRYP_AESCTR_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2034,7 +2012,7 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
     {
@@ -2090,17 +2068,14 @@ HAL_StatusTypeDef HAL_CRYP_AESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t tickstart;
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2118,7 +2093,7 @@ HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
       __HAL_CRYP_ENABLE(hcryp);
 
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
       while(HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
       {
@@ -2177,16 +2152,14 @@ HAL_StatusTypeDef HAL_CRYP_AESCBC_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_AESCTR_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2761,16 +2734,14 @@ HAL_StatusTypeDef HAL_CRYP_DESCBC_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t 
   */
 HAL_StatusTypeDef HAL_CRYP_DESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2804,16 +2775,14 @@ HAL_StatusTypeDef HAL_CRYP_DESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_DESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2847,16 +2816,14 @@ HAL_StatusTypeDef HAL_CRYP_DESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_DESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -2890,16 +2857,14 @@ HAL_StatusTypeDef HAL_CRYP_DESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_DESCBC_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -3457,16 +3422,14 @@ HAL_StatusTypeDef HAL_CRYP_TDESCBC_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint8_t
   */
 HAL_StatusTypeDef HAL_CRYP_TDESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -3500,16 +3463,14 @@ HAL_StatusTypeDef HAL_CRYP_TDESECB_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYP_TDESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pPlainData, uint16_t Size, uint8_t *pCypherData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pPlainData;
-    outputaddr = (uint32_t)pCypherData;
+    uint32_t inputaddr  = (uint32_t)pPlainData;
+    uint32_t outputaddr = (uint32_t)pCypherData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -3543,16 +3504,14 @@ HAL_StatusTypeDef HAL_CRYP_TDESCBC_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYP_TDESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;
@@ -3586,16 +3545,14 @@ HAL_StatusTypeDef HAL_CRYP_TDESECB_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_
   */
 HAL_StatusTypeDef HAL_CRYP_TDESCBC_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint8_t *pCypherData, uint16_t Size, uint8_t *pPlainData)
 {
-  uint32_t inputaddr;
-  uint32_t outputaddr;
 
   if((hcryp->State == HAL_CRYP_STATE_READY) || (hcryp->Phase == HAL_CRYP_PHASE_PROCESS))
   {
     /* Process Locked */
     __HAL_LOCK(hcryp);
 
-    inputaddr  = (uint32_t)pCypherData;
-    outputaddr = (uint32_t)pPlainData;
+    uint32_t inputaddr  = (uint32_t)pCypherData;
+    uint32_t outputaddr = (uint32_t)pPlainData;
 
     /* Change the CRYP state */
     hcryp->State = HAL_CRYP_STATE_BUSY;

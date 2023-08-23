@@ -450,8 +450,6 @@ __weak void HAL_DSI_MspDeInit(DSI_HandleTypeDef* hdsi)
   */
 void HAL_DSI_IRQHandler(DSI_HandleTypeDef *hdsi)
 {
-  uint32_t ErrorStatus0, ErrorStatus1;
-
   /* Tearing Effect Interrupt management ***************************************/
   if(__HAL_DSI_GET_FLAG(hdsi, DSI_FLAG_TE) != RESET)
   {
@@ -481,9 +479,9 @@ void HAL_DSI_IRQHandler(DSI_HandleTypeDef *hdsi)
   /* Error Interrupts management ***********************************************/
   if(hdsi->ErrorMsk != 0U)
   {
-    ErrorStatus0 = hdsi->Instance->ISR[0U];
+    uint32_t ErrorStatus0 = hdsi->Instance->ISR[0U];
     ErrorStatus0 &= hdsi->Instance->IER[0U];
-    ErrorStatus1 = hdsi->Instance->ISR[1U];
+    uint32_t ErrorStatus1 = hdsi->Instance->ISR[1U];
     ErrorStatus1 &= hdsi->Instance->IER[1U];
 
     if(ErrorStatus0 & DSI_ERROR_ACK_MASK)

@@ -138,17 +138,18 @@ void L1::L1Encrypt(size_t plaintext_size, std::shared_ptr<uint8_t[]> plaintext, 
 	   (algorithm_mode != CryptoInitialisation::Modes::CFB)){
 		throw std::invalid_argument("Invalid algorithm mode.");
 	}
-	uint32_t encSessId = 0; // crypto session identifier on the SEcube
 	uint16_t curr_len = 0; // how many bytes have been processed by the latest cryptoupdate() call
-	size_t curr_chunk = 0; // dimension (bytes) of current portion of data to be encrypted
-	uint64_t enc_size = 0; // counter of how many bytes are encrypted
-	size_t total_size_copy = 0; // here we will store a copy of the total size of the plaintext
 	unique_ptr<uint8_t[]> ciphertext; // here we will store the encrypted data
 	encrypted_data.reset(); // reset content of the L1Ciphertext object (in case the caller provided an object already used before)
 	encrypted_data.algorithm = algorithm;
 	encrypted_data.mode = algorithm_mode;
 	encrypted_data.key_id = key_id;
 	try {
+	    uint32_t encSessId = 0; // crypto session identifier on the SEcube
+	    size_t curr_chunk = 0; // dimension (bytes) of current portion of data to be encrypted
+        uint64_t enc_size = 0; // counter of how many bytes are encrypted
+        size_t total_size_copy = 0; // here we will store a copy of the total size of the plaintext
+
 		L1CryptoInit(algorithm, algorithm_mode | CryptoInitialisation::Direction::ENCRYPT, key_id, encSessId);
 		uint8_t padding = (B5_AES_BLK_SIZE - (plaintext_size % B5_AES_BLK_SIZE)); // PKCS#7 padding
 		size_t total_size = plaintext_size + padding;
@@ -450,11 +451,13 @@ void L1::L1Digest(size_t input_size, std::shared_ptr<uint8_t[]> input_data, SEcu
 	if(((digest.algorithm != L1Algorithms::Algorithms::HMACSHA256) && (digest.algorithm != L1Algorithms::Algorithms::SHA256))){
 		throw digestExc;
 	}
-	uint32_t encSessId = 0;
+
 	std::unique_ptr<uint8_t[]> output_data = make_unique<uint8_t[]>(32);
 	uint8_t *input = input_data.get(); // alias for input data
 	uint8_t *output = output_data.get(); // alias for digest
 	try {
+	    uint32_t encSessId = 0;
+
 		switch(digest.algorithm){
 			case L1Algorithms::Algorithms::HMACSHA256:
 				L1CryptoInit(digest.algorithm, 0, digest.key_id, encSessId);
@@ -629,9 +632,10 @@ void L1::L1KeyList(std::vector<std::pair<uint32_t, uint16_t>>& keylist){
 void L1::L1FindKey(uint32_t keyId, bool& found) {
 	L1FindKeyException findKeyExc;
 	this->base.FillSessionBuffer((uint8_t*)&keyId, L1Response::Offset::DATA, 4);
-	uint16_t dataLen = 4;
 	uint16_t respLen = 0;
 	try {
+	    uint16_t dataLen = 4;
+
 		TXRXData(L1Commands::Codes::KEY_FIND, dataLen, 0, &respLen);
 	}
 	catch(L1Exception& e) {

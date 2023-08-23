@@ -287,9 +287,6 @@ __weak void HAL_DCMI_MspDeInit(DCMI_HandleTypeDef* hdcmi)
   */
 HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef* hdcmi, uint32_t DCMI_Mode, uint32_t pData, uint32_t Length)
 {
-  /* Initialize the second memory address */
-  uint32_t SecondMemAddress = 0U;
-
   /* Check function parameters */
   assert_param(IS_DCMI_CAPTURE_MODE(DCMI_Mode));
 
@@ -345,7 +342,7 @@ HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef* hdcmi, uint32_t DCMI_Mo
     hdcmi->XferTransferNumber = hdcmi->XferCount;
 
     /* Update second memory address */
-    SecondMemAddress = (uint32_t)(pData + (4U*hdcmi->XferSize));
+    uint32_t SecondMemAddress = (uint32_t)(pData + (4U*hdcmi->XferSize));
 
     /* Start DMA multi buffer transfer */
     HAL_DMAEx_MultiBufferStart_IT(hdcmi->DMA_Handle, (uint32_t)&hdcmi->Instance->DR, (uint32_t)pData, SecondMemAddress, hdcmi->XferSize);

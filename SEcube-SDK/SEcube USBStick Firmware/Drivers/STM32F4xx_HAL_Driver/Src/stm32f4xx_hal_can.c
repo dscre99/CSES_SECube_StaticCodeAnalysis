@@ -670,7 +670,6 @@ HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef* hcan, uint32_t Timeout)
   */
 HAL_StatusTypeDef HAL_CAN_Transmit_IT(CAN_HandleTypeDef* hcan)
 {
-  uint32_t  transmitmailbox = 5U;
 
   /* Check the parameters */
   assert_param(IS_CAN_IDTYPE(hcan->pTxMsg->IDE));
@@ -681,6 +680,8 @@ HAL_StatusTypeDef HAL_CAN_Transmit_IT(CAN_HandleTypeDef* hcan)
      ((hcan->Instance->TSR&CAN_TSR_TME1) == CAN_TSR_TME1) || \
      ((hcan->Instance->TSR&CAN_TSR_TME2) == CAN_TSR_TME2))
   {
+    uint32_t  transmitmailbox;
+
     /* Process Locked */
     __HAL_LOCK(hcan);
 

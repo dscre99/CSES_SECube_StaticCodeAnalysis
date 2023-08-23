@@ -1354,10 +1354,6 @@ uint32_t HAL_DMA2D_GetError(const DMA2D_HandleTypeDef *hdma2d)
 static void DMA2D_SetConfig(DMA2D_HandleTypeDef *hdma2d, uint32_t pdata, uint32_t DstAddress, uint32_t Width, uint32_t Height)
 {
   uint32_t tmp = 0U;
-  uint32_t tmp1;
-  uint32_t tmp2;
-  uint32_t tmp3;
-  uint32_t tmp4;
 
   tmp = Width << 16U;
 
@@ -1370,10 +1366,10 @@ static void DMA2D_SetConfig(DMA2D_HandleTypeDef *hdma2d, uint32_t pdata, uint32_
   /* Register to memory DMA2D mode selected */
   if (hdma2d->Init.Mode == DMA2D_R2M)
   {
-    tmp1 = pdata & DMA2D_OCOLR_ALPHA_1;
-    tmp2 = pdata & DMA2D_OCOLR_RED_1;
-    tmp3 = pdata & DMA2D_OCOLR_GREEN_1;
-    tmp4 = pdata & DMA2D_OCOLR_BLUE_1;
+    uint32_t tmp1 = pdata & DMA2D_OCOLR_ALPHA_1;
+    uint32_t tmp2 = pdata & DMA2D_OCOLR_RED_1;
+    uint32_t tmp3 = pdata & DMA2D_OCOLR_GREEN_1;
+    uint32_t tmp4 = pdata & DMA2D_OCOLR_BLUE_1;
 
     /* Prepare the value to be wrote to the OCOLR register according to the color mode */
     if (hdma2d->Init.ColorMode == DMA2D_ARGB8888)

@@ -190,7 +190,6 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
 {
   uint32_t position;
   uint32_t ioposition;
-  uint32_t iocurrent;
   uint32_t temp;
 
   /* Check the parameters */
@@ -205,7 +204,7 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
     /* Get the IO position */
     ioposition = ((uint32_t)0x01U) << position;
     /* Get the current IO position */
-    iocurrent = (uint32_t)(GPIO_Init->Pin) & ioposition;
+    uint32_t iocurrent = (uint32_t)(GPIO_Init->Pin) & ioposition;
 
     if(iocurrent == ioposition)
     {

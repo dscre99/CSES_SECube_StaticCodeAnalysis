@@ -564,10 +564,10 @@ HAL_StatusTypeDef HAL_FMPI2C_DeInit(FMPI2C_HandleTypeDef *hfmpi2c)
   */
 HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t sizetmp;
-
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
+    uint32_t sizetmp;
+
     if((pData == NULL ) || (Size == 0U))
     {
       return  HAL_ERROR;
@@ -686,10 +686,11 @@ HAL_StatusTypeDef HAL_FMPI2C_Master_Transmit(FMPI2C_HandleTypeDef *hfmpi2c, uint
   */
 HAL_StatusTypeDef HAL_FMPI2C_Master_Receive(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t sizetmp;
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
+    uint32_t sizetmp;
+
     if((pData == NULL ) || (Size == 0U))
     {
       return  HAL_ERROR;
@@ -1632,13 +1633,13 @@ HAL_StatusTypeDef HAL_FMPI2C_Slave_Receive_DMA(FMPI2C_HandleTypeDef *hfmpi2c, ui
   */
 HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t Sizetmp;
-
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
+    uint32_t Sizetmp;
+
     if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
@@ -1776,13 +1777,13 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Write(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t D
   */
 HAL_StatusTypeDef HAL_FMPI2C_Mem_Read(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint16_t MemAddress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t Sizetmp;
-
   /* Check the parameters */
   assert_param(IS_FMPI2C_MEMADD_SIZE(MemAddSize));
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
   {
+    uint32_t Sizetmp;
+
     if((pData == NULL) || (Size == 0U))
     {
       return  HAL_ERROR;
@@ -2315,8 +2316,6 @@ HAL_StatusTypeDef HAL_FMPI2C_Mem_Read_DMA(FMPI2C_HandleTypeDef *hfmpi2c, uint16_
   */
 HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16_t DevAddress, uint32_t Trials, uint32_t Timeout)
 {
-  uint32_t tickstart;
-
   __IO uint32_t FMPI2C_Trials = 0U;
 
   if(hfmpi2c->State == HAL_FMPI2C_STATE_READY)
@@ -2339,7 +2338,7 @@ HAL_StatusTypeDef HAL_FMPI2C_IsDeviceReady(FMPI2C_HandleTypeDef *hfmpi2c, uint16
 
       /* No need to Check TC flag, with AUTOEND mode the stop is automatically generated */
       /* Wait until STOPF flag is set or a NACK flag is set*/
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
       while((__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_STOPF) == RESET) && (__HAL_FMPI2C_GET_FLAG(hfmpi2c, FMPI2C_FLAG_AF) == RESET) && (hfmpi2c->State != HAL_FMPI2C_STATE_TIMEOUT))
       {
         if(Timeout != HAL_MAX_DELAY)
@@ -2727,13 +2726,11 @@ HAL_StatusTypeDef HAL_FMPI2C_EnableListen_IT(FMPI2C_HandleTypeDef *hfmpi2c)
   */
 HAL_StatusTypeDef HAL_FMPI2C_DisableListen_IT(FMPI2C_HandleTypeDef *hfmpi2c)
 {
-  /* Declaration of tmp to prevent undefined behavior of volatile usage */
-  uint32_t tmp;
-
   /* Disable Address listen mode only if a transfer is not ongoing */
   if(hfmpi2c->State == HAL_FMPI2C_STATE_LISTEN)
   {
-    tmp = (uint32_t)(hfmpi2c->State) & FMPI2C_STATE_MSK;
+    /* Declaration of tmp to prevent undefined behavior of volatile usage */
+    uint32_t tmp = (uint32_t)(hfmpi2c->State) & FMPI2C_STATE_MSK;
     hfmpi2c->PreviousState = tmp | (uint32_t)(hfmpi2c->Mode);
     hfmpi2c->State = HAL_FMPI2C_STATE_READY;
     hfmpi2c->Mode = HAL_FMPI2C_MODE_NONE;
@@ -3820,7 +3817,6 @@ static HAL_StatusTypeDef FMPI2C_RequestMemoryRead(FMPI2C_HandleTypeDef *hfmpi2c,
   */
 static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
 {
-  uint16_t DevAddress;
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
 
   /* Check if last DMA request was done with RELOAD */
@@ -3878,7 +3874,7 @@ static void FMPI2C_DMAMasterTransmitCplt(DMA_HandleTypeDef *hdma)
         hfmpi2c->XferSize = hfmpi2c->XferCount;
       }
 
-      DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
+      uint16_t DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmatx, (uint32_t)hfmpi2c->pBuffPtr, (uint32_t)&hfmpi2c->Instance->TXDR, hfmpi2c->XferSize);
@@ -4031,7 +4027,6 @@ static void FMPI2C_DMASlaveTransmitCplt(DMA_HandleTypeDef *hdma)
 static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
 {
   FMPI2C_HandleTypeDef* hfmpi2c = (FMPI2C_HandleTypeDef*)((DMA_HandleTypeDef*)hdma)->Parent;
-  uint16_t DevAddress;
 
   /* Check if last DMA request was done with RELOAD */
   /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
@@ -4088,7 +4083,7 @@ static void FMPI2C_DMAMasterReceiveCplt(DMA_HandleTypeDef *hdma)
         hfmpi2c->XferSize = hfmpi2c->XferCount;
       }
 
-      DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
+      uint16_t DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmarx, (uint32_t)&hfmpi2c->Instance->RXDR, (uint32_t)hfmpi2c->pBuffPtr, hfmpi2c->XferSize);
@@ -4250,7 +4245,6 @@ static void FMPI2C_DMASlaveReceiveCplt(DMA_HandleTypeDef *hdma)
   */
 static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
 {
-  uint16_t DevAddress;
   FMPI2C_HandleTypeDef* hfmpi2c = ( FMPI2C_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
 
   /* Check if last DMA request was done with RELOAD */
@@ -4308,7 +4302,7 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
         hfmpi2c->XferSize = hfmpi2c->XferCount;
       }
 
-      DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
+      uint16_t DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmatx, (uint32_t)hfmpi2c->pBuffPtr, (uint32_t)&hfmpi2c->Instance->TXDR, hfmpi2c->XferSize);
@@ -4410,7 +4404,6 @@ static void FMPI2C_DMAMemTransmitCplt(DMA_HandleTypeDef *hdma)
 static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
 {
   FMPI2C_HandleTypeDef* hfmpi2c = ( FMPI2C_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
-  uint16_t DevAddress;
 
   /* Check if last DMA request was done with RELOAD */
   /* Set NBYTES to write and reload if size > MAX_NBYTE_SIZE */
@@ -4467,7 +4460,7 @@ static void FMPI2C_DMAMemReceiveCplt(DMA_HandleTypeDef *hdma)
         hfmpi2c->XferSize = hfmpi2c->XferCount;
       }
 
-      DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
+      uint16_t DevAddress = (hfmpi2c->Instance->CR2 & FMPI2C_CR2_SADD);
 
       /* Enable the DMA channel */
       HAL_DMA_Start_IT(hfmpi2c->hdmarx, (uint32_t)&hfmpi2c->Instance->RXDR, (uint32_t)hfmpi2c->pBuffPtr, hfmpi2c->XferSize);

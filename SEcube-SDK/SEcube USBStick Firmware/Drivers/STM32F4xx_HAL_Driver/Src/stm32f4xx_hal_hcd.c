@@ -456,7 +456,6 @@ HAL_StatusTypeDef HAL_HCD_HC_SubmitRequest(HCD_HandleTypeDef *hhcd,
 void HAL_HCD_IRQHandler(HCD_HandleTypeDef *hhcd)
 {
   const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
-  uint32_t i, interrupt;
 
   /* Ensure that we are in device mode */
   if (USB_GetMode(hhcd->Instance) == USB_OTG_MODE_HOST)
@@ -521,8 +520,8 @@ void HAL_HCD_IRQHandler(HCD_HandleTypeDef *hhcd)
     /* Handle Host channel Interrupts */
     if(__HAL_HCD_GET_FLAG(hhcd, USB_OTG_GINTSTS_HCINT))
     {
-      interrupt = USB_HC_ReadInterrupt(hhcd->Instance);
-      for (i = 0U; i < hhcd->Init.Host_channels; i++)
+      uint32_t interrupt = USB_HC_ReadInterrupt(hhcd->Instance);
+      for (uint32_t i = 0U; i < hhcd->Init.Host_channels; i++)
       {
         if (interrupt & (1U << i))
         {
@@ -1090,7 +1089,6 @@ static void HCD_RXQLVL_IRQHandler(HCD_HandleTypeDef *hhcd)
   uint32_t pktsts;
   uint32_t pktcnt;
   uint32_t temp = 0U;
-  uint32_t tmpreg = 0U;
 
   temp = hhcd->Instance->GRXSTSP;
   channelnum = temp &  USB_OTG_GRXSTSP_EPNUM;
@@ -1113,7 +1111,7 @@ static void HCD_RXQLVL_IRQHandler(HCD_HandleTypeDef *hhcd)
       if((USBx_HC(channelnum)->HCTSIZ & USB_OTG_HCTSIZ_PKTCNT) > 0U)
       {
         /* re-activate the channel when more packets are expected */
-        tmpreg = USBx_HC(channelnum)->HCCHAR;
+        uint32_t tmpreg = USBx_HC(channelnum)->HCCHAR;
         tmpreg &= ~USB_OTG_HCCHAR_CHDIS;
         tmpreg |= USB_OTG_HCCHAR_CHENA;
         USBx_HC(channelnum)->HCCHAR = tmpreg;

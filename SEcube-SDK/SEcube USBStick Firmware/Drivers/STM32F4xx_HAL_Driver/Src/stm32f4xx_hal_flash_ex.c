@@ -178,7 +178,6 @@ extern HAL_StatusTypeDef         FLASH_WaitForLastOperation(uint32_t Timeout);
 HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t *SectorError)
 {
   HAL_StatusTypeDef status = HAL_ERROR;
-  uint32_t index;
 
   /* Process Locked */
   __HAL_LOCK(&pFlash);
@@ -211,7 +210,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
       assert_param(IS_FLASH_NBSECTORS(pEraseInit->NbSectors + pEraseInit->Sector));
 
       /* Erase by sector by sector to be done*/
-      for(index = pEraseInit->Sector; index < (pEraseInit->NbSectors + pEraseInit->Sector); index++)
+      for(uint32_t index = pEraseInit->Sector; index < (pEraseInit->NbSectors + pEraseInit->Sector); index++)
       {
         FLASH_Erase_Sector(index, (uint8_t) pEraseInit->VoltageRange);
 
@@ -1198,7 +1197,6 @@ static HAL_StatusTypeDef FLASH_OB_RDP_LevelConfig(uint8_t Level)
   */
 static HAL_StatusTypeDef FLASH_OB_UserConfig(uint8_t Iwdg, uint8_t Stop, uint8_t Stdby)
 {
-  uint8_t optiontmp = 0xFFU;
   HAL_StatusTypeDef status = HAL_OK;
 
   /* Check the parameters */
@@ -1212,7 +1210,7 @@ static HAL_StatusTypeDef FLASH_OB_UserConfig(uint8_t Iwdg, uint8_t Stop, uint8_t
   if(status == HAL_OK)
   {
     /* Mask OPTLOCK, OPTSTRT, BOR_LEV and BFB2 bits */
-    optiontmp =  (uint8_t)((*(__IO uint8_t *)OPTCR_BYTE0_ADDRESS) & (uint8_t)0x1FU);
+    uint32_t optiontmp =  (uint8_t)((*(__IO uint8_t *)OPTCR_BYTE0_ADDRESS) & (uint8_t)0x1FU);
 
     /* Update User Option Byte */
     *(__IO uint8_t *)OPTCR_BYTE0_ADDRESS = Iwdg | (uint8_t)(Stdby | (uint8_t)(Stop | ((uint8_t)optiontmp)));
