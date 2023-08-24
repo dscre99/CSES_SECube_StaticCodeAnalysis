@@ -399,8 +399,6 @@ HAL_StatusTypeDef HAL_USART_DeInit(USART_HandleTypeDef *husart)
   */
 HAL_StatusTypeDef HAL_USART_Transmit(USART_HandleTypeDef *husart, uint8_t *pTxData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pTxData == NULL) || (Size == 0U))
@@ -426,7 +424,7 @@ HAL_StatusTypeDef HAL_USART_Transmit(USART_HandleTypeDef *husart, uint8_t *pTxDa
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pTxData;
+        uint16_t *tmp = (uint16_t*) pTxData;
         husart->Instance->DR = (*tmp & (uint16_t)0x01FFU);
         if(husart->Init.Parity == USART_PARITY_NONE)
         {
@@ -476,8 +474,6 @@ HAL_StatusTypeDef HAL_USART_Transmit(USART_HandleTypeDef *husart, uint8_t *pTxDa
   */
 HAL_StatusTypeDef HAL_USART_Receive(USART_HandleTypeDef *husart, uint8_t *pRxData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pRxData == NULL) || (Size == 0U))
@@ -511,7 +507,7 @@ HAL_StatusTypeDef HAL_USART_Receive(USART_HandleTypeDef *husart, uint8_t *pRxDat
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pRxData ;
+        uint16_t *tmp = (uint16_t*) pRxData ;
         if(husart->Init.Parity == USART_PARITY_NONE)
         {
           *tmp = (uint16_t)(husart->Instance->DR & (uint16_t)0x01FFU);
@@ -578,8 +574,6 @@ HAL_StatusTypeDef HAL_USART_Receive(USART_HandleTypeDef *husart, uint8_t *pRxDat
   */
 HAL_StatusTypeDef HAL_USART_TransmitReceive(USART_HandleTypeDef *husart, uint8_t *pTxData, uint8_t *pRxData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pTxData == NULL) || (pRxData == NULL) || (Size == 0U))
@@ -609,7 +603,7 @@ HAL_StatusTypeDef HAL_USART_TransmitReceive(USART_HandleTypeDef *husart, uint8_t
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pTxData;
+        uint16_t *tmp = (uint16_t*) pTxData;
         husart->Instance->DR = (*tmp & (uint16_t)0x01FFU);
         if(husart->Init.Parity == USART_PARITY_NONE)
         {
@@ -839,8 +833,6 @@ HAL_StatusTypeDef HAL_USART_TransmitReceive_IT(USART_HandleTypeDef *husart, uint
   */
 HAL_StatusTypeDef HAL_USART_Transmit_DMA(USART_HandleTypeDef *husart, uint8_t *pTxData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pTxData == NULL) || (Size == 0U))
@@ -867,7 +859,7 @@ HAL_StatusTypeDef HAL_USART_Transmit_DMA(USART_HandleTypeDef *husart, uint8_t *p
     husart->hdmatx->XferErrorCallback = USART_DMAError;
 
     /* Enable the USART transmit DMA Stream */
-    tmp = (uint32_t*)&pTxData;
+    uint32_t *tmp = (uint32_t*)&pTxData;
     HAL_DMA_Start_IT(husart->hdmatx, *(uint32_t*)tmp, (uint32_t)&husart->Instance->DR, Size);
 
     /* Clear the TC flag in the SR register by writing 0 to it */
@@ -900,8 +892,6 @@ HAL_StatusTypeDef HAL_USART_Transmit_DMA(USART_HandleTypeDef *husart, uint8_t *p
   */
 HAL_StatusTypeDef HAL_USART_Receive_DMA(USART_HandleTypeDef *husart, uint8_t *pRxData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pRxData == NULL) || (Size == 0U))
@@ -930,7 +920,7 @@ HAL_StatusTypeDef HAL_USART_Receive_DMA(USART_HandleTypeDef *husart, uint8_t *pR
     husart->hdmarx->XferErrorCallback = USART_DMAError;
 
     /* Enable the USART receive DMA Stream */
-    tmp = (uint32_t*)&pRxData;
+    uint32_t *tmp = (uint32_t*)&pRxData;
     HAL_DMA_Start_IT(husart->hdmarx, (uint32_t)&husart->Instance->DR, *(uint32_t*)tmp, Size);
 
     /* Enable the USART transmit DMA Stream: the transmit stream is used in order
@@ -973,8 +963,6 @@ HAL_StatusTypeDef HAL_USART_Receive_DMA(USART_HandleTypeDef *husart, uint8_t *pR
   */
 HAL_StatusTypeDef HAL_USART_TransmitReceive_DMA(USART_HandleTypeDef *husart, uint8_t *pTxData, uint8_t *pRxData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   if(husart->State == HAL_USART_STATE_READY)
   {
     if((pTxData == NULL) || (pRxData == NULL) || (Size == 0U))
@@ -1011,7 +999,7 @@ HAL_StatusTypeDef HAL_USART_TransmitReceive_DMA(USART_HandleTypeDef *husart, uin
     husart->hdmarx->XferErrorCallback = USART_DMAError;
 
     /* Enable the USART receive DMA Stream */
-    tmp = (uint32_t*)&pRxData;
+    uint32_t *tmp = (uint32_t*)&pRxData;
     HAL_DMA_Start_IT(husart->hdmarx, (uint32_t)&husart->Instance->DR, *(uint32_t*)tmp, Size);
 
     /* Enable the USART transmit DMA Stream */
@@ -1553,13 +1541,11 @@ static HAL_StatusTypeDef USART_WaitOnFlagUntilTimeout(USART_HandleTypeDef *husar
   */
 static HAL_StatusTypeDef USART_Transmit_IT(USART_HandleTypeDef *husart)
 {
-  uint16_t* tmp;
-
   if(husart->State == HAL_USART_STATE_BUSY_TX)
   {
     if(husart->Init.WordLength == USART_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) husart->pTxBuffPtr;
+      uint16_t *tmp = (uint16_t*) husart->pTxBuffPtr;
       husart->Instance->DR = (uint16_t)(*tmp & (uint16_t)0x01FFU);
       if(husart->Init.Parity == USART_PARITY_NONE)
       {
@@ -1620,12 +1606,11 @@ static HAL_StatusTypeDef USART_EndTransmit_IT(USART_HandleTypeDef *husart)
   */
 static HAL_StatusTypeDef USART_Receive_IT(USART_HandleTypeDef *husart)
 {
-  uint16_t* tmp;
   if(husart->State == HAL_USART_STATE_BUSY_RX)
   {
     if(husart->Init.WordLength == USART_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) husart->pRxBuffPtr;
+      uint16_t *tmp = (uint16_t*) husart->pRxBuffPtr;
       if(husart->Init.Parity == USART_PARITY_NONE)
       {
         *tmp = (uint16_t)(husart->Instance->DR & (uint16_t)0x01FFU);
@@ -1692,8 +1677,6 @@ static HAL_StatusTypeDef USART_Receive_IT(USART_HandleTypeDef *husart)
   */
 static HAL_StatusTypeDef USART_TransmitReceive_IT(USART_HandleTypeDef *husart)
 {
-  uint16_t* tmp;
-
   if(husart->State == HAL_USART_STATE_BUSY_TX_RX)
   {
     if(husart->TxXferCount != 0x00U)
@@ -1702,7 +1685,7 @@ static HAL_StatusTypeDef USART_TransmitReceive_IT(USART_HandleTypeDef *husart)
       {
         if(husart->Init.WordLength == USART_WORDLENGTH_9B)
         {
-          tmp = (uint16_t*) husart->pTxBuffPtr;
+          uint16_t *tmp = (uint16_t*) husart->pTxBuffPtr;
           husart->Instance->DR = (uint16_t)(*tmp & (uint16_t)0x01FFU);
           if(husart->Init.Parity == USART_PARITY_NONE)
           {

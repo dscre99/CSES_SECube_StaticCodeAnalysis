@@ -564,8 +564,6 @@ HAL_StatusTypeDef USB_DeactivateDedicatedEndpoint(USB_OTG_GlobalTypeDef *USBx, U
   */
 HAL_StatusTypeDef USB_EPStartXfer(USB_OTG_GlobalTypeDef *USBx , USB_OTG_EPTypeDef *ep, uint8_t dma)
 {
-  uint16_t pktcnt;
-
   /* IN endpoint */
   if (ep->is_in == 1U)
   {
@@ -647,7 +645,7 @@ HAL_StatusTypeDef USB_EPStartXfer(USB_OTG_GlobalTypeDef *USBx , USB_OTG_EPTypeDe
     }
     else
     {
-      pktcnt = (ep->xfer_len + ep->maxpacket -1U)/ ep->maxpacket;
+      uint16_t pktcnt = (ep->xfer_len + ep->maxpacket -1U)/ ep->maxpacket;
       USBx_OUTEP(ep->num)->DOEPTSIZ |= (USB_OTG_DOEPTSIZ_PKTCNT & (pktcnt << 19U));
       USBx_OUTEP(ep->num)->DOEPTSIZ |= (USB_OTG_DOEPTSIZ_XFRSIZ & (ep->maxpacket * pktcnt));
     }
@@ -775,10 +773,11 @@ HAL_StatusTypeDef USB_EP0StartXfer(USB_OTG_GlobalTypeDef *USBx , USB_OTG_EPTypeD
   */
 HAL_StatusTypeDef USB_WritePacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *src, uint8_t ch_ep_num, uint16_t len, uint8_t dma)
 {
-  uint32_t count32b, i;
 
   if (dma == 0U)
   {
+    uint32_t count32b, i;
+
     count32b =  (len + 3U) / 4U;
     for (i = 0U; i < count32b; i++, src += 4U)
     {
@@ -1441,7 +1440,6 @@ HAL_StatusTypeDef USB_HC_Init(USB_OTG_GlobalTypeDef *USBx,
 HAL_StatusTypeDef USB_HC_StartXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_HCTypeDef *hc, uint8_t dma)
 {
   uint8_t  is_oddframe = 0U;
-  uint16_t len_words = 0U;
   uint16_t num_packets = 0U;
   uint16_t max_hc_pkt_count = 256U;
   uint32_t tmpreg = 0U;
@@ -1463,6 +1461,7 @@ HAL_StatusTypeDef USB_HC_StartXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_HCTypeDe
   /* Compute the expected number of packets associated to the transfer */
   if (hc->xfer_len > 0U)
   {
+    uint16_t max_hc_pkt_count = 256U;
     num_packets = (hc->xfer_len + hc->max_packet - 1U) / hc->max_packet;
 
     if (num_packets > max_hc_pkt_count)
@@ -1505,6 +1504,8 @@ HAL_StatusTypeDef USB_HC_StartXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_HCTypeDe
   {
     if((hc->ep_is_in == 0U) && (hc->xfer_len > 0U))
     {
+      uint16_t len_words;
+
       switch(hc->ep_type)
       {
         /* Non periodic transfer */

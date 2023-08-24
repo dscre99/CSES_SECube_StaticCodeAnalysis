@@ -562,8 +562,6 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
   */
 HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, uint32_t FLatency)
 {
-  uint32_t tickstart;
-
   /* Check the parameters */
   assert_param(IS_RCC_CLOCKTYPE(RCC_ClkInitStruct->ClockType));
   assert_param(IS_FLASH_LATENCY(FLatency));
@@ -629,7 +627,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
 
     __HAL_RCC_SYSCLK_CONFIG(RCC_ClkInitStruct->SYSCLKSource);
     /* Get Start Tick*/
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     if(RCC_ClkInitStruct->SYSCLKSource == RCC_SYSCLKSOURCE_HSE)
     {
@@ -867,7 +865,6 @@ void HAL_RCC_DisableCSS(void)
   */
 __weak uint32_t HAL_RCC_GetSysClockFreq(void)
 {
-  uint32_t pllm = 0U, pllvco = 0U, pllp = 0U;
   uint32_t sysclockfreq = 0U;
 
   /* Get SYSCLK source -------------------------------------------------------*/
@@ -885,9 +882,11 @@ __weak uint32_t HAL_RCC_GetSysClockFreq(void)
     }
     case RCC_CFGR_SWS_PLL:  /* PLL used as system clock  source */
     {
+      uint32_t pllvco = 0U;
+
       /* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLLM) * PLLN
       SYSCLK = PLL_VCO / PLLP */
-      pllm = RCC->PLLCFGR & RCC_PLLCFGR_PLLM;
+      uint32_t pllm = RCC->PLLCFGR & RCC_PLLCFGR_PLLM;
       if(__HAL_RCC_GET_PLL_OSCSOURCE() != RCC_PLLSOURCE_HSI)
       {
         /* HSE used as PLL clock source */
@@ -898,7 +897,7 @@ __weak uint32_t HAL_RCC_GetSysClockFreq(void)
         /* HSI used as PLL clock source */
         pllvco = ((HSI_VALUE / pllm) * ((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> POSITION_VAL(RCC_PLLCFGR_PLLN)));
       }
-      pllp = ((((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> POSITION_VAL(RCC_PLLCFGR_PLLP)) + 1U) *2U);
+      uint32_t pllp = ((((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> POSITION_VAL(RCC_PLLCFGR_PLLP)) + 1U) *2U);
 
       sysclockfreq = pllvco/pllp;
       break;

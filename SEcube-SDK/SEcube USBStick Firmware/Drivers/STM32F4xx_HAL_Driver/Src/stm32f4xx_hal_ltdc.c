@@ -542,7 +542,6 @@ HAL_StatusTypeDef HAL_LTDC_ConfigCLUT(LTDC_HandleTypeDef *hltdc, uint32_t *pCLUT
 {
   uint32_t tmp;
   uint32_t counter = 0U;
-  uint32_t pcounter;
 
   /* Process locked */
   __HAL_LOCK(hltdc);
@@ -563,7 +562,7 @@ HAL_StatusTypeDef HAL_LTDC_ConfigCLUT(LTDC_HandleTypeDef *hltdc, uint32_t *pCLUT
     {
       tmp  = ((counter << 24U) | ((uint32_t)(*pCLUT) & 0xFFU) | ((uint32_t)(*pCLUT) & 0xFF00U) | ((uint32_t)(*pCLUT) & 0xFF0000U));
     }
-    pcounter = (uint32_t)pCLUT + sizeof(*pCLUT);
+    uint32_t pcounter = (uint32_t)pCLUT + sizeof(*pCLUT);
     pCLUT = (uint32_t *)pcounter;
 
     /* Specifies the C-LUT address and RGB value */

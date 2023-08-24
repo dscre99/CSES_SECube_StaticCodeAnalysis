@@ -306,8 +306,6 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
   */
 HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
 {
-  uint32_t tickstart;
-
   assert_param(IS_PWR_VOLTAGE_SCALING_RANGE(VoltageScaling));
 
   /* Enable PWR RCC Clock Peripheral */
@@ -320,7 +318,7 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
     __HAL_RCC_PLL_DISABLE();
 
     /* Get Start Tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
     /* Wait till PLL is disabled */
     while(__HAL_RCC_GET_FLAG(RCC_FLAG_PLLRDY) != RESET)
     {

@@ -2502,7 +2502,6 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
 {
   SDIO_CmdInitTypeDef sdio_cmdinitstructure;
   __IO HAL_SD_ErrorTypedef errorstate = SD_OK;
-  uint32_t response = 0U, count = 0U, validvoltage = 0U;
   uint32_t sdtype = SD_STD_CAPACITY;
 
   /* Power ON Sequence -------------------------------------------------------*/
@@ -2571,6 +2570,9 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
      or SD card 1.x */
   if(errorstate == SD_OK)
   {
+    uint32_t count = 0U;
+    uint32_t validvoltage = 0U;
+
     /* SD CARD */
     /* Send ACMD41 SD_APP_OP_COND with Argument 0x80100000 */
     while((!validvoltage) && (count < SD_MAX_VOLT_TRIAL))
@@ -2609,7 +2611,7 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
       }
 
       /* Get command response */
-      response = SDIO_GetResponse(SDIO_RESP1);
+      uint32_t response = SDIO_GetResponse(SDIO_RESP1);
 
       /* Get operating voltage*/
       validvoltage = (((response >> 31U) == 1U) ? 1U : 0U);

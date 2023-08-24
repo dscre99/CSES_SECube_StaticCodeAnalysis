@@ -1817,13 +1817,12 @@ HAL_StatusTypeDef HAL_I2C_EnableListen_IT(I2C_HandleTypeDef *hi2c)
   */
 HAL_StatusTypeDef HAL_I2C_DisableListen_IT(I2C_HandleTypeDef *hi2c)
 {
-  /* Declaration of tmp to prevent undefined behavior of volatile usage */
-  uint32_t tmp;
-
   /* Disable Address listen mode only if a transfer is not ongoing */
   if(hi2c->State == HAL_I2C_STATE_LISTEN)
   {
-    tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
+    /* Declaration of tmp to prevent undefined behavior of volatile usage */
+    uint32_t tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
+
     hi2c->PreviousState = tmp | (uint32_t)(hi2c->Mode);
     hi2c->State = HAL_I2C_STATE_READY;
     hi2c->Mode = HAL_I2C_MODE_NONE;
@@ -3066,8 +3065,6 @@ HAL_StatusTypeDef HAL_I2C_Mem_Read_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddr
   */
 HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint32_t Trials, uint32_t Timeout)
 {
-  uint32_t tickstart, tmp1, tmp2, tmp3, I2C_Trials = 1U;
-
   if(hi2c->State == HAL_I2C_STATE_READY)
   {
     /* Wait until BUSY flag is reset */
@@ -3086,6 +3083,8 @@ HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c, uint16_t DevAdd
     hi2c->ErrorCode = HAL_I2C_ERROR_NONE;
     hi2c->XferOptions = I2C_NO_OPTION_FRAME;
 
+    uint32_t I2C_Trials = 1U;
+
     do
     {
       /* Generate Start */
@@ -3102,11 +3101,11 @@ HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c, uint16_t DevAdd
 
       /* Wait until ADDR or AF flag are set */
       /* Get tick */
-      tickstart = HAL_GetTick();
+      uint32_t tickstart = HAL_GetTick();
 
-      tmp1 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_ADDR);
-      tmp2 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_AF);
-      tmp3 = hi2c->State;
+      uint32_t tmp1 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_ADDR);
+      uint32_t tmp2 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_AF);
+      uint32_t tmp3 = hi2c->State;
       while((tmp1 == RESET) && (tmp2 == RESET) && (tmp3 != HAL_I2C_STATE_TIMEOUT))
       {
         if((Timeout == 0U)||((HAL_GetTick() - tickstart ) > Timeout))
@@ -3285,7 +3284,7 @@ void HAL_I2C_EV_IRQHandler(I2C_HandleTypeDef *hi2c)
   */
 void HAL_I2C_ER_IRQHandler(I2C_HandleTypeDef *hi2c)
 {
-  uint32_t tmp1 = 0U, tmp2 = 0U, tmp3, tmp4;
+  uint32_t tmp1 = 0U, tmp2 = 0U;
 
   tmp1 = __HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_BERR);
   tmp2 = __HAL_I2C_GET_IT_SOURCE(hi2c, I2C_IT_ERR);
@@ -3316,8 +3315,8 @@ void HAL_I2C_ER_IRQHandler(I2C_HandleTypeDef *hi2c)
   {
     tmp1 = hi2c->Mode;
     tmp2 = hi2c->XferCount;
-    tmp3 = hi2c->State;
-    tmp4 = hi2c->PreviousState;
+    uint32_t I2C_Trials = 1U;tmp3 = hi2c->State;
+    uint32_t I2C_Trials = 1U;tmp4 = hi2c->PreviousState;
     if((tmp1 == HAL_I2C_MODE_SLAVE) && (tmp2 == 0U) && \
       ((tmp3 == HAL_I2C_STATE_BUSY_TX) || (tmp3 == HAL_I2C_STATE_BUSY_TX_LISTEN) || \
       ((tmp3 == HAL_I2C_STATE_LISTEN) && (tmp4 == I2C_STATE_SLAVE_BUSY_TX))))
@@ -3836,9 +3835,6 @@ static HAL_StatusTypeDef I2C_MasterReceive_BTF(I2C_HandleTypeDef *hi2c)
   */
 static HAL_StatusTypeDef I2C_SlaveTransmit_TXE(I2C_HandleTypeDef *hi2c)
 {
-  /* Declaration of tmp to prevent undefined behavior of volatile usage */
-  uint32_t tmp;
-
   if(hi2c->XferCount != 0U)
   {
     /* Write data to DR */
@@ -3851,7 +3847,8 @@ static HAL_StatusTypeDef I2C_SlaveTransmit_TXE(I2C_HandleTypeDef *hi2c)
       __HAL_I2C_DISABLE_IT(hi2c, I2C_IT_BUF);
 
       /* Set state at HAL_I2C_STATE_LISTEN */
-      tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
+        /* Declaration of tmp to prevent undefined behavior of volatile usage */
+      uint32_t tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
       hi2c->PreviousState = tmp | (uint32_t)(hi2c->Mode);
       hi2c->State = HAL_I2C_STATE_LISTEN;
 
@@ -3887,9 +3884,6 @@ static HAL_StatusTypeDef I2C_SlaveTransmit_BTF(I2C_HandleTypeDef *hi2c)
   */
 static HAL_StatusTypeDef I2C_SlaveReceive_RXNE(I2C_HandleTypeDef *hi2c)
 {
-  /* Declaration of tmp to prevent undefined behavior of volatile usage */
-  uint32_t tmp;
-
   if(hi2c->XferCount != 0U)
   {
     /* Read data from DR */
@@ -3902,7 +3896,8 @@ static HAL_StatusTypeDef I2C_SlaveReceive_RXNE(I2C_HandleTypeDef *hi2c)
       __HAL_I2C_DISABLE_IT(hi2c, I2C_IT_BUF);
 
       /* Set state at HAL_I2C_STATE_LISTEN */
-      tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
+        /* Declaration of tmp to prevent undefined behavior of volatile usage */
+      uint32_t tmp = (uint32_t)(hi2c->State) & I2C_STATE_MSK;
       hi2c->PreviousState = tmp | (uint32_t)(hi2c->Mode);
       hi2c->State = HAL_I2C_STATE_LISTEN;
 

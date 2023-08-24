@@ -610,8 +610,6 @@ HAL_StatusTypeDef HAL_UART_DeInit(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   /* Check that a Tx process is not already ongoing */
   if(huart->gState == HAL_UART_STATE_READY)
   {
@@ -637,7 +635,7 @@ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, u
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pData;
+        uint16_t *tmp = (uint16_t*) pData;
         huart->Instance->DR = (*tmp & (uint16_t)0x01FFU);
         if(huart->Init.Parity == UART_PARITY_NONE)
         {
@@ -688,8 +686,6 @@ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, u
   */
 HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   /* Check that a Rx process is not already ongoing */
   if(huart->RxState == HAL_UART_STATE_READY)
   {
@@ -717,7 +713,7 @@ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, ui
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pData;
+        uint16_t *tmp = (uint16_t*) pData;
         if(huart->Init.Parity == UART_PARITY_NONE)
         {
           *tmp = (uint16_t)(huart->Instance->DR & (uint16_t)0x01FFU);
@@ -862,8 +858,6 @@ HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData,
   */
 HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Tx process is not already ongoing */
   if(huart->gState == HAL_UART_STATE_READY)
   {
@@ -892,7 +886,7 @@ HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, uint8_t *pDat
     huart->hdmatx->XferErrorCallback = UART_DMAError;
 
     /* Enable the UART transmit DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(huart->hdmatx, *(uint32_t*)tmp, (uint32_t)&huart->Instance->DR, Size);
 
     /* Clear the TC flag in the SR register by writing 0 to it */
@@ -924,8 +918,6 @@ HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, uint8_t *pDat
   */
 HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Rx process is not already ongoing */
   if(huart->RxState == HAL_UART_STATE_READY)
   {
@@ -953,7 +945,7 @@ HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart, uint8_t *pData
     huart->hdmarx->XferErrorCallback = UART_DMAError;
 
     /* Enable the DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(huart->hdmarx, (uint32_t)&huart->Instance->DR, *(uint32_t*)tmp, Size);
 
     /* Enable the DMA transfer for the receiver request by setting the DMAR bit
@@ -1620,14 +1612,12 @@ static HAL_StatusTypeDef UART_WaitOnFlagUntilTimeout(UART_HandleTypeDef *huart, 
   */
 static HAL_StatusTypeDef UART_Transmit_IT(UART_HandleTypeDef *huart)
 {
-  uint16_t* tmp;
-
   /* Check that a Tx process is ongoing */
   if(huart->gState == HAL_UART_STATE_BUSY_TX)
   {
     if(huart->Init.WordLength == UART_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) huart->pTxBuffPtr;
+      uint16_t *tmp = (uint16_t*) huart->pTxBuffPtr;
       huart->Instance->DR = (uint16_t)(*tmp & (uint16_t)0x01FFU);
       if(huart->Init.Parity == UART_PARITY_NONE)
       {
@@ -1687,14 +1677,12 @@ static HAL_StatusTypeDef UART_EndTransmit_IT(UART_HandleTypeDef *huart)
   */
 static HAL_StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart)
 {
-  uint16_t* tmp;
-
   /* Check that a Rx process is ongoing */
   if(huart->RxState == HAL_UART_STATE_BUSY_RX)
   {
     if(huart->Init.WordLength == UART_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) huart->pRxBuffPtr;
+      uint16_t *tmp = (uint16_t*) huart->pRxBuffPtr;
       if(huart->Init.Parity == UART_PARITY_NONE)
       {
         *tmp = (uint16_t)(huart->Instance->DR & (uint16_t)0x01FFU);

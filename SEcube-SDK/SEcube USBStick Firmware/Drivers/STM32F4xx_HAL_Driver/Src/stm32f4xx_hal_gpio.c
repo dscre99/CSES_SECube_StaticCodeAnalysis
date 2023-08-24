@@ -314,7 +314,6 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
 {
   uint32_t position;
   uint32_t ioposition;
-  uint32_t iocurrent;
   uint32_t tmp;
 
   /* Check the parameters */
@@ -326,7 +325,7 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
     /* Get the IO position */
     ioposition = ((uint32_t)0x01U) << position;
     /* Get the current IO position */
-    iocurrent = (GPIO_Pin) & ioposition;
+    uint32_t iocurrent = (GPIO_Pin) & ioposition;
 
     if(iocurrent == ioposition)
     {

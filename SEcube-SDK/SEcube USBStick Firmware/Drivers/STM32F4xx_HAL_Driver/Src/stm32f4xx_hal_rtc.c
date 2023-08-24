@@ -277,8 +277,6 @@ HAL_StatusTypeDef HAL_RTC_Init(RTC_HandleTypeDef *hrtc)
   */
 HAL_StatusTypeDef HAL_RTC_DeInit(RTC_HandleTypeDef *hrtc)
 {
-  uint32_t tickstart;
-
   /* Set RTC state */
   hrtc->State = HAL_RTC_STATE_BUSY;
 
@@ -305,7 +303,7 @@ HAL_StatusTypeDef HAL_RTC_DeInit(RTC_HandleTypeDef *hrtc)
     hrtc->Instance->CR &= (uint32_t)0x00000007U;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     /* Wait till WUTWF flag is set and if Time out is reached exit */
     while(((hrtc->Instance->ISR) & RTC_ISR_WUTWF) == (uint32_t)RESET)
@@ -1480,8 +1478,6 @@ HAL_RTCStateTypeDef HAL_RTC_GetState(const RTC_HandleTypeDef* hrtc)
   */
 HAL_StatusTypeDef RTC_EnterInitMode(RTC_HandleTypeDef* hrtc)
 {
-  uint32_t tickstart;
-
   /* Check if the Initialization mode is set */
   if((hrtc->Instance->ISR & RTC_ISR_INITF) == (uint32_t)RESET)
   {
@@ -1489,7 +1485,7 @@ HAL_StatusTypeDef RTC_EnterInitMode(RTC_HandleTypeDef* hrtc)
     hrtc->Instance->ISR = (uint32_t)RTC_INIT_MASK;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     /* Wait till RTC is in INIT state and if Time out is reached exit */
     while((hrtc->Instance->ISR & RTC_ISR_INITF) == (uint32_t)RESET)

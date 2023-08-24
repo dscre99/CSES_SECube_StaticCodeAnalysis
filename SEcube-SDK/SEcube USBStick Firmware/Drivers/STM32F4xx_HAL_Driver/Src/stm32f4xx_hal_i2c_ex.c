@@ -146,8 +146,6 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigAnalogFilter(I2C_HandleTypeDef *hi2c, uint32_t
   */
 HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_t DigitalFilter)
 {
-  uint16_t tmpreg;
-
   /* Check the parameters */
   assert_param(IS_I2C_ALL_INSTANCE(hi2c->Instance));
   assert_param(IS_I2C_DIGITAL_FILTER(DigitalFilter));
@@ -160,7 +158,7 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_
     __HAL_I2C_DISABLE(hi2c);
 
     /* Get the old register value */
-    tmpreg = hi2c->Instance->FLTR;
+    uint16_t tmpreg = hi2c->Instance->FLTR;
 
     /* Reset I2Cx DNF bit [3:0] */
     tmpreg &= ~(I2C_FLTR_DNF);

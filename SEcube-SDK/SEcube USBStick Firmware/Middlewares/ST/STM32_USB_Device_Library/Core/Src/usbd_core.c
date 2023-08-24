@@ -296,11 +296,9 @@ USBD_StatusTypeDef USBD_LL_SetupStage(USBD_HandleTypeDef *pdev, uint8_t *psetup)
 */
 USBD_StatusTypeDef USBD_LL_DataOutStage(USBD_HandleTypeDef *pdev , uint8_t epnum, uint8_t *pdata)
 {
-  USBD_EndpointTypeDef    *pep;
-
   if(epnum == 0)
   {
-    pep = &pdev->ep_out[0];
+    USBD_EndpointTypeDef *pep = &pdev->ep_out[0];
 
     if ( pdev->ep0_state == USBD_EP0_DATA_OUT)
     {
@@ -340,11 +338,9 @@ USBD_StatusTypeDef USBD_LL_DataOutStage(USBD_HandleTypeDef *pdev , uint8_t epnum
 */
 USBD_StatusTypeDef USBD_LL_DataInStage(USBD_HandleTypeDef *pdev ,uint8_t epnum, uint8_t *pdata)
 {
-  USBD_EndpointTypeDef    *pep;
-
   if(epnum == 0)
   {
-    pep = &pdev->ep_in[0];
+    USBD_EndpointTypeDef *pep = &pdev->ep_in[0];
 
     if ( pdev->ep0_state == USBD_EP0_DATA_IN)
     {

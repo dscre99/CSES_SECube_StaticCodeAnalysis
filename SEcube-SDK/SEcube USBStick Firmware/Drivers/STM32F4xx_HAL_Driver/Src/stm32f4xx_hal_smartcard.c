@@ -424,8 +424,6 @@ HAL_StatusTypeDef HAL_SMARTCARD_DeInit(SMARTCARD_HandleTypeDef *hsc)
   */
 HAL_StatusTypeDef HAL_SMARTCARD_Transmit(SMARTCARD_HandleTypeDef *hsc, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   if(hsc->gState == HAL_SMARTCARD_STATE_READY)
   {
     if((pData == NULL) || (Size == 0U))
@@ -448,7 +446,7 @@ HAL_StatusTypeDef HAL_SMARTCARD_Transmit(SMARTCARD_HandleTypeDef *hsc, uint8_t *
       {
         return HAL_TIMEOUT;
       }
-      tmp = (uint16_t*) pData;
+      uint16_t *tmp = (uint16_t*) pData;
       hsc->Instance->DR = (*tmp & (uint16_t)0x01FFU);
       pData +=1U;
     }
@@ -483,8 +481,6 @@ HAL_StatusTypeDef HAL_SMARTCARD_Transmit(SMARTCARD_HandleTypeDef *hsc, uint8_t *
   */
 HAL_StatusTypeDef HAL_SMARTCARD_Receive(SMARTCARD_HandleTypeDef *hsc, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   if(hsc->RxState == HAL_SMARTCARD_STATE_READY)
   {
     if((pData == NULL) || (Size == 0U))
@@ -509,7 +505,7 @@ HAL_StatusTypeDef HAL_SMARTCARD_Receive(SMARTCARD_HandleTypeDef *hsc, uint8_t *p
       {
         return HAL_TIMEOUT;
       }
-      tmp = (uint16_t*) pData;
+      uint16_t *tmp = (uint16_t*) pData;
       *tmp = (uint16_t)(hsc->Instance->DR & (uint16_t)0x00FFU);
       pData +=1U;
     }
@@ -634,8 +630,6 @@ HAL_StatusTypeDef HAL_SMARTCARD_Receive_IT(SMARTCARD_HandleTypeDef *hsc, uint8_t
   */
 HAL_StatusTypeDef HAL_SMARTCARD_Transmit_DMA(SMARTCARD_HandleTypeDef *hsc, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Tx process is not already ongoing */
   if(hsc->gState == HAL_SMARTCARD_STATE_READY)
   {
@@ -661,7 +655,7 @@ HAL_StatusTypeDef HAL_SMARTCARD_Transmit_DMA(SMARTCARD_HandleTypeDef *hsc, uint8
     hsc->hdmatx->XferErrorCallback = SMARTCARD_DMAError;
 
     /* Enable the SMARTCARD transmit DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hsc->hdmatx, *(uint32_t*)tmp, (uint32_t)&hsc->Instance->DR, Size);
 
      /* Clear the TC flag in the SR register by writing 0 to it */
@@ -693,8 +687,6 @@ HAL_StatusTypeDef HAL_SMARTCARD_Transmit_DMA(SMARTCARD_HandleTypeDef *hsc, uint8
   */
 HAL_StatusTypeDef HAL_SMARTCARD_Receive_DMA(SMARTCARD_HandleTypeDef *hsc, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Rx process is not already ongoing */
   if(hsc->RxState == HAL_SMARTCARD_STATE_READY)
   {
@@ -719,7 +711,7 @@ HAL_StatusTypeDef HAL_SMARTCARD_Receive_DMA(SMARTCARD_HandleTypeDef *hsc, uint8_
     hsc->hdmarx->XferErrorCallback = SMARTCARD_DMAError;
 
     /* Enable the DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hsc->hdmarx, (uint32_t)&hsc->Instance->DR, *(uint32_t*)tmp, Size);
 
     /* Enable the DMA transfer for the receiver request by setting the DMAR bit
@@ -1042,12 +1034,10 @@ static HAL_StatusTypeDef SMARTCARD_WaitOnFlagUntilTimeout(SMARTCARD_HandleTypeDe
   */
 static HAL_StatusTypeDef SMARTCARD_Transmit_IT(SMARTCARD_HandleTypeDef *hsc)
 {
-  uint16_t* tmp;
-
   /* Check that a Tx process is ongoing */
   if(hsc->gState == HAL_SMARTCARD_STATE_BUSY_TX)
   {
-    tmp = (uint16_t*) hsc->pTxBuffPtr;
+    uint16_t *tmp = (uint16_t*) hsc->pTxBuffPtr;
     hsc->Instance->DR = (uint16_t)(*tmp & (uint16_t)0x01FFU);
     hsc->pTxBuffPtr += 1U;
 
@@ -1098,12 +1088,10 @@ static HAL_StatusTypeDef SMARTCARD_EndTransmit_IT(SMARTCARD_HandleTypeDef *hsmar
   */
 static HAL_StatusTypeDef SMARTCARD_Receive_IT(SMARTCARD_HandleTypeDef *hsc)
 {
-  uint16_t* tmp;
-
   /* Check that a Rx process is ongoing */
   if(hsc->RxState == HAL_SMARTCARD_STATE_BUSY_RX)
   {
-    tmp = (uint16_t*) hsc->pRxBuffPtr;
+    uint16_t *tmp = (uint16_t*) hsc->pRxBuffPtr;
     *tmp = (uint16_t)(hsc->Instance->DR & (uint16_t)0x00FFU);
     hsc->pRxBuffPtr += 1U;
 

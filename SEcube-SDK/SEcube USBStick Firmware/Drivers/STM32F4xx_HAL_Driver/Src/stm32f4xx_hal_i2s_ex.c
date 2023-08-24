@@ -347,9 +347,6 @@ HAL_StatusTypeDef HAL_I2S_Init(I2S_HandleTypeDef *hi2s)
   */
 HAL_StatusTypeDef HAL_I2SEx_TransmitReceive(I2S_HandleTypeDef *hi2s, uint16_t *pTxData, uint16_t *pRxData, uint16_t Size, uint32_t Timeout)
 {
-  uint32_t tickstart;
-  uint32_t tmp1;
-
   if((pTxData == NULL ) || (pRxData == NULL ) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -358,7 +355,7 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive(I2S_HandleTypeDef *hi2s, uint16_t *p
   /* Check the I2S State */
   if(hi2s->State == HAL_I2S_STATE_READY)
   {
-    tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
+    uint32_t tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
     /* Check the Data format: When a 16-bit data frame or a 16-bit data frame extended
        is selected during the I2S configuration phase, the Size parameter means the number
        of 16-bit data length in the transaction and when a 24-bit data frame or a 32-bit data
@@ -409,7 +406,7 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive(I2S_HandleTypeDef *hi2s, uint16_t *p
         hi2s->Instance->DR = (*pTxData++);
 
         /* Get tick */
-        tickstart = HAL_GetTick();
+        uint32_t tickstart = HAL_GetTick();
 
         /* Wait until RXNE flag is set */
         while((I2SxEXT(hi2s->Instance)->SR & SPI_SR_RXNE) != SPI_SR_RXNE)
@@ -517,8 +514,6 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive(I2S_HandleTypeDef *hi2s, uint16_t *p
   */
 HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_IT(I2S_HandleTypeDef *hi2s, uint16_t *pTxData, uint16_t *pRxData, uint16_t Size)
 {
-  uint32_t tmp1;
-
   if(hi2s->State == HAL_I2S_STATE_READY)
   {
     if((pTxData == NULL ) || (pRxData == NULL ) || (Size == 0U))
@@ -529,7 +524,7 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_IT(I2S_HandleTypeDef *hi2s, uint16_t
     hi2s->pTxBuffPtr = pTxData;
     hi2s->pRxBuffPtr = pRxData;
 
-    tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
+    uint32_t tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
     /* Check the Data format: When a 16-bit data frame or a 16-bit data frame extended
        is selected during the I2S configuration phase, the Size parameter means the number
        of 16-bit data length in the transaction and when a 24-bit data frame or a 32-bit data
@@ -639,9 +634,6 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_IT(I2S_HandleTypeDef *hi2s, uint16_t
   */
 HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_DMA(I2S_HandleTypeDef *hi2s, uint16_t *pTxData, uint16_t *pRxData, uint16_t Size)
 {
-  uint32_t *tmp;
-  uint32_t tmp1;
-
   if((pTxData == NULL ) || (pRxData == NULL ) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -652,7 +644,7 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_DMA(I2S_HandleTypeDef *hi2s, uint16_
     hi2s->pTxBuffPtr = pTxData;
     hi2s->pRxBuffPtr = pRxData;
 
-    tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
+    uint32_t tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
     /* Check the Data format: When a 16-bit data frame or a 16-bit data frame extended
        is selected during the I2S configuration phase, the Size parameter means the number
        of 16-bit data length in the transaction and when a 24-bit data frame or a 32-bit data
@@ -701,7 +693,7 @@ HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_DMA(I2S_HandleTypeDef *hi2s, uint16_
     if((tmp1 == I2S_MODE_MASTER_TX) || (tmp1 == I2S_MODE_SLAVE_TX))
     {
       /* Enable the Rx DMA Stream */
-      tmp = (uint32_t*)&pRxData;
+      uint32_t *tmp = (uint32_t*)&pRxData;
       HAL_DMA_Start_IT(hi2s->hdmarx, (uint32_t)&I2SxEXT(hi2s->Instance)->DR, *(uint32_t*)tmp, hi2s->RxXferSize);
 
       /* Enable Rx DMA Request */
@@ -1083,14 +1075,12 @@ void HAL_I2S_IRQHandler(I2S_HandleTypeDef *hi2s)
   */
 HAL_StatusTypeDef I2SEx_TransmitReceive_IT(I2S_HandleTypeDef *hi2s)
 {
-  uint32_t tmp1, tmp2;
-
   if(hi2s->State == HAL_I2S_STATE_BUSY_TX_RX)
   {
     /* Process Locked */
     __HAL_LOCK(hi2s);
 
-    tmp1 = hi2s->Instance->I2SCFGR & SPI_I2SCFGR_I2SCFG;
+    uint32_t tmp1 = hi2s->Instance->I2SCFGR & SPI_I2SCFGR_I2SCFG;
     /* Check if the I2S_MODE_MASTER_TX or I2S_MODE_SLAVE_TX Mode is selected */
     if((tmp1 == I2S_MODE_MASTER_TX) || (tmp1 == I2S_MODE_SLAVE_TX))
     {
@@ -1166,7 +1156,7 @@ HAL_StatusTypeDef I2SEx_TransmitReceive_IT(I2S_HandleTypeDef *hi2s)
     }
 
     tmp1 = hi2s->RxXferCount;
-    tmp2 = hi2s->TxXferCount;
+    uint32_t tmp2 = hi2s->TxXferCount;
     if((tmp1 == 0U) && (tmp2 == 0U))
     {
       /* Disable I2Sx ERR interrupt */

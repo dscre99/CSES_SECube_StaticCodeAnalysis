@@ -395,8 +395,6 @@ HAL_StatusTypeDef HAL_IRDA_DeInit(IRDA_HandleTypeDef *hirda)
   */
 HAL_StatusTypeDef HAL_IRDA_Transmit(IRDA_HandleTypeDef *hirda, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   /* Check that a Tx process is not already ongoing */
   if(hirda->gState == HAL_IRDA_STATE_READY)
   {
@@ -422,7 +420,7 @@ HAL_StatusTypeDef HAL_IRDA_Transmit(IRDA_HandleTypeDef *hirda, uint8_t *pData, u
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pData;
+        uint16_t* tmp = (uint16_t*) pData;
         hirda->Instance->DR = (*tmp & (uint16_t)0x01FFU);
         if(hirda->Init.Parity == IRDA_PARITY_NONE)
         {
@@ -473,8 +471,6 @@ HAL_StatusTypeDef HAL_IRDA_Transmit(IRDA_HandleTypeDef *hirda, uint8_t *pData, u
   */
 HAL_StatusTypeDef HAL_IRDA_Receive(IRDA_HandleTypeDef *hirda, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-  uint16_t* tmp;
-
   /* Check that a Rx process is not already ongoing */
   if(hirda->RxState == HAL_IRDA_STATE_READY)
   {
@@ -501,7 +497,7 @@ HAL_StatusTypeDef HAL_IRDA_Receive(IRDA_HandleTypeDef *hirda, uint8_t *pData, ui
         {
           return HAL_TIMEOUT;
         }
-        tmp = (uint16_t*) pData ;
+        uint16_t* tmp = (uint16_t*) pData ;
         if(hirda->Init.Parity == IRDA_PARITY_NONE)
         {
           *tmp = (uint16_t)(hirda->Instance->DR & (uint16_t)0x01FFU);
@@ -644,8 +640,6 @@ HAL_StatusTypeDef HAL_IRDA_Receive_IT(IRDA_HandleTypeDef *hirda, uint8_t *pData,
   */
 HAL_StatusTypeDef HAL_IRDA_Transmit_DMA(IRDA_HandleTypeDef *hirda, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Tx process is not already ongoing */
   if(hirda->gState == HAL_IRDA_STATE_READY)
   {
@@ -673,7 +667,7 @@ HAL_StatusTypeDef HAL_IRDA_Transmit_DMA(IRDA_HandleTypeDef *hirda, uint8_t *pDat
     hirda->hdmatx->XferErrorCallback = IRDA_DMAError;
 
     /* Enable the IRDA transmit DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hirda->hdmatx, *(uint32_t*)tmp, (uint32_t)&hirda->Instance->DR, Size);
 
     /* Clear the TC flag in the SR register by writing 0 to it */
@@ -705,8 +699,6 @@ HAL_StatusTypeDef HAL_IRDA_Transmit_DMA(IRDA_HandleTypeDef *hirda, uint8_t *pDat
   */
 HAL_StatusTypeDef HAL_IRDA_Receive_DMA(IRDA_HandleTypeDef *hirda, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   /* Check that a Rx process is not already ongoing */
   if(hirda->RxState == HAL_IRDA_STATE_READY)
   {
@@ -733,7 +725,7 @@ HAL_StatusTypeDef HAL_IRDA_Receive_DMA(IRDA_HandleTypeDef *hirda, uint8_t *pData
     hirda->hdmarx->XferErrorCallback = IRDA_DMAError;
 
     /* Enable the DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hirda->hdmarx, (uint32_t)&hirda->Instance->DR, *(uint32_t*)tmp, Size);
 
     /* Enable the DMA transfer for the receiver request by setting the DMAR bit
@@ -1225,14 +1217,12 @@ static HAL_StatusTypeDef IRDA_WaitOnFlagUntilTimeout(IRDA_HandleTypeDef *hirda, 
   */
 static HAL_StatusTypeDef IRDA_Transmit_IT(IRDA_HandleTypeDef *hirda)
 {
-  uint16_t* tmp;
-
   /* Check that a Tx process is ongoing */
   if(hirda->gState == HAL_IRDA_STATE_BUSY_TX)
   {
     if(hirda->Init.WordLength == IRDA_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) hirda->pTxBuffPtr;
+      uint16_t* tmp = (uint16_t*) hirda->pTxBuffPtr;
       hirda->Instance->DR = (uint16_t)(*tmp & (uint16_t)0x01FFU);
       if(hirda->Init.Parity == IRDA_PARITY_NONE)
       {
@@ -1295,14 +1285,12 @@ static HAL_StatusTypeDef IRDA_EndTransmit_IT(IRDA_HandleTypeDef *hirda)
   */
 static HAL_StatusTypeDef IRDA_Receive_IT(IRDA_HandleTypeDef *hirda)
 {
-  uint16_t* tmp;
-
   /* Check that a Rx process is ongoing */
   if(hirda->RxState == HAL_IRDA_STATE_BUSY_RX)
   {
     if(hirda->Init.WordLength == IRDA_WORDLENGTH_9B)
     {
-      tmp = (uint16_t*) hirda->pRxBuffPtr;
+      uint16_t* tmp = (uint16_t*) hirda->pRxBuffPtr;
       if(hirda->Init.Parity == IRDA_PARITY_NONE)
       {
         *tmp = (uint16_t)(hirda->Instance->DR & (uint16_t)0x01FFU);

@@ -4974,8 +4974,6 @@ static void TIM_SlaveTimer_SetConfig(TIM_HandleTypeDef *htim,
                               TIM_SlaveConfigTypeDef * sSlaveConfig)
 {
   uint32_t tmpsmcr = 0U;
-  uint32_t tmpccmr1 = 0U;
-  uint32_t tmpccer = 0U;
 
  /* Get the TIMx SMCR register value */
   tmpsmcr = htim->Instance->SMCR;
@@ -5018,9 +5016,9 @@ static void TIM_SlaveTimer_SetConfig(TIM_HandleTypeDef *htim,
       assert_param(IS_TIM_TRIGGERFILTER(sSlaveConfig->TriggerFilter));
 
       /* Disable the Channel 1: Reset the CC1E Bit */
-      tmpccer = htim->Instance->CCER;
+      uint32_t tmpccer = htim->Instance->CCER;
       htim->Instance->CCER &= ~TIM_CCER_CC1E;
-      tmpccmr1 = htim->Instance->CCMR1;
+      uint32_t tmpccmr1 = htim->Instance->CCMR1;
 
       /* Set the filter */
       tmpccmr1 &= ~TIM_CCMR1_IC1F;

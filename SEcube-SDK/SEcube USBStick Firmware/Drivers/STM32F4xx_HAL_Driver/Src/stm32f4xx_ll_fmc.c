@@ -351,8 +351,6 @@ HAL_StatusTypeDef FMC_NORSRAM_Timing_Init(FMC_NORSRAM_TypeDef *Device, FMC_NORSR
   */
 HAL_StatusTypeDef  FMC_NORSRAM_Extended_Timing_Init(FMC_NORSRAM_EXTENDED_TypeDef *Device, FMC_NORSRAM_TimingTypeDef *Timing, uint32_t Bank, uint32_t ExtendedMode)
 {
-  uint32_t tmpr;
-
   /* Check the parameters */
   assert_param(IS_FMC_EXTENDED_MODE(ExtendedMode));
 
@@ -369,7 +367,7 @@ HAL_StatusTypeDef  FMC_NORSRAM_Extended_Timing_Init(FMC_NORSRAM_EXTENDED_TypeDef
     assert_param(IS_FMC_NORSRAM_BANK(Bank));
 
     /* Get the BWTR register value */
-    tmpr = Device->BWTR[Bank];
+    uint32_t tmpr = Device->BWTR[Bank];
 
     /* Clear ADDSET, ADDHLD, DATAST, BUSTURN and ACCMOD bits */
     tmpr &= ((uint32_t)~(FMC_BWTR1_ADDSET  | FMC_BWTR1_ADDHLD | FMC_BWTR1_DATAST | \
@@ -1354,7 +1352,6 @@ HAL_StatusTypeDef FMC_PCCARD_DeInit(FMC_PCCARD_TypeDef *Device)
 HAL_StatusTypeDef FMC_SDRAM_Init(FMC_SDRAM_TypeDef *Device, FMC_SDRAM_InitTypeDef *Init)
 {
   uint32_t tmpr1 = 0U;
-  uint32_t tmpr2;
 
   /* Check the parameters */
   assert_param(IS_FMC_SDRAM_DEVICE(Device));
@@ -1405,7 +1402,7 @@ HAL_StatusTypeDef FMC_SDRAM_Init(FMC_SDRAM_TypeDef *Device, FMC_SDRAM_InitTypeDe
                         Init->ReadBurst          |\
                         Init->ReadPipeDelay);
 
-    tmpr2 = Device->SDCR[FMC_SDRAM_BANK2];
+    uint32_t tmpr2 = Device->SDCR[FMC_SDRAM_BANK2];
 
     /* Clear NC, NR, MWID, NB, CAS, WP, SDCLK, RBURST, and RPIPE bits */
     tmpr2 &= ((uint32_t)~(FMC_SDCR1_NC  | FMC_SDCR1_NR | FMC_SDCR1_MWID | \
@@ -1437,7 +1434,6 @@ HAL_StatusTypeDef FMC_SDRAM_Init(FMC_SDRAM_TypeDef *Device, FMC_SDRAM_InitTypeDe
 HAL_StatusTypeDef FMC_SDRAM_Timing_Init(FMC_SDRAM_TypeDef *Device, FMC_SDRAM_TimingTypeDef *Timing, uint32_t Bank)
 {
   uint32_t tmpr1 = 0U;
-  uint32_t tmpr2;
 
   /* Check the parameters */
   assert_param(IS_FMC_SDRAM_DEVICE(Device));
@@ -1484,7 +1480,7 @@ HAL_StatusTypeDef FMC_SDRAM_Timing_Init(FMC_SDRAM_TypeDef *Device, FMC_SDRAM_Tim
                        (((Timing->WriteRecoveryTime)-1U) <<16U)    |\
                        (((Timing->RCDDelay)-1U) << 24U));
 
-    tmpr2 = Device->SDTR[FMC_SDRAM_BANK1];
+    uint32_t tmpr2 = Device->SDTR[FMC_SDRAM_BANK1];
 
     /* Clear TMRD, TXSR, TRAS, TRC, TWR, TRP and TRCD bits */
     tmpr2 &= ((uint32_t)~(FMC_SDTR1_TMRD  | FMC_SDTR1_TXSR | FMC_SDTR1_TRAS | \

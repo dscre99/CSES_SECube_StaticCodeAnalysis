@@ -316,11 +316,6 @@ HAL_StatusTypeDef HAL_SAI_InitProtocol(SAI_HandleTypeDef *hsai, uint32_t protoco
   */
 HAL_StatusTypeDef HAL_SAI_Init(SAI_HandleTypeDef *hsai)
 {
-  uint32_t tmpclock = 0U;
-
-  /* This variable used to store the SAI_CK_x (value in Hz) */
-  uint32_t freq = 0U;
-
   /* This variable is used to compute CKSTR bits of SAI CR1 according to
      ClockStrobing and AudioMode fields */
   uint32_t ckstr_bits = 0U;
@@ -385,11 +380,14 @@ HAL_StatusTypeDef HAL_SAI_Init(SAI_HandleTypeDef *hsai)
      MCKDIV[3:0] = SAI_CK_x / FS * 512 */
   if(hsai->Init.AudioFrequency != SAI_AUDIO_FREQUENCY_MCKDIV)
   {
-  /* Get SAI clock source based on Source clock selection from RCC */
-  freq = SAI_GetInputClock(hsai);
+    /* This variable used to store the SAI_CK_x (value in Hz) */
+    uint32_t freq;
+
+    /* Get SAI clock source based on Source clock selection from RCC */
+    freq = SAI_GetInputClock(hsai);
 
     /* (saiclocksource x 10) to keep Significant digits */
-    tmpclock = (((freq * 10U) / ((hsai->Init.AudioFrequency) * 512U)));
+    uint32_t tmpclock = (((freq * 10U) / ((hsai->Init.AudioFrequency) * 512U)));
 
     hsai->Init.Mckdiv = tmpclock / 10U;
 
@@ -1039,8 +1037,6 @@ HAL_StatusTypeDef HAL_SAI_Abort(SAI_HandleTypeDef *hsai)
   */
 HAL_StatusTypeDef HAL_SAI_Transmit_DMA(SAI_HandleTypeDef *hsai, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   if((pData == NULL) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -1067,7 +1063,7 @@ HAL_StatusTypeDef HAL_SAI_Transmit_DMA(SAI_HandleTypeDef *hsai, uint8_t *pData, 
     hsai->hdmatx->XferErrorCallback = SAI_DMAError;
 
     /* Enable the Tx DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hsai->hdmatx, *(uint32_t*)tmp, (uint32_t)&hsai->Instance->DR, hsai->XferSize);
 
     /* Check if the SAI is already enabled */
@@ -1104,8 +1100,6 @@ HAL_StatusTypeDef HAL_SAI_Transmit_DMA(SAI_HandleTypeDef *hsai, uint8_t *pData, 
   */
 HAL_StatusTypeDef HAL_SAI_Receive_DMA(SAI_HandleTypeDef *hsai, uint8_t *pData, uint16_t Size)
 {
-  uint32_t *tmp;
-
   if((pData == NULL) || (Size == 0U))
   {
     return  HAL_ERROR;
@@ -1132,7 +1126,7 @@ HAL_StatusTypeDef HAL_SAI_Receive_DMA(SAI_HandleTypeDef *hsai, uint8_t *pData, u
     hsai->hdmarx->XferErrorCallback = SAI_DMAError;
 
     /* Enable the Rx DMA Stream */
-    tmp = (uint32_t*)&pData;
+    uint32_t *tmp = (uint32_t*)&pData;
     HAL_DMA_Start_IT(hsai->hdmarx, (uint32_t)&hsai->Instance->DR, *(uint32_t*)tmp, hsai->XferSize);
 
     /* Check if the SAI is already enabled */

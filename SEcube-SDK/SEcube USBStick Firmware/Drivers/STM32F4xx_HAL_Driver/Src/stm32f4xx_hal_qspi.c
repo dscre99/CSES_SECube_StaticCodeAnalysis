@@ -1026,7 +1026,6 @@ HAL_StatusTypeDef HAL_QSPI_Receive_IT(QSPI_HandleTypeDef *hqspi, uint8_t *pData)
 HAL_StatusTypeDef HAL_QSPI_Transmit_DMA(QSPI_HandleTypeDef *hqspi, uint8_t *pData)
 {
   HAL_StatusTypeDef status = HAL_OK;
-  uint32_t *tmp;
 
   /* Process locked */
   __HAL_LOCK(hqspi);
@@ -1062,7 +1061,7 @@ HAL_StatusTypeDef HAL_QSPI_Transmit_DMA(QSPI_HandleTypeDef *hqspi, uint8_t *pDat
       MODIFY_REG(hqspi->hdma->Instance->CR, DMA_SxCR_DIR, hqspi->hdma->Init.Direction);
 
       /* Enable the QSPI transmit DMA Channel */
-      tmp = (uint32_t*)&pData;
+      uint32_t *tmp = (uint32_t*)&pData;
       HAL_DMA_Start_IT(hqspi->hdma, *(uint32_t*)tmp, (uint32_t)&hqspi->Instance->DR, hqspi->TxXferSize);
 
       /* Enable the DMA transfer by setting the DMAEN bit in the QSPI CR register */
@@ -1094,7 +1093,6 @@ HAL_StatusTypeDef HAL_QSPI_Transmit_DMA(QSPI_HandleTypeDef *hqspi, uint8_t *pDat
 HAL_StatusTypeDef HAL_QSPI_Receive_DMA(QSPI_HandleTypeDef *hqspi, uint8_t *pData)
 {
   HAL_StatusTypeDef status = HAL_OK;
-  uint32_t *tmp;
   uint32_t addr_reg = READ_REG(hqspi->Instance->AR);
 
   /* Process locked */
@@ -1128,7 +1126,7 @@ HAL_StatusTypeDef HAL_QSPI_Receive_DMA(QSPI_HandleTypeDef *hqspi, uint8_t *pData
       MODIFY_REG(hqspi->hdma->Instance->CR, DMA_SxCR_DIR, hqspi->hdma->Init.Direction);
 
       /* Enable the DMA Channel */
-      tmp = (uint32_t*)&pData;
+      uint32_t *tmp = (uint32_t*)&pData;
       HAL_DMA_Start_IT(hqspi->hdma, (uint32_t)&hqspi->Instance->DR, *(uint32_t*)tmp, hqspi->RxXferSize);
 
       /* Configure QSPI: CCR register with functional as indirect read */

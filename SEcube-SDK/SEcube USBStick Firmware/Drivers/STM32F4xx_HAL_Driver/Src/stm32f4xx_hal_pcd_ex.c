@@ -89,7 +89,6 @@
   */
 HAL_StatusTypeDef HAL_PCDEx_SetTxFiFo(PCD_HandleTypeDef *hpcd, uint8_t fifo, uint16_t size)
 {
-  uint8_t i;
   uint32_t Tx_Offset = 0U;
 
   /*  TXn min size = 16 words. (n  : Transmit FIFO index)
@@ -111,7 +110,7 @@ HAL_StatusTypeDef HAL_PCDEx_SetTxFiFo(PCD_HandleTypeDef *hpcd, uint8_t fifo, uin
   else
   {
     Tx_Offset += (hpcd->Instance->DIEPTXF0_HNPTXFSIZ) >> 16U;
-    for (i = 0U; i < (fifo - 1U); i++)
+    for (uint8_t i = 0U; i < (fifo - 1U); i++)
     {
       Tx_Offset += (hpcd->Instance->DIEPTXF[i] >> 16U);
     }

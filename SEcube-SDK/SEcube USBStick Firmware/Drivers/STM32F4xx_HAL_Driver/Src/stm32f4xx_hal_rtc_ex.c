@@ -1283,8 +1283,6 @@ HAL_StatusTypeDef HAL_RTCEx_DeactivateCoarseCalib(RTC_HandleTypeDef* hrtc)
   */
 HAL_StatusTypeDef HAL_RTCEx_SetSmoothCalib(RTC_HandleTypeDef* hrtc, uint32_t SmoothCalibPeriod, uint32_t SmoothCalibPlusPulses, uint32_t SmouthCalibMinusPulsesValue)
 {
-  uint32_t tickstart;
-
   /* Check the parameters */
   assert_param(IS_RTC_SMOOTH_CALIB_PERIOD(SmoothCalibPeriod));
   assert_param(IS_RTC_SMOOTH_CALIB_PLUS(SmoothCalibPlusPulses));
@@ -1302,7 +1300,7 @@ HAL_StatusTypeDef HAL_RTCEx_SetSmoothCalib(RTC_HandleTypeDef* hrtc, uint32_t Smo
   if((hrtc->Instance->ISR & RTC_ISR_RECALPF) != RESET)
   {
   /* Get tick */
-  tickstart = HAL_GetTick();
+  uint32_t tickstart = HAL_GetTick();
 
     /* check if a calibration is pending*/
     while((hrtc->Instance->ISR & RTC_ISR_RECALPF) != RESET)

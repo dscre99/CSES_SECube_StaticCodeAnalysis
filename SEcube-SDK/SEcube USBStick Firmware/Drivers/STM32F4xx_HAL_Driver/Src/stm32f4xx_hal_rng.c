@@ -246,7 +246,6 @@ __weak void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
 
 HAL_StatusTypeDef HAL_RNG_GenerateRandomNumber(RNG_HandleTypeDef *hrng, uint32_t *random32bit)
 {
-  uint32_t tickstart;
   HAL_StatusTypeDef status = HAL_OK;
 
   /* Process Locked */
@@ -259,7 +258,7 @@ HAL_StatusTypeDef HAL_RNG_GenerateRandomNumber(RNG_HandleTypeDef *hrng, uint32_t
     hrng->State = HAL_RNG_STATE_BUSY;
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    uint32_t tickstart = HAL_GetTick();
 
     /* Check if data register contains valid random data */
     while(__HAL_RNG_GET_FLAG(hrng, RNG_FLAG_DRDY) == RESET)
